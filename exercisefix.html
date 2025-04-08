@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graduate Application Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #5c7eee, #358dff);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .form-header {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #6e8efb;
+        }
+        .btn-custom {
+            background: #6e8efb;
+            border: none;
+            padding: 10px 20px;
+            width: 100%;
+            font-size: 1rem;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        .btn-custom:hover {
+            background: #5a75db;
+        }
+        .warning {
+            color: red;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .dropdown-container {
+    position: relative;
+}
+.dropdown-menu {
+    position: absolute;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+    background-color: white;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+.dropdown-item {
+    padding: 8px 16px;
+    cursor: pointer;
+}
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+.required {
+    color: red;
+    margin-left: 3px;
+}
+    </style>
+</head>
+<body>
+<!-- SECTION A -->
+<div class="form-container">
+    <div class="form-header">Section A: About Your Course</div>
+    <p class="text-muted">Before completing this form, please refer to the Graduate Admissions Application Guide (available at <a href="www.graduate.ox.ac.uk/applicationguide">www.graduate.ox.ac.uk/applicationguide</a>.
+        Any errors resulting from failure to do so may delay your application.
+        This form may only be used to apply for one course. If you wish to apply for more than one course, you must submit a separate application form and pay the £75 application fee each time.</p>
+    
+    <p class="mb-3"><span class="required">*</span> Fields marked with an asterisk are required.</p>
+    
+    <form id="gradForm">
+        <h5>Applicants for all graduate courses:</h5>
+        <div class="mb-3">
+            <label for="courseCode" class="form-label">(i) State the course code as given on the course page<span class="required">*</span>: <a href="https://www.ox.ac.uk/admissions/graduate/courses" target="_blank">www.ox.ac.uk/admissions/graduate/courses</a></label>
+            <input type="text" class="form-control" id="courseCode" required>
+        </div>
+        <div class="mb-3">
+            <label for="courseTitle" class="form-label">(ii) Title of the Course<span class="required">*</span>:</label>
+            <div class="dropdown-container">
+                <input type="text" class="form-control" id="courseSearch" placeholder="Search for a course..." autocomplete="off" required>
+                <div class="dropdown-menu" id="courseDropdown"></div>
+            </div>
+        </div>
+
+        <p class="text-muted"><em>You must complete ALL sections below.</em></p>
+        <h5>For research courses (e.g. DPhil, MSc by Research (MRes), etc.):</h5>
+        <div class="mb-3">
+            <label for="researchField" class="form-label">(iii) State the proposed field and title of research project
+            <textarea class="form-control" id="researchField" rows="3" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="supervisor" class="form-label">Proposed Supervisor(s)</label>
+            <input type="text" class="form-control" id="supervisor" required>
+        </div>
+        <h5>For all courses:</h5>
+        <div class="mb-3">
+            <label for="unavailableDatesStart" class="form-label">(iv) Start unavailable date for interview or visit:</label>
+            <input type="date" class="form-control" id="unavailableDatesStart" required>
+            <label for="unavailableDatesEnd" class="form-label">End unavailable date for interview or visit:</label>
+            <input type="date" class="form-control" id="unavailableDatesEnd" required>
+        </div>
+        <h5>For Masters courses:</h5>
+        <fieldset class="mb-3">
+            <legend class="fs-6">(v) Do you intend to apply for a research degree after completing this course?<span class="required">*</span></legend>
+            <div class="d-flex gap-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="researchIntent" id="yes" value="yes" required>
+                    <label class="form-check-label" for="yes">Yes</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="researchIntent" id="no" value="no">
+                    <label class="form-check-label" for="no">No</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="researchIntent" id="unsure" value="unsure">
+                    <label class="form-check-label" for="unsure">Unsure</label>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<!-- SECTION B -->
+<div class="form-container">
+    <div class="form-header">Section B: College Preference</div>
+    <form>
+        <div class="mb-3">
+            <div class="form-check">
+                <input type="radio" name="collegePreferenceOption" id="noPreference" class="form-check-input" onchange="togglePreference()" checked>
+                <label for="noPreference" class="form-check-label">I have no college preference</label>
+            </div>
+            <div class="form-check mt-2">
+                <input type="radio" name="collegePreferenceOption" id="hasPreference" class="form-check-input" onchange="togglePreference()">
+                <label for="hasPreference" class="form-check-label">I have a specific college preference</label>
+            </div>
+        </div>
+        <div class="mb-3" id="preferenceField" style="display: none;">
+            <label for="collegePreference" class="form-label">My college preference is<span class="required">*</span>:</label>
+            <input type="text" class="form-control" id="collegePreference">
+        </div>
+    </form>
+</div>
+
+<script>
+    function togglePreference() {
+        const preferenceField = document.getElementById("preferenceField");
+        const hasPreference = document.getElementById("hasPreference").checked;
+
+        preferenceField.style.display = hasPreference ? "block" : "none";
+    }
+
+    document.addEventListener("DOMContentLoaded", togglePreference);
+</script>
+
+
+<!-- SECTION C -->
+<div class="form-container">
+    <div class="form-header">Section C: Personal Details</div>
+    <form>
+        <p>Please enter your name exactly as it appears on your passport or other official document, including middle names. If you go by a name that is not listed on your official document(s), you can enter this in the Preferred Name field.</p>
+        <div class="mb-3">
+            <label for="givenName" class="form-label">Given Name (Forename)<span class="required">*</span>:</label>
+            <input type="text" class="form-control" id="givenName" required>
+        </div>
+        <div class="mb-3">
+            <label for="preferredName" class="form-label">Preferred Name:</label>
+            <input type="text" class="form-control" id="preferredName">
+        </div>
+        <div class="mb-3">
+            <label for="middleName" class="form-label">Middle Name(s):</label>
+            <input type="text" class="form-control" id="middleName">
+        </div>
+        <div class="mb-3">
+            <label for="familyName" class="form-label">Family Name (Surname)<span class="required">*</span>:</label>
+            <input type="text" class="form-control" id="familyName" required>
+        </div>
+        <div class="mb-3">
+            <label for="previousFamilyName" class="form-label">Please provide any previous family name (Surname):</label>
+            <input type="text" class="form-control" id="previousFamilyName">
+        </div>
+        <div class="mb-3">
+            <label for="title" class="form-label">Title<span class="required">*</span>:</label>
+            <select class="form-select" id="title" required>
+                <option value="" selected disabled>Please select a title</option>
+                <option value="Miss">Miss</option>
+                <option value="Mr">Mr</option>
+                <option value="Mrs">Mrs</option>
+                <option value="Ms">Ms</option>
+                <option value="Mx">Mx</option>
+                <option value="Dr">Dr</option>
+                <option value="Professor">Professor</option>
+                <option value="Reverend">Reverend</option>
+                <option value="No Title">No Title</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Sex<span class="required">*</span>:</label>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" name="sex" id="female" value="female" required>
+                <label for="female" class="form-check-label">Female</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" name="sex" id="male" value="male">
+                <label for="male" class="form-check-label">Male</label>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="dob" class="form-label">Date of Birth (dd/mm/yyyy)<span class="required">*</span>:</label>
+            <input type="date" class="form-control" id="dob" required>
+        </div>
+        <div class="mb-3">
+            <label for="previousGivenName" class="form-label">Please provide any previous given name (Forename):</label>
+            <input type="text" class="form-control" id="previousGivenName">
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Effective Dates (dd/mm/yyyy) for previous family name:</label>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="previousFamilyFrom" class="form-label">From:</label>
+                    <input type="date" class="form-control" id="previousFamilyFrom">
+                </div>
+                <div class="col-md-6">
+                    <label for="previousFamilyTo" class="form-label">To:</label>
+                    <input type="date" class="form-control" id="previousFamilyTo">
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Effective Dates (dd/mm/yyyy) for previous given name:</label>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="previousGivenFrom" class="form-label">From:</label>
+                    <input type="date" class="form-control" id="previousGivenFrom">
+                </div>
+                <div class="col-md-6">
+                    <label for="previousGivenTo" class="form-label">To:</label>
+                    <input type="date" class="form-control" id="previousGivenTo">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- SECTION D -->
+        <div class="form-container">
+            <div class="form-header">Section D: Contact Information</div>
+            <form>
+                <h5>Home Address</h5>
+                <div class="mb-3">
+                    <label for="homeAddress" class="form-label">Home Address<span class="required">*</span>:</label>
+                    <textarea class="form-control" id="homeAddress" rows="2" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="homeCity" class="form-label">City<span class="required">*</span>:</label>
+                    <input type="text" class="form-control" id="homeCity">
+                </div>
+                <div class="mb-3">
+                    <label for="homePostcode" class="form-label">Postcode/ZIP Code<span class="required">*</span>:</label>
+                    <input type="text" class="form-control" id="homePostcode">
+                </div>
+                <div class="mb-3">
+                    <label for="homeState" class="form-label">State<span class="required">*</span>:</label>
+                    <input type="text" class="form-control" id="homeState">
+                </div>
+                <div class="mb-3">
+                    <label for="homeCountry" class="form-label">Country<span class="required">*</span>:</label>
+                    <input type="text" class="form-control" id="homeCountry">
+                </div>
+        
+                <h5>Correspondence Address</h5>
+                <div class="mb-3">
+                    <label for="correspondenceAddress" class="form-label">Correspondence Address<span class="required">*</span>:</label>
+                    <textarea class="form-control" id="correspondenceAddress" rows="2"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="correspondenceCity" class="form-label">City<span class="required">*</span>:</label>
+                    <input type="text" class="form-control" id="correspondenceCity">
+                </div>
+                <div class="mb-3">
+                    <label for="correspondencePostcode" class="form-label">Postcode/ZIP Code<span class="required">*</span>:</label>
+                    <input type="text" class="form-control" id="correspondencePostcode">
+                </div>
+                <div class="mb-3">
+                    <label for="correspondenceState" class="form-label">State<span class="required">*</span>:</label>
+                    <input type="text" class="form-control" id="correspondenceState">
+                </div>
+                <div class="mb-3">
+                    <label for="correspondenceCountry" class="form-label">Country<span class="required">*</span>:</label>
+                    <input type="text" class="form-control" id="correspondenceCountry">
+                </div>
+        
+                <h5>Effective Dates</h5>
+                <div class="mb-3">
+                    <label for="effectiveFrom" class="form-label">From<span class="required">*</span>:</label>
+                    <input type="date" class="form-control" id="effectiveFrom">
+                </div>
+                <div class="mb-3">
+                    <label for="effectiveTo" class="form-label">To<span class="required">*</span>:</label>
+                    <input type="date" class="form-control" id="effectiveTo">
+                </div>
+        
+                <h5>Telephone</h5>
+                <div class="mb-3">
+                    <label for="phoneNumber" class="form-label">Phone Number<span class="required">*</span>:</label>
+                    <div class="mb-3">                        <div class="d-flex gap-2">
+                        <select class="form-control" id="countryCode">
+                            <option value="+61">Australia (+61)</option>
+                            <option value="+86">China (+86)</option>
+                            <option value="+33">France (+33)</option>
+                            <option value="+49">Germany (+49)</option>
+                            <option value="+91">India (+91)</option>
+                            <option value="+62">Indonesia (+62)</option>
+                            <option value="+81">Japan (+81)</option>
+                            <option value="+65">Singapore (+65)</option>
+                            <option value="+44">United Kingdom (+44)</option>
+                            <option value="+1">United States (+1)</option>
+                        </select>
+                            <input type="text" class="form-control" id="areaCode" placeholder="Area Code (if applicable)">
+                            <input type="text" class="form-control" id="phoneNumber" placeholder="Number">
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="altPhoneNumber" class="form-label">Alternative Phone Number:</label>
+                    <div class="mb-3">                        <div class="d-flex gap-2">
+                        <select class="form-control" id="countryCode">
+                            <option value="+61">Australia (+61)</option>
+                            <option value="+86">China (+86)</option>
+                            <option value="+33">France (+33)</option>
+                            <option value="+49">Germany (+49)</option>
+                            <option value="+91">India (+91)</option>
+                            <option value="+62">Indonesia (+62)</option>
+                            <option value="+81">Japan (+81)</option>
+                            <option value="+65">Singapore (+65)</option>
+                            <option value="+44">United Kingdom (+44)</option>
+                            <option value="+1">United States (+1)</option>
+                        </select>
+                            <input type="text" class="form-control" id="areaCode" placeholder="Area Code (if applicable)">
+                            <input type="text" class="form-control" id="phoneNumber" placeholder="Number">
+                        </div>
+                    </div>
+                </div>
+        
+                <h5>Email Address</h5>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email Address<span class="required">*</span>:</label>
+                    <input type="email" class="form-control" id="email" required>
+                    <div id="emailError" class="text-danger" style="display: none;">Invalid email format. Please include '@'.</div>
+           </div>
+                <div class="mb-3">
+                    <label for="altEmail" class="form-label">Alternative Email Address:</label>
+                    <input type="email" class="form-control" id="altEmail">
+                    <div id="altEmailError" class="text-danger" style="display: none;">Invalid email format. Please include '@'.</div>
+                </div>
+                </div>
+            </form>
+        </div>
+
+<!-- SECTION E -->
+        <div class="form-container">
+            <div class="form-header">Section E: Nominated Third Party</div>
+            <form>
+                <p class="text-muted">The University of Oxford will normally only discuss your application with you. If you wish to nominate a third party with whom we may discuss your application and accept direction on its handling, please provide their details. Note that a nominated third party will be able to amend or withdraw your application on your behalf.</p>
+                
+                <div class="mb-3">
+                    <label class="form-label">Do you wish to provide details of a nominated third party?</label>
+                    <div class="d-flex gap-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="nominateThirdParty" id="yesNominate" value="yes">
+                            <label class="form-check-label" for="yesNominate">Yes</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="nominateThirdParty" id="noNominate" value="no">
+                            <label class="form-check-label" for="noNominate">No</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="nomineeName" class="form-label">Name of nominated third party:</label>
+                    <input type="text" class="form-control" id="nomineeName">
+                </div>
+                
+                <div class="mb-3">
+                    <label for="nomineeEmail" class="form-label">Email address of nominated third party:</label>
+                    <input type="email" class="form-control" id="nomineeEmail">
+                    <div id="nomineeEmailError" class="text-danger" style="display: none;">Invalid email format. Please include '@'.</div>
+
+                </div>
+                
+                <div class="mb-3">
+                    <label for="nomineeBirth" class="form-label">Date of birth of nominated third party:</label>
+                    <input type="date" class="form-control" id="nomineeBirth">
+                </div>
+            </form>
+        </div>
+
+<!-- SECTION F -->
+        <div class="form-container">
+
+            <div class="form-header">Section F: Nationality</div>
+            <form>
+                <p class="text-muted">The details you provide on this page will be used to determine your fee status and eligibility for many scholarships. The details you give below should reflect your current situation, at the date you submit your application.</p>
+                
+                <div class="mb-3">
+                    <label for="birthCountry" class="form-label">COUNTRY OF BIRTH<span class="required">*</span>:</label>
+                    <input type="text" class="form-control" id="birthCountry">
+                </div>
+        
+                <div class="mb-3">
+                    <label class="form-label">COUNTRY OF NATIONALITY/CITIZENSHIP<span class="required">*</span>:</label>
+                    <p class="text-muted small">In this section, give details of the countries of which you have nationality and the start date(s). If you have been a national of a country since birth, use your birth date as the "From" date under "start date of nationality". Please only include nationalities that you currently hold.</p>
+                    
+                    <div class="table-responsive mb-3">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>NATIONALITY</th>
+                                    <th>START DATE OF NATIONALITY (dd/mm/yyyy)</th>
+                                    <th>PASSPORT NUMBER</th>
+                                    <th>COUNTRY OF ISSUE</th>
+                                    <th>PASSPORT EXPIRY DATE <br> (dd/mm/yyyy)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" class="form-control" id="nationality1"></td>
+                                    <td><input type="date" class="form-control" id="nationalityDate1"></td>
+                                    <td><input type="text" class="form-control" id="passportNumber1"></td>
+                                    <td><input type="text" class="form-control" id="issueCountry1"></td>
+                                    <td><input type="date" class="form-control" id="passportExpiry1"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5">
+                                        <div class="mt-2">
+                                            <input type="checkbox" class="form-check-input" id="dualNational">
+                                            <label for="dualNational" class="form-check-label">If dual national:</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" class="form-control" id="nationality2"></td>
+                                    <td><input type="date" class="form-control" id="nationalityDate2"></td>
+                                    <td><input type="text" class="form-control" id="passportNumber2"></td>
+                                    <td><input type="text" class="form-control" id="issueCountry2"></td>
+                                    <td><input type="date" class="form-control" id="passportExpiry2"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const yesVisa = document.getElementById("yesVisa");
+                        const noVisa = document.getElementById("noVisa");
+                        const uncertainVisa = document.getElementById("uncertainVisa");
+                        const visaDetailsContainer = document.getElementById("visaDetailsContainer");
+                
+                        function toggleVisaDetails() {
+                            if (yesVisa.checked) {
+                                visaDetailsContainer.style.display = "block";
+                            } else {
+                                visaDetailsContainer.style.display = "none";
+                            }
+                        }
+                
+                        yesVisa.addEventListener("change", toggleVisaDetails);
+                        noVisa.addEventListener("change", toggleVisaDetails);
+                        uncertainVisa.addEventListener("change", toggleVisaDetails);
+                
+                        // Initial check in case "Yes" is preselected
+                        toggleVisaDetails();
+                    });
+                </script>
+                
+                <div class="mb-3">
+                    <label class="form-label">Do you expect to require a visa to enter the UK for your study?<span class="required">*</span></label>
+                    <div class="d-flex gap-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="requireVisa" id="yesVisa" value="yes">
+                            <label class="form-check-label" for="yesVisa">Yes</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="requireVisa" id="noVisa" value="no">
+                            <label class="form-check-label" for="noVisa">No</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="requireVisa" id="uncertainVisa" value="uncertain">
+                            <label class="form-check-label" for="uncertainVisa">Uncertain</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Section that should only appear when 'Yes' is selected -->
+                <div id="visaDetailsContainer" style="display: none;">
+                    <div class="mb-3">
+                        <p>If you expect to require a visa to enter the UK for your study, please provide details of the passport that you intend to use.</p>
+                        <!-- This information is already captured in the nationality table above -->
+                    </div>
+                
+                    <div class="container">
+                        <div class="mb-4">
+                            <label class="form-label">ORDINARY RESIDENCE AND LEAVE TO REMAIN</label>
+                            <ul class="list-group mb-3">
+                                <li class="list-group-item">Your country of ordinary residence is the country in which you are normally resident, out of choice and for a settled purpose, apart from temporary or occasional absences. It is not a country in which you are studying, working or living temporarily.</li>
+                                <li class="list-group-item">EU nationals only: if you currently live in the UK for the purpose of full-time education only, you should enter the relevant UK region (England, Northern Ireland, Scotland or Wales) as your current residence and the country where you otherwise reside as your previous residence. The end date of your previous residence should be entered at the day before you arrived in the UK.</li>
+                                <li class="list-group-item">If you have been ordinarily resident in a single country since birth, please enter your birth date in the "From" field for the current country of ordinary residence.</li>
+                                <li class="list-group-item">If you have been ordinarily resident in more than one country, your dates of residence must not overlap. You must include an end date for your previous country of ordinary residence, which must be at least one day before the start date of your current country of ordinary residence.</li>
+                                <li class="list-group-item">If you are <strong>resident</strong> in a country listed in Section O, you may be eligible for a fee waiver.</li>
+                            </ul>
+                        </div>
+                    </div>
+                
+                    <div class="mb-3">
+                        <label for="currentResidence" class="form-label"><strong>CURRENT COUNTRY OF ORDINARY RESIDENCE<span class="required">*</span></strong></label>
+                        <input type="text" class="form-control" id="currentResidence" name="currentResidence" placeholder="Enter country">
+                    </div>
+                
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="fromDate" class="form-label">FROM (dd/mm/yyyy)</label>
+                            <input type="date" class="form-control" id="fromDate" name="fromDate">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="toDate" class="form-label">TO (dd/mm/yyyy)</label>
+                            <input type="date" class="form-control" id="toDate" name="toDate">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label"><br>I am an EU national resident in the UK for the main purpose of full-time education<span class="required">*</span></label>
+                        <div class="d-flex gap-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="euNationalEducation" id="yesEuEducation" value="yes">
+                                <label class="form-check-label" for="yesEuEducation">Yes</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="euNationalEducation" id="noEuEducation" value="no">
+                                <label class="form-check-label" for="noEuEducation">No</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <p>If you have been ordinarily resident in a different country during the last six years, please enter details of the most recent:</p>
+                        <div class="row">
+                            <div class="mb-3">
+                                <label for="previousResidence" class="form-label"><strong>PREVIOUS COUNTRY OF RESIDENCE</strong></label>
+                                <input type="text" class="form-control" id="previousResidence" name="previousResidence" placeholder="Enter country">
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="prevFromDate" class="form-label">FROM (dd/mm/yyyy)</label>
+                                    <input type="date" class="form-control" id="prevFromDate" name="prevFromDate">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="prevToDate" class="form-label">TO (dd/mm/yyyy)</label>
+                                    <input type="date" class="form-control" id="prevToDate" name="prevToDate">
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                            
+                    <div class="mb-3">
+                        <label class="form-label">If you are not a UK or EU Citizen but you are currently living in the UK, do you have indefinite leave to remain status (which has been entered into your passport)?</label>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="indefiniteLeave" id="yesIndefiniteLeave" value="yes">
+                                    <label class="form-check-label" for="yesIndefiniteLeave">Yes</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="indefiniteLeave" id="noIndefiniteLeave" value="no">
+                                    <label class="form-check-label" for="noIndefiniteLeave">No</label>
+                                </div>
+                            </div>
+                            <div class="col-md-8" id="grantedDateContainer" style="display: none;">
+                                <label for="grantedDate" class="form-label">If yes, when was it granted?</label>
+                                <input type="date" class="form-control" id="grantedDate">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            const yesIndefiniteLeave = document.getElementById("yesIndefiniteLeave");
+                            const noIndefiniteLeave = document.getElementById("noIndefiniteLeave");
+                            const grantedDateContainer = document.getElementById("grantedDateContainer");
+                    
+                            function toggleGrantedDate() {
+                                if (yesIndefiniteLeave.checked) {
+                                    grantedDateContainer.style.display = "block";
+                                } else {
+                                    grantedDateContainer.style.display = "none";
+                                }
+                            }
+                    
+                            yesIndefiniteLeave.addEventListener("change", toggleGrantedDate);
+                            noIndefiniteLeave.addEventListener("change", toggleGrantedDate);
+                        });
+                    </script>
+                </div>
+                
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const yesIndefiniteLeave = document.getElementById("yesIndefiniteLeave");
+        const noIndefiniteLeave = document.getElementById("noIndefiniteLeave");
+        const grantedDateContainer = document.getElementById("grantedDateContainer");
+
+        function toggleGrantedDate() {
+            if (yesIndefiniteLeave.checked) {
+                grantedDateContainer.style.display = "block";
+            } else {
+                grantedDateContainer.style.display = "none";
+            }
+        }
+
+        yesIndefiniteLeave.addEventListener("change", toggleGrantedDate);
+        noIndefiniteLeave.addEventListener("change", toggleGrantedDate);
+    });
+</script>
+
+            </form>
+        </div>
+        
+<!-- SECTION G -->
+<div class="form-container">
+    <script>
+        function toggleAccommodationQuestions() {
+            var yesOption = document.getElementById("accommodationYes");
+            var accommodationDetails = document.getElementById("accommodationDetails");
+            if (yesOption.checked) {
+                accommodationDetails.style.display = "block";
+            } else {
+                accommodationDetails.style.display = "none";
+            }
+        }
+    </script>
+         <h2>Section G: Accommodation</h2>
+         <div style="background-color: #e7f3fe; padding: 10px; border-radius: 5px;">
+             This section is for information only and does not constitute an application to University or college accommodation. For further information, please visit the Accommodation Office website <a href="http://www.spuni.or.ac.uk/accommodation/">here</a>.
+         </div>
+         <br>
+         
+         <label>Do you intend to apply for accommodation owned by the college? *</label>
+         <br>
+         <input type="radio" id="accommodationYes" name="accommodation" value="yes" onclick="toggleAccommodationQuestions()"> Yes
+         <br>
+         <input type="radio" id="accommodationNo" name="accommodation" value="no" onclick="toggleAccommodationQuestions()"> No
+         
+         <div id="accommodationDetails" style="display: none;">
+             <br>
+             <label>Please provide the sex and date of birth of any accompanying children: *</label>
+             <br>
+             <label>Sex:</label>
+             <select name="child_sex">
+                 <option value="male">Male</option>
+                 <option value="female">Female</option>
+                 <option value="other">Other</option>
+             </select>
+             <br>
+             <label>Date of Birth:</label>
+             <input type="date" name="child_dob">
+             <br><br>
+             
+             <label>Excluding yourself, how many adults will be accompanying you? *</label>
+             <input type="number" name="accompanying_adults" min="0">
+         </div>
+     </body>
+</div>
+
+<!-- SECTION H -->
+<div class="form-container">
+<h4 class="mt-4"><strong>SECTION H: REFEREES INFORMATION<span class="required">*</span></strong></h4>
+<p>Please enter contact details for three referees below.</p>
+
+<p>
+    References should be academic or, where specifically permitted on the course page 
+    (<a href="https://www.graduate.ox.ac.uk/courses">www.graduate.ox.ac.uk/courses</a>), professional.
+    Family members, friends, and neighbours may not act as referees.
+</p>
+
+<p>
+    It is a University requirement that three references are provided and that references are received 
+    in time for the deadline for your application to be considered. 
+    For more information on references, please see the 
+    <strong>Application Guide</strong> 
+    (<a href="https://www.graduate.ox.ac.uk/applicationguide">www.graduate.ox.ac.uk/applicationguide</a>).
+</p>
+
+<p>
+    Please ask your referee to send the reference directly to 
+    <a href="mailto:graduate.admissions@admin.ox.ac.uk">graduate.admissions@admin.ox.ac.uk</a> 
+    quoting your full name and the course to which you are applying, and we will add it to your application.
+</p>
+
+<p>
+    <strong>References must be sent to us from your referee’s official (institutional or organisational) email address.</strong>
+    Alternatively, sealed references may be enclosed with this application. In this case, 
+    each reference must be in a sealed envelope, signed by the referee across the seal of the envelope, 
+    and their signature covered with clear adhesive tape.
+</p>
+
+<!-- Table for referees' details -->
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Referee title, name and role</th>
+            <th>Referee institutional/professional postal and email address</th>
+            <th>Type of reference (academic or professional)</th>
+            <th>Reference submission type</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Three rows for referees -->
+        <tr>
+            <td><input type="text" class="form-control" name="referee1_name"></td>
+            <td><input type="text" class="form-control" name="referee1_address"></td>
+            <td>
+                <select class="form-control" name="referee1_type">
+                    <option value="academic">Academic</option>
+                    <option value="professional">Professional</option>
+                </select>
+            </td>
+            <td>
+                <input type="checkbox" name="referee1_email"> Referee will submit by email<br>
+                <input type="checkbox" name="referee1_sealed"> Sealed reference enclosed
+            </td>
+        </tr>
+        <tr>
+            <td><input type="text" class="form-control" name="referee2_name"></td>
+            <td><input type="text" class="form-control" name="referee2_address"></td>
+            <td>
+                <select class="form-control" name="referee2_type">
+                    <option value="academic">Academic</option>
+                    <option value="professional">Professional</option>
+                </select>
+            </td>
+            <td>
+                <input type="checkbox" name="referee2_email"> Referee will submit by email<br>
+                <input type="checkbox" name="referee2_sealed"> Sealed reference enclosed
+            </td>
+        </tr>
+        <tr>
+            <td><input type="text" class="form-control" name="referee3_name"></td>
+            <td><input type="text" class="form-control" name="referee3_address"></td>
+            <td>
+                <select class="form-control" name="referee3_type">
+                    <option value="academic">Academic</option>
+                    <option value="professional">Professional</option>
+                </select>
+            </td>
+            <td>
+                <input type="checkbox" name="referee3_email"> Referee will submit by email<br>
+                <input type="checkbox" name="referee3_sealed"> Sealed reference enclosed
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
+<!-- SECTION I -->
+<div class="form-container">
+    <div class="form-header">Section I: Details of Current & Previous Education</div>
+    <form>
+        <p>Please enter your previous and current qualifications, newest first. You should include details of all qualifications gained at 
+           degree level (i.e. university) and above, but not earlier education. For further guidance, please see our <a href="https://www.graduate.ox.ac.uk/applicationguide">Application Guide</a>.</p>
+        
+        <div class="table-responsive mb-4">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>University/Institution attended<span class="required">*</span></th>
+                        <th>Start date (dd/mm/yyyy)<span class="required">*</span></th>
+                        <th>Date of completion/ expected completion (dd/mm/yyyy)<span class="required">*</span></th>
+                        <th>Qualification obtained or studying for (e.g. BA, MSc)<span class="required">*</span></th>
+                        <th>Main subject (e.g. Chemistry, English)<span class="required">*</span></th>
+                        <th>Result/expected result (grade, classification, etc.)<span class="required">*</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" class="form-control" name="institution"></td>
+                        <td><input type="date" class="form-control" name="start_date"></td>
+                        <td><input type="date" class="form-control" name="completion_date"></td>
+                        <td><input type="text" class="form-control" name="qualification"></td>
+                        <td><input type="text" class="form-control" name="subject"></td>
+                        <td><input type="text" class="form-control" name="result"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" class="form-control" name="institution2"></td>
+                        <td><input type="date" class="form-control" name="start_date2"></td>
+                        <td><input type="date" class="form-control" name="completion_date2"></td>
+                        <td><input type="text" class="form-control" name="qualification2"></td>
+                        <td><input type="text" class="form-control" name="subject2"></td>
+                        <td><input type="text" class="form-control" name="result2"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <p>If you require a Tier 4 student visa, please give details below of any periods of study (including non-degree level courses), 
+           complete or incomplete, undertaken in the UK that are not already listed above.</p>
+        
+        <p>You should include years abroad spent in the UK while registered at an overseas institution. Please list start and end dates, course 
+           title, level and institution.</p>
+        
+        <div class="table-responsive mb-4">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>University/Institution attended<span class="required">*</span></th>
+                        <th>Start date (dd/mm/yyyy)<span class="required">*</span></th>
+                        <th>Date of completion/ expected completion (dd/mm/yyyy)<span class="required">*</span></th>
+                        <th>Course title<span class="required">*</span></th>
+                        <th>Level<span class="required">*</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" class="form-control" name="uk_institution"></td>
+                        <td><input type="date" class="form-control" name="uk_start_date"></td>
+                        <td><input type="date" class="form-control" name="uk_completion_date"></td>
+                        <td><input type="text" class="form-control" name="course_title"></td>
+                        <td><input type="text" class="form-control" name="level"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" class="form-control" name="uk_institution2"></td>
+                        <td><input type="date" class="form-control" name="uk_start_date2"></td>
+                        <td><input type="date" class="form-control" name="uk_completion_date2"></td>
+                        <td><input type="text" class="form-control" name="course_title2"></td>
+                        <td><input type="text" class="form-control" name="level2"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label">Have you undertaken degree-level study at any institution, which you have not completed, excluding any qualification you are currently working towards?<span class="required">*</span></label>
+            <div class="d-flex gap-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="incomplete_study" id="yes_incomplete" value="yes">
+                    <label class="form-check-label" for="yes_incomplete">Yes</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="incomplete_study" id="no_incomplete" value="no">
+                    <label class="form-check-label" for="no_incomplete">No</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mb-4" id="incompleteStudyDetails" style="display: none;">
+            <label class="form-label">If "Yes", please state the course(s) and the institution(s) and the reason(s) the qualification was not completed.</label>
+            <textarea class="form-control" name="incomplete_study_details" rows="3"></textarea>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label">Are you planning to begin, or to continue studying for, a degree at any institution, at the same time as you would also be studying at Oxford for the course for which you are now applying?<span class="required">*</span></label>
+            <div class="d-flex gap-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="concurrent_study" id="yes_concurrent" value="yes">
+                    <label class="form-check-label" for="yes_concurrent">Yes</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="concurrent_study" id="no_concurrent" value="no">
+                    <label class="form-check-label" for="no_concurrent">No</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mb-4" id="concurrentStudyDetails" style="display: none;">
+            <label class="form-label">If "Yes", please provide details of the course and the institution and how you believe it will be possible to pursue both courses at the same time.</label>
+            <textarea class="form-control" name="concurrent_study_details" rows="3"></textarea>
+        </div>
+        
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const yesIncomplete = document.getElementById("yes_incomplete");
+                const noIncomplete = document.getElementById("no_incomplete");
+                const incompleteStudyDetails = document.getElementById("incompleteStudyDetails");
+        
+                const yesConcurrent = document.getElementById("yes_concurrent");
+                const noConcurrent = document.getElementById("no_concurrent");
+                const concurrentStudyDetails = document.getElementById("concurrentStudyDetails");
+        
+                function toggleIncompleteDetails() {
+                    incompleteStudyDetails.style.display = yesIncomplete.checked ? "block" : "none";
+                }
+        
+                function toggleConcurrentDetails() {
+                    concurrentStudyDetails.style.display = yesConcurrent.checked ? "block" : "none";
+                }
+        
+                yesIncomplete.addEventListener("change", toggleIncompleteDetails);
+                noIncomplete.addEventListener("change", toggleIncompleteDetails);
+                
+                yesConcurrent.addEventListener("change", toggleConcurrentDetails);
+                noConcurrent.addEventListener("change", toggleConcurrentDetails);
+            });
+        </script>        
+    </form>
+    </div>
+    
+<!-- SECTION J -->
+<div class="form-container">
+    <h2>Section J: GRE (if applicable)</h2>
+    <p>For further information on whether a GRE score is required please see our Application Guide 
+  <a href="https://www.graduate.ox.ac.uk/applicationguide">(www.graduate.ox.ac.uk/applicationguide)</a>.
+</p>
+<table border="1">
+  <tr>
+    <td>GRE date of test:</td>
+    <td><input type="text" name="gre_date" /></td>
+    <td>Verbal score:</td>
+    <td><input type="text" name="verbal_score" /></td>
+  </tr>
+  <tr>
+    <td>Verbal %:</td>
+    <td><input type="text" name="verbal_percent" /></td>
+    <td>Quantitative score:</td>
+    <td><input type="text" name="quant_score" /></td>
+  </tr>
+  <tr>
+    <td>Quantitative %:</td>
+    <td><input type="text" name="quant_percent" /></td>
+    <td>Analytical writing score:</td>
+    <td><input type="text" name="analytical_score" /></td>
+  </tr>
+  <tr>
+    <td>Analytical writing %:</td>
+    <td><input type="text" name="analytical_percent" /></td>
+  </tr>
+</table>
+</div>
+
+<!-- SECTION K -->
+<div class="form-container">
+    <h2>Section K: English language skills</h2>
+  <table>
+    <tr>
+      <td>Is English your first language?<span class="required">*</span></td>
+      <td><input type="radio" name="english_first" value="yes"> Yes</td>
+      <td><input type="radio" name="english_first" value="no"> No</td>
+    </tr>
+    <tr>
+      <td>Have you completed, or are you completing, a full-time qualification equivalent to a UK degree entirely taught and assessed in English?<span class="required">*</span></td>
+      <td><input type="radio" name="qualification" value="yes"> Yes</td>
+      <td><input type="radio" name="qualification" value="no"> No</td>
+    </tr>
+    <tr>
+      <td>Have you completed a course under a United Kingdom Tier 4 child visa?<span class="required">*</span></td>
+      <td><input type="radio" name="tier4_visa" value="yes"> Yes</td>
+      <td><input type="radio" name="tier4_visa" value="no"> No</td>
+    </tr>
+  </table>
+</div>
+
+<!-- SECTION L -->
+<div class="form-container">
+    <h2>Section L: English language proficiency<span class="required">*</span></h2>
+    <p>
+        If your first language is not English, or if your first language is English but you are not a national of the UK, Ireland or a majority English-speaking country recognised by the UK Home Office, 
+        you must either supply an English test result or upload a letter explaining why you are requesting a waiver.
+        <a href="https://www.graduate.ox.ac.uk/englishproficiency">(More info)</a>.
+    </p>
+    
+    <div style="overflow-x: auto;">
+        <table border="1" style="width: 100%;">
+            <tr>
+                <th>Test type (e.g. TOEFL, IELTS, etc.)</th>
+                <th>Date taken</th>
+                <th>Overall result</th>
+                <th>Listening</th>
+                <th>Reading</th>
+                <th>Writing</th>
+                <th>Speaking</th>
+            </tr>
+            <tr>
+                <td><input type="text" name="test_type" /></td>
+                <td><input type="date" name="date_taken" /></td>
+                <td><input type="text" name="overall_result" /></td>
+                <td><input type="text" name="listening_score" /></td>
+                <td><input type="text" name="reading_score" /></td>
+                <td><input type="text" name="writing_score" /></td>
+                <td><input type="text" name="speaking_score" /></td>
+            </tr>
+        </table>
+    </div>
+
+    <p>
+        I intend to submit a test waiver request with my supporting materials 
+        <input type="radio" name="test_waiver" value="yes"> Yes
+        <input type="radio" name="test_waiver" value="no"> No
+    </p>
+
+    <p>
+        For more information on test waivers, please see the 
+        <a href="https://www.graduate.ox.ac.uk/applicationguide">Application Guide</a>.
+    </p>
+
+    <h3>Knowledge of other languages</h3>
+    <p>If you have a working knowledge of languages other than English, please specify your competence level:</p>
+    
+    <div style="overflow-x: auto;">
+        <table border="1" style="width: 100%;">
+            <tr>
+                <th>Language</th>
+                <th>Reading</th>
+                <th>Writing</th>
+                <th>Speaking</th>
+                <th>Understanding</th>
+            </tr>
+            <tr>
+                <td><input type="text" name="language_name" /></td>
+                <td><input type="text" name="reading_level" /></td>
+                <td><input type="text" name="writing_level" /></td>
+                <td><input type="text" name="speaking_level" /></td>
+                <td><input type="text" name="understanding_level" /></td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Submit Section -->
+    <div style="text-align: center; margin-top: 30px;">
+        <p><strong>Ensure all fields are filled out correctly before submitting.</strong></p>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</div>
+
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const courses = [
+        "MPhil in Development Studies",
+        "MPhil in International Relations",
+        "DPhil in Mathematics",
+        "MSc by Research in Chemistry",
+        "MSc in Artificial Intelligence",
+        "MSc in Business Analytics",
+        "MSc in Data Science",
+        "MSc in Environmental Sustainability",
+        "MSc in Genomic Medicine",
+        "MSc in Machine Learning"
+    ];
+
+    const searchInput = document.getElementById("courseSearch");
+    const dropdown = document.getElementById("courseDropdown");
+
+    function filterCourses(query) {
+        dropdown.innerHTML = ""; // Clear previous results
+        if (!query.trim()) {
+            dropdown.style.display = "none";
+            return;
+        }
+
+        const filteredCourses = courses.filter(course =>
+            course.toLowerCase().includes(query.toLowerCase())
+        );
+
+        if (filteredCourses.length === 0) {
+            dropdown.innerHTML = "<div class='dropdown-item text-muted'>No matches found</div>";
+        } else {
+            filteredCourses.forEach(course => {
+                const item = document.createElement("div");
+                item.classList.add("dropdown-item");
+                item.textContent = course;
+                item.onclick = () => {
+                    searchInput.value = course;
+                    dropdown.style.display = "none";
+                };
+                dropdown.appendChild(item);
+            });
+        }
+        dropdown.style.display = "block";
+    }
+
+    searchInput.addEventListener("keyup", () => filterCourses(searchInput.value));
+
+    // Hide dropdown when clicking outside
+    document.addEventListener("click", (event) => {
+        if (!event.target.closest(".dropdown-container")) {
+            dropdown.style.display = "none";
+        }
+    });
+
+    // Preference toggle logic
+    function togglePreference() {
+        const noPreference = document.getElementById("noPreference");
+        const preferenceField = document.getElementById("preferenceField");
+        const collegeInput = document.getElementById("collegePreference");
+
+        if (noPreference.checked) {
+            preferenceField.style.display = "none";
+            collegeInput.value = ""; // Clear input
+        } else {
+            preferenceField.style.display = "block";
+        }
+    }
+
+    document.getElementById("noPreference")?.addEventListener("change", togglePreference);
+
+    // Email validation
+    function validateEmail(input, errorElement) {
+        if (input.value.trim() && !input.value.includes("@")) {
+            errorElement.style.display = "block";
+        } else {
+            errorElement.style.display = "none";
+        }
+    }
+
+    const emailFields = [
+        { input: "email", error: "emailError" },
+        { input: "altEmail", error: "altEmailError" },
+        { input: "nomineeEmail", error: "nomineeEmailError" }
+    ];
+
+    emailFields.forEach(({ input, error }) => {
+        const emailInput = document.getElementById(input);
+        const emailError = document.getElementById(error);
+
+        if (emailInput && emailError) {
+            emailInput.addEventListener("input", () => validateEmail(emailInput, emailError));
+        }
+    });
+});
+
+</script>      
+</body>
+</html>
