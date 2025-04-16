@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reviewer Module</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+        background: #002147;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        overflow-y: auto;
+    }
+    .form-container {
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .form-header {
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #cba344;
+    }
+    .btn-custom {
+        background: #e7ce92;
+        border: none;
+        padding: 10px 20px;
+        width: 100%;
+        font-size: 1.2rem;
+        border-radius: 8px;
+        transition: background 0.3s;
+        font-weight: bolder;
+    }
+    .btn-custom:hover {
+        background: #e7a711;
+    }
+    .btn-tertiary{
+        background: #b1b7bd;
+        border: none;
+        padding: 10px 20px;
+        width: 100%;
+        font-size: 1rem;
+        border-radius: 8px;
+        transition: background 0.3s;
+    }
+    .btn-tertiary:hover {
+        background: #808fa2;
+    }
+    .warning {
+        color: #e83e36;
+        font-size: 0.9rem;
+        display: none;
+    }
+
+    .dropdown-container {
+        position: relative;
+    }
+    .dropdown-menu {
+        position: absolute;
+        width: 100%;
+        max-height: 200px;
+        overflow-y: auto;
+        z-index: 1000;
+        display: none;
+        background-color: white;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+    }
+    .dropdown-item {
+        padding: 8px 16px;
+        cursor: pointer;
+    }
+    .dropdown-item:hover {
+        background-color: #f1d89e;
+    }
+    .required {
+        color: red;
+        margin-left: 3px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <div class="form-header">Reviewer Panel - Graduate Application</div>
+
+    <h5>Section A: About the Course</h5>
+    <p><strong>Course Code:</strong> MLF001</p>
+    <p><strong>Course Title:</strong> MSc in Law and Finance</p>
+    <p><strong>Proposed Research Field:</strong> International Arbitration and AI Law</p>
+    <p><strong>Proposed Supervisor(s):</strong> Prof. Emily Robson</p>
+    <p><strong>Unavailable for Interview:</strong> 2025-07-15 to 2025-07-22</p>
+    <p><strong>Intends to pursue research after course:</strong> Yes</p>
+
+    <hr>
+
+    <h5>Section B: College Preference</h5>
+    <p><strong>Preference Option:</strong> Has college preference</p>
+    <p><strong>College Preference:</strong> Balliol College</p>
+
+    <hr>
+
+    <h5>Document Request</h5>
+    <div class="mb-3">
+      <label class="form-label">Request Additional Document</label>
+      <select class="form-select mb-2">
+        <option selected disabled>Choose a document...</option>
+        <option value="ref1">Referee 1 Letter</option>
+        <option value="ref2">GRE Score</option>
+        <option value="english">English Proficiency</option>
+      </select>
+      <input type="text" class="form-control" placeholder="Other (type manually)">
+    </div>
+
+    <hr>
+
+    <h5>Status Recommendation</h5>
+    <div class="mb-3">
+      <label for="status" class="form-label">Status Recommendation<span class="required">*</span></label>
+      <select id="status" class="form-control" required>
+        <option value="">-- Select --</option>
+        <option value="accept">Accept</option>
+        <option value="reject">Reject</option>
+        <option value="hold">Hold</option>
+      </select>
+    </div>
+
+    <div>
+      <button class="btn btn-custom w-100">Send</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
