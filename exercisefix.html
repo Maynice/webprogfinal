@@ -391,44 +391,48 @@
         </div>
 
 <!-- SECTION E -->
-        <div class="form-container">
-            <div class="form-header">Section E: Nominated Third Party</div>
-            <form>
-                <p style="background-color: #f0eccd; padding: 10px; border-radius: 5px;">The University of Oxford will normally only discuss your application with you. If you wish to nominate a third party with whom we may discuss your application and accept direction on its handling, please provide their details. Note that a nominated third party will be able to amend or withdraw your application on your behalf.</p>
-                
-                <div class="mb-3">
-                    <label class="form-label">Do you wish to provide details of a nominated third party?</label>
-                    <div class="d-flex gap-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="nominateThirdParty" id="yesNominate" value="yes">
-                            <label class="form-check-label" for="yesNominate">Yes</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="nominateThirdParty" id="noNominate" value="no">
-                            <label class="form-check-label" for="noNominate">No</label>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="mb-3">
-                    <label for="nomineeName" class="form-label">Name of nominated third party:</label>
-                    <input type="text" class="form-control" id="nomineeName">
-                </div>
-                
-                <div class="mb-3">
-                    <label for="nomineeEmail" class="form-label">Email address of nominated third party:</label>
-                    <input type="email" class="form-control" id="nomineeEmail">
-                    <div id="nomineeEmailError" class="text-danger" style="display: none;">Invalid email format. Please include '@'.</div>
-
-                </div>
-                
-                <div class="mb-3">
-                    <label for="nomineeBirth" class="form-label">Date of birth of nominated third party:</label>
-                    <input type="date" class="form-control" id="nomineeBirth">
-                </div>
-            </form>
+<div class="form-container">
+    <div class="form-header">Section E: Nominated Third Party</div>
+    <form>
+      <p style="background-color: #f0eccd; padding: 10px; border-radius: 5px;">
+        The University of Oxford will normally only discuss your application with you. If you wish to nominate a third party with whom we may discuss your application and accept direction on its handling, please provide their details. Note that a nominated third party will be able to amend or withdraw your application on your behalf.
+      </p>
+  
+      <div class="mb-3">
+        <label class="form-label">Do you wish to provide details of a nominated third party?</label>
+        <div class="d-flex gap-3">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="nominateThirdParty" id="yesNominate" value="yes">
+            <label class="form-check-label" for="yesNominate">Yes</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="nominateThirdParty" id="noNominate" value="no" checked>
+            <label class="form-check-label" for="noNominate">No</label>
+          </div>
         </div>
-
+      </div>
+  
+      <!-- This part is hidden by default -->
+      <div id="nomineeDetails" style="display: none;">
+        <div class="mb-3">
+          <label for="nomineeName" class="form-label">Name of nominated third party:</label>
+          <input type="text" class="form-control" id="nomineeName">
+        </div>
+  
+        <div class="mb-3">
+          <label for="nomineeEmail" class="form-label">Email address of nominated third party:</label>
+          <input type="email" class="form-control" id="nomineeEmail">
+          <div id="nomineeEmailError" class="text-danger" style="display: none;">Invalid email format. Please include '@'.</div>
+        </div>
+  
+        <div class="mb-3">
+          <label for="nomineeBirth" class="form-label">Date of birth of nominated third party:</label>
+          <input type="date" class="form-control" id="nomineeBirth">
+        </div>
+      </div>
+    </form>
+  </div>
+  
 <!-- SECTION F -->
         <div class="form-container">
 
@@ -447,44 +451,69 @@
                     
                     <div class="table-responsive mb-3">
                         <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Nationality</th>
-                                    <th>Start Date of Nationality (dd/mm/yyyy)</th>
-                                    <th>Passport Number</th>
-                                    <th>Country Of Issue</th>
-                                    <th>Passport Expiry Date <br> (dd/mm/yyyy)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><input type="text" class="form-control" id="nationality1"></td>
-                                    <td><input type="date" class="form-control" id="nationalityDate1"></td>
-                                    <td><input type="text" class="form-control" id="passportNumber1"></td>
-                                    <td><input type="text" class="form-control" id="issueCountry1"></td>
-                                    <td><input type="date" class="form-control" id="passportExpiry1"></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="5">
-                                        <div class="mt-2">
-                                            <input type="checkbox" class="form-check-input" id="dualNational">
-                                            <label for="dualNational" class="form-check-label">If dual national:</label>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><input type="text" class="form-control" id="nationality2"></td>
-                                    <td><input type="date" class="form-control" id="nationalityDate2"></td>
-                                    <td><input type="text" class="form-control" id="passportNumber2"></td>
-                                    <td><input type="text" class="form-control" id="issueCountry2"></td>
-                                    <td><input type="date" class="form-control" id="passportExpiry2"></td>
-                                </tr>
-                            </tbody>
+                          <thead>
+                            <tr>
+                              <th>Nationality</th>
+                              <th>Start Date of Nationality (dd/mm/yyyy)</th>
+                              <th>Passport Number</th>
+                              <th>Country Of Issue</th>
+                              <th>Passport Expiry Date <br> (dd/mm/yyyy)</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td><input type="text" class="form-control" id="nationality1"></td>
+                              <td><input type="date" class="form-control" id="nationalityDate1"></td>
+                              <td><input type="text" class="form-control" id="passportNumber1"></td>
+                              <td><input type="text" class="form-control" id="issueCountry1"></td>
+                              <td><input type="date" class="form-control" id="passportExpiry1"></td>
+                            </tr>
+                      
+                            <!-- Dual Nationality Radio Button -->
+                            <tr>
+                              <td colspan="5">
+                                <div class="mt-2">
+                                  <label class="form-label mb-1">Are you a dual national?</label>
+                                  <div class="d-flex gap-3">
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="dualNationalityOption" id="dualYes" value="yes">
+                                      <label class="form-check-label" for="dualYes">Yes</label>
+                                    </div>
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="dualNationalityOption" id="dualNo" value="no">
+                                      <label class="form-check-label" for="dualNo">No</label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                      
+                            <!-- Second Nationality Row (Hidden by Default) -->
+                            <tr id="secondNationalityRow" style="display: none;">
+                              <td><input type="text" class="form-control" id="nationality2"></td>
+                              <td><input type="date" class="form-control" id="nationalityDate2"></td>
+                              <td><input type="text" class="form-control" id="passportNumber2"></td>
+                              <td><input type="text" class="form-control" id="issueCountry2"></td>
+                              <td><input type="date" class="form-control" id="passportExpiry2"></td>
+                            </tr>
+                          </tbody>
                         </table>
-                    </div>
+                      </div>
                 </div>
         
                 <script>
+                     const dualYes = document.getElementById('dualYes');
+  const dualNo = document.getElementById('dualNo');
+  const secondNationalityRow = document.getElementById('secondNationalityRow');
+
+  dualYes.addEventListener('change', () => {
+    secondNationalityRow.style.display = 'table-row';
+  });
+
+  dualNo.addEventListener('change', () => {
+    secondNationalityRow.style.display = 'none';
+  });
+                    
                     document.addEventListener("DOMContentLoaded", function () {
                         const yesVisa = document.getElementById("yesVisa");
                         const noVisa = document.getElementById("noVisa");
@@ -1017,9 +1046,27 @@
 <div class="form-container">
     <div class="form-header">Section L: English language proficiency</div>
     <p style="background-color: #f0eccd; padding: 10px; border-radius: 5px;">
-        If your first language is not English, or if your first language is English but you are not a national of the UK, Ireland or a majority English-speaking country recognised by the UK Home Office, 
-        you must either supply an English test result or upload a letter explaining why you are requesting a waiver.
-        <a href="https://www.graduate.ox.ac.uk/englishproficiency">(More info)</a>.
+            If your first language is not English, or if your first language is English but you are not a national of the UK, Ireland or a majority English-speaking country recognised by the UK Home Office 
+            (<a href="https://www.graduate.ox.ac.uk/englishproficiency" target="_blank">www.graduate.ox.ac.uk/englishproficiency</a>), 
+            you must either supply an English test result or upload a letter written by you explaining why you are requesting a waiver to the English language test.
+          <br><br>
+            The University is unable to waive the requirement for an English Language test if it is required for visa purposes, unless you fulfil the requirements in the Application Guide 
+            (<a href="https://www.graduate.ox.ac.uk/applicationguide" target="_blank">www.graduate.ox.ac.uk/applicationguide</a>).
+            <br><br>
+            If you have IELTS (Academic), TOEFL or Cambridge Certificate test results which will be less than two years old when your course commences, please enter them below. 
+            The required scores must be met in a single test, not across multiple settings. 
+            Only enter information where you have received the results – if you do not have test results at the time of applying, 
+            you can still submit your application without these scores and upload them separately via the Graduate Application Self Service.
+            <br><br>
+            This service will be available after you have submitted the application. If you are unable to access this service, 
+            please send your results to <a href="mailto:graduate.admissions@admin.ox.ac.uk">graduate.admissions@admin.ox.ac.uk</a> or 
+            Graduate Admissions Office, University Offices, Wellington Square, Oxford, OX1 2JD.
+            <br><br>
+            You may be required to demonstrate a particular level of English language proficiency to the University for academic or visa reasons. 
+            Further information can be found in our <strong>Application Guide</strong> 
+            (<a href="https://www.graduate.ox.ac.uk/applicationguide" target="_blank">www.graduate.ox.ac.uk/applicationguide</a>).
+          </p>
+          
     </p>
     
     <div style="overflow-x: auto;">
@@ -1045,11 +1092,24 @@
         </table>
     </div>
 
-    <p>
-        I intend to submit a test waiver request with my supporting materials 
-        <input type="radio" name="test_waiver" value="yes"> Yes
-        <input type="radio" name="test_waiver" value="no"> No
-    </p>
+    <p><br>I intend to submit a test waiver request with my supporting materials:</p>
+
+    <div class="mb-3 d-flex gap-3">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="testWaiverIntent" id="testWaiverYes" value="yes" required onchange="toggleWaiverUpload(true)">
+          <label class="form-check-label" for="testWaiverYes">Yes</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="testWaiverIntent" id="testWaiverNo" value="no" onchange="toggleWaiverUpload(false)">
+          <label class="form-check-label" for="testWaiverNo">No</label>
+        </div>
+      </div>
+
+<div id="waiverUploadSection" style="display: none; margin-top: 10px;">
+    <label for="waiverFile" class="form-label">Upload supporting file:</label>
+    <input class="form-control" type="file" id="waiverFile" name="waiverFile">
+    <br>
+</div>
 
     <p style="background-color: #f0eccd; padding: 10px; border-radius: 5px;">
         For more information on test waivers, please see the 
@@ -1057,7 +1117,8 @@
     </p>
 
     <h5>Knowledge of other languages</h5>
-    <p style="background-color: #f0eccd; padding: 10px; border-radius: 5px;">If you have a working knowledge of languages other than English, please specify your competence level:</p>
+    <p style="background-color: #f0eccd; padding: 10px; border-radius: 5px;">If you have a working knowledge of languages other than English (including your native language), please specify, and state 
+        whether the level of your competence in Reading, Writing, Speaking and Understanding is Advanced, Intermediate or Basic:</p>
     
     <div style="overflow-x: auto;">
         <table border="1" style="width: 100%;">
@@ -1077,12 +1138,78 @@
             </tr>
         </table>
     </div>
+    </div>
+
+    <!-- Section Q + Submit Section -->
 
     <!-- Submit Section -->
-    <div style="text-align: center; margin-top: 30px;">
+        <div class="form-container">
+  <div class="form-header">Section Q: Data Protection Notice and Declaration</div>
+  <p style="background-color: #f0eccd; padding: 10px; border-radius: 5px;">Please read the following Data Protection Notice and Declaration carefully. By signing the Declaration you confirm your acceptance of the statements which form the Declaration. If you do not sign this form, we cannot process your application.</p>
+
+  <h5>DATA PROTECTION NOTICE</h5>
+  <p>
+    Personal data will be collected, stored and retained in accordance with the General Data Protection Regulation and related UK data protection legislation.
+    Please read the University's Data Protection Notice (<strong>Appendix B</strong>) before accepting the terms and conditions and submitting your application.
+  </p>
+
+  <h5>DECLARATION</h5>
+  <p>
+    I confirm that the information I have provided on this application form is (to the best of my knowledge) true, accurate, current and complete; and I agree to notify the University promptly if any information contained on this application form should change, in order to keep it true, accurate, current and complete.
+  </p>
+  <p>
+    I confirm that all supporting work submitted as part of this application is entirely my own original work, except where clearly stated otherwise, and does not include any plagiarised elements.
+  </p>
+  <p>
+    I accept that if I become a student at the University of Oxford the terms of the University’s <a href="https://www.admin.ox.ac.uk/statutes/790-121.shtml" target="_blank">Statute XVI</a> relating to intellectual property will apply to me, and that the University will be entitled in accordance with those terms to claim ownership of intellectual property which I produce.
+  </p>
+
+  <p><h5>Note</h5> All admissions decisions taken by the University of Oxford and its Colleges rely on the statements made on the application form and on the supporting documents supplied by you and your referees. This information will be held and used for the purpose of processing your application for study, for student administration and, where relevant, for funding purposes.</p>
+
+  <p>
+    If the University, or any College of the University, believes that any information or statement, including references, contained on your application form may not be true, accurate, current and complete, or that any document submitted in support of your application may not be entirely your own original work, except where clearly stated otherwise, it may take any necessary steps, including contacting third parties, to verify that information or statement, or to confirm that any supporting document is entirely your own original work, except where clearly stated otherwise.
+  </p>
+
+  <p>
+    As part of the admissions process the University may use a plagiarism detection system. This system screens any written work submitted as part of your application for plagiarism, paraphrasing and collusion. The plagiarism detection system will store on its database any written work submitted for screening. For the University’s definition of plagiarism and more information on how the plagiarism detection system works please see the 
+    <a href="https://www.ox.ac.uk/admissions/graduate/applying-to-oxford/university-policies/plagiarism?wssl=1" target="_blank">Application Guide</a>.
+  </p>
+
+  <p>
+    If, in the opinion of the University, or any College of the University, any information or statement, including references, provided on this application form is not true, accurate, current and complete, or any supporting document is not entirely your own original work, except where clearly stated otherwise, the University, or any College of the University, retains the right to reject your application. If you have been made an offer by the University, or any College of the University, then the University, or any College of the University, may in these circumstances withdraw or amend that offer, or terminate your contact with the University or College if you have accepted your offer. If you have been admitted as a student, you may be subject to disciplinary action which could result in your expulsion from the University and your College.
+  </p>
+
+  <p>Please sign in the box below and print your name to accept this declaration:</p>
+
+  <div class="row mb-3 align-items-end">
+    <!-- Upload Signature -->
+    <div class="col-md-6">
+      <label for="signature-upload" class="form-label d-block">
+        Upload Signature <span class="text-danger">*</span>
+        <small class="text-muted d-block">(Accepted formats: .pdf, .png, .jpg, .jpeg)</small>
+      </label>
+      <input type="file" class="form-control" id="signature-upload" name="signature-upload" accept=".pdf,.png,.jpg,.jpeg" required>
+    </div>
+  
+    <!-- Date -->
+    <div class="col-md-6">
+      <label for="date" class="form-label">Date <span class="text-danger">*</span></label>
+      <input type="date" id="date" name="date" class="form-control" required>
+    </div>
+  </div>
+  
+  <!-- Print Name -->
+  <div class="mb-3">
+    <label for="print-name" class="form-label">Please Print Name <span class="text-danger">*</span></label>
+    <input type="text" id="print-name" name="print-name" class="form-control" required>
+  </div>
+</div>
+<div class="form-container">
+
         <p><strong>Ensure all fields are filled out correctly before submitting.</strong></p>
         <button type="submit" class="btn btn-custom">Submit</button>
-    </div>
+    
+</div>
 </div>
 
 
@@ -1211,13 +1338,26 @@ function addChild() {
         container.appendChild(newChild);
     }
 
-    // Event delegation: handle remove button clicks, even for dynamically added elements
     document.addEventListener('click', function(e) {
         if (e.target && e.target.classList.contains('remove-btn')) {
             const entry = e.target.closest('.child-entry');
             if (entry) entry.remove();
         }
     });
+    const yesRadio = document.getElementById('yesNominate');
+  const noRadio = document.getElementById('noNominate');
+  const nomineeDetails = document.getElementById('nomineeDetails');
+
+  yesRadio.addEventListener('change', () => {
+    nomineeDetails.style.display = 'block';
+  });
+
+  noRadio.addEventListener('change', () => {
+    nomineeDetails.style.display = 'none';
+  });
+  function toggleWaiverUpload(show) {
+        document.getElementById('waiverUploadSection').style.display = show ? 'block' : 'none';
+    }
 </script>      
 </body>
 </html>
