@@ -1139,7 +1139,102 @@
         </table>
     </div>
     </div>
+<!-- Section N: Supporting documents checklist -->
+<div class="form-container">
+    <section id="section-n">
+      <div class="form-header">Section N: Supporting documents checklist</div><br>
+      <p style="background-color: #f0eccd; padding: 10px; border-radius: 5px;"><strong>Supporting documents are required with all applications.</strong><br>
+        All applications require supporting documents to be submitted to make them complete; please check which documents are required for the course for which you are applying 
+        (<a href="https://www.graduate.ox.ac.uk/courses" target="_blank">www.graduate.ox.ac.uk/courses</a>).
+        <strong>If any required documents are missing, or do not follow the specifications in the ‘How to apply’ section of the course page, the department may not assess your application.</strong>
+      <br><br>For the purpose of processing your application, your submitted documents will be scanned and merged into a single PDF document. By submitting your application, you agree to your documents being managed in this way.</p>
+  
+      <!-- MANDATORY DOCUMENTS -->
+      <fieldset>
+        <h5>Mandatory for All Courses</h5>
+  
+        <label>Transcripts:</label><br>
+        <input class="form-control" type="file" name="transcriptUpload">
+        <br>
+        <label>CV/Résumé:</label><br>
+        <small class="text-muted d-block">(Accepted formats: .pdf, .doc, .docx)</small>
 
+        <input class="form-control" type="file" name="CVUpload" accept=".pdf,.doc,.docx"><br>
+        <label>Statement of Purpose/Research Proposal: Must match the course-specific requirements on the 
+          <a href="https://www.graduate.ox.ac.uk/courses" target="_blank">course page</a>.
+        </label><br>
+        <small class="text-muted d-block">(Accepted formats: .pdf, .doc, .docx)</small>
+
+        <input class="form-control" type="file" name="statementUpload" accept=".pdf,.doc,.docx"><br>
+      </fieldset>
+  
+      <!-- ADDITIONAL DOCUMENTS -->
+      <fieldset>
+    <h5>Additional Items That may be Mandatory for Your Application</h5> 
+        (<a href="https://www.ox.ac.uk/admissions/graduate/courses" target="_blank">Check requirements</a>)<br><br>
+  
+        <label>
+          <input type="checkbox" name="documents" value="written1" onchange="toggleUpload(this)">
+          Written work 1
+        </label>
+        <div id="upload_written1" class="upload-field"></div><br>
+  
+        <label>
+          <input type="checkbox" name="documents" value="written2" onchange="toggleUpload(this)">
+          Written work 2
+        </label>
+        <div id="upload_written2" class="upload-field"></div><br>
+  
+        <label>
+          <input type="checkbox" name="documents" value="singleWritten" onchange="toggleUpload(this)">
+          One longer written work (replaces two shorter)
+        </label>
+        <div id="upload_singleWritten" class="upload-field"></div><br>
+  
+        <label>
+          <input type="checkbox" name="documents" value="portfolio" onchange="toggleUpload(this)">
+          Portfolio/audio-visual/media/maths test/music scores
+        </label>
+        <div id="upload_portfolio" class="upload-field"></div><br>
+  
+        <label>
+          <input type="checkbox" name="documents" value="englishTest" onchange="toggleUpload(this)">
+          English Language Test Result (e.g. TOEFL, IELTS)
+        </label>
+        <div id="upload_englishTest" class="upload-field"></div><br>
+  
+        <label>
+          <input type="checkbox" name="documents" value="gre" onchange="toggleUpload(this)">
+          GRE admissions test certificate(s)
+        </label>
+        <div id="upload_gre" class="upload-field"></div><br>
+      </fieldset>
+  
+      <!-- OTHER ITEMS -->
+      <fieldset>
+        <h5>Other items (tick as appropriate)</h5>
+        <label>
+          <input type="checkbox" name="documents" value="waiverLetter" onchange="toggleUpload(this)">
+          English Test Waiver Letter (only if applicable)
+        </label>
+        <div id="upload_waiverLetter" class="upload-field"></div><br>
+      </fieldset>
+  
+      <!-- SCHOLARSHIP SECTION -->
+      <fieldset>
+        <h5>Scholarship application(s)</h5>
+        <label>
+          <input type="checkbox" name="documents" value="scholarshipSupport" onchange="toggleUpload(this)">
+          Separate statement(s) for each scholarship applied for 
+          (<a href="https://www.ox.ac.uk/feesandfunding/prospectivestudents/graduate/scholarships" target="_blank">View scholarships</a>)
+        </label>
+        <div id="upload_scholarshipSupport" class="upload-field"></div><br>
+  
+        <label for="numScholarships">Number of scholarship applications being added:</label>
+        <input type="number" id="numScholarships" name="numScholarships" min="0" style="width: 60px;">
+      </fieldset>
+    </section>
+  </div>
     <!-- Section Q + Submit Section -->
 
     <!-- Submit Section -->
@@ -1358,6 +1453,16 @@ function addChild() {
   function toggleWaiverUpload(show) {
         document.getElementById('waiverUploadSection').style.display = show ? 'block' : 'none';
     }
+    function toggleUpload(checkbox) {
+    const fieldId = "upload_" + checkbox.value;
+    const fieldDiv = document.getElementById(fieldId);
+        if (checkbox.checked) {
+      fieldDiv.innerHTML = `<input type="file" name="${checkbox.value}Upload" class="form-control" accept=".pdf,.doc,.docx">`;
+    } else {
+      fieldDiv.innerHTML = "";
+        }
+  }
+
 </script>      
 </body>
 </html>
