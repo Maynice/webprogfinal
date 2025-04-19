@@ -95,7 +95,7 @@
              style="max-width: 100px;">    </div>
 <!-- SECTION A -->
 <div class="form-container">
-    <div class="form-header">Section A: About Your Course</div>
+    <div class="form-header">Section A: About Your Course</div><br>
     <p style="background-color: #f0eccd; padding: 10px; border-radius: 5px;"> Before completing this form, please refer to the Graduate Admissions Application Guide (available at <a href="www.graduate.ox.ac.uk/applicationguide">www.graduate.ox.ac.uk/applicationguide</a>.
         Any errors resulting from failure to do so may delay your application.
         This form may only be used to apply for one course. If you wish to apply for more than one course, you must submit a separate application form and pay the £75 application fee each time.<br><br>
@@ -119,9 +119,12 @@
         <p class="text-muted"><em>You must complete ALL sections below.</em></p>
         <h5>For research courses (e.g. DPhil, MSc by Research (MRes), etc.):</h5>
         <div class="mb-3">
-            <label for="researchField" class="form-label">(iii) State the proposed field and title of research project
+            <label for="researchField" class="form-label">
+                (iii) State the proposed field and title of research project
+            </label>
             <textarea class="form-control" id="researchField" rows="3" required></textarea>
         </div>
+        
         <div class="mb-3">
             <label for="supervisor" class="form-label">Proposed Supervisor(s)</label>
             <input type="text" class="form-control" id="supervisor" required>
@@ -189,7 +192,7 @@
 
 <!-- SECTION C -->
 <div class="form-container">
-    <div class="form-header">Section C: Personal Details</div>
+    <div class="form-header">Section C: Personal Details</div><br>
     <form>
         <p style="background-color: #f0eccd; padding: 10px; border-radius: 5px;">Please enter your name exactly as it appears on your passport or other official document, including middle names. If you go by a name that is not listed on your official document(s), you can enter this in the Preferred Name field.</p>
         <div class="mb-3">
@@ -286,68 +289,221 @@
                 </div>
                 <div class="mb-3">
                     <label for="homeCity" class="form-label">City<span class="required">*</span>:</label>
-                    <input type="text" class="form-control" id="homeCity">
+                    <input type="text" class="form-control" id="homeCity" required>
                 </div>
                 <div class="mb-3">
                     <label for="homePostcode" class="form-label">Postcode/ZIP Code<span class="required">*</span>:</label>
-                    <input type="text" class="form-control" id="homePostcode">
+                    <input type="text" class="form-control" id="homePostcode" required>
                 </div>
                 <div class="mb-3">
                     <label for="homeState" class="form-label">State<span class="required">*</span>:</label>
-                    <input type="text" class="form-control" id="homeState">
+                    <input type="text" class="form-control" id="homeState" required>
                 </div>
                 <div class="mb-3">
                     <label for="homeCountry" class="form-label">Country<span class="required">*</span>:</label>
-                    <input type="text" class="form-control" id="homeCountry">
+                    <input type="text" class="form-control" id="homeCountry" required>
                 </div>
         
                 <h5>Correspondence Address</h5>
                 <div class="mb-3">
                     <label for="correspondenceAddress" class="form-label">Correspondence Address<span class="required">*</span>:</label>
-                    <textarea class="form-control" id="correspondenceAddress" rows="2"></textarea>
+                    <textarea class="form-control" id="correspondenceAddress" rows="2" required></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="correspondenceCity" class="form-label">City<span class="required">*</span>:</label>
-                    <input type="text" class="form-control" id="correspondenceCity">
+                    <input type="text" class="form-control" id="correspondenceCity" required>
                 </div>
                 <div class="mb-3">
                     <label for="correspondencePostcode" class="form-label">Postcode/ZIP Code<span class="required">*</span>:</label>
-                    <input type="text" class="form-control" id="correspondencePostcode">
+                    <input type="text" class="form-control" id="correspondencePostcode" required>
                 </div>
                 <div class="mb-3">
                     <label for="correspondenceState" class="form-label">State<span class="required">*</span>:</label>
-                    <input type="text" class="form-control" id="correspondenceState">
+                    <input type="text" class="form-control" id="correspondenceState" required>
                 </div>
                 <div class="mb-3">
                     <label for="correspondenceCountry" class="form-label">Country<span class="required">*</span>:</label>
-                    <input type="text" class="form-control" id="correspondenceCountry">
+                    <input type="text" class="form-control" id="correspondenceCountry" required>
                 </div>
         
                 <h5>Effective Dates</h5>
                 <div class="mb-3">
                     <label for="effectiveFrom" class="form-label">From<span class="required">*</span>:</label>
-                    <input type="date" class="form-control" id="effectiveFrom">
+                    <input type="date" class="form-control" id="effectiveFrom" required>
                 </div>
                 <div class="mb-3">
                     <label for="effectiveTo" class="form-label">To<span class="required">*</span>:</label>
-                    <input type="date" class="form-control" id="effectiveTo">
+                    <input type="date" class="form-control" id="effectiveTo" required>
                 </div>
         
                 <h5>Telephone</h5>
                 <div class="mb-3">
                     <label for="phoneNumber" class="form-label">Phone Number<span class="required">*</span>:</label>
                     <div class="mb-3">                        <div class="d-flex gap-2">
-                        <select class="form-control" id="countryCode">
-                            <option value="+61">Australia (+61)</option>
-                            <option value="+86">China (+86)</option>
-                            <option value="+33">France (+33)</option>
-                            <option value="+49">Germany (+49)</option>
-                            <option value="+91">India (+91)</option>
-                            <option value="+62">Indonesia (+62)</option>
-                            <option value="+81">Japan (+81)</option>
-                            <option value="+65">Singapore (+65)</option>
-                            <option value="+44">United Kingdom (+44)</option>
-                            <option value="+1">United States (+1)</option>
+                        <select class="form-control" id="countryCode" required>
+                            <option value="+93">Afghanistan (+93)</option>
+<option value="+355">Albania (+355)</option>
+<option value="+213">Algeria (+213)</option>
+<option value="+376">Andorra (+376)</option>
+<option value="+244">Angola (+244)</option>
+<option value="+54">Argentina (+54)</option>
+<option value="+374">Armenia (+374)</option>
+<option value="+61">Australia (+61)</option>
+<option value="+43">Austria (+43)</option>
+<option value="+994">Azerbaijan (+994)</option>
+<option value="+973">Bahrain (+973)</option>
+<option value="+880">Bangladesh (+880)</option>
+<option value="+375">Belarus (+375)</option>
+<option value="+32">Belgium (+32)</option>
+<option value="+501">Belize (+501)</option>
+<option value="+229">Benin (+229)</option>
+<option value="+975">Bhutan (+975)</option>
+<option value="+591">Bolivia (+591)</option>
+<option value="+387">Bosnia and Herzegovina (+387)</option>
+<option value="+267">Botswana (+267)</option>
+<option value="+55">Brazil (+55)</option>
+<option value="+673">Brunei (+673)</option>
+<option value="+359">Bulgaria (+359)</option>
+<option value="+226">Burkina Faso (+226)</option>
+<option value="+257">Burundi (+257)</option>
+<option value="+855">Cambodia (+855)</option>
+<option value="+237">Cameroon (+237)</option>
+<option value="+1">Canada (+1)</option>
+<option value="+238">Cape Verde (+238)</option>
+<option value="+236">Central African Republic (+236)</option>
+<option value="+235">Chad (+235)</option>
+<option value="+56">Chile (+56)</option>
+<option value="+86">China (+86)</option>
+<option value="+57">Colombia (+57)</option>
+<option value="+269">Comoros (+269)</option>
+<option value="+243">Congo - Kinshasa (+243)</option>
+<option value="+242">Congo - Brazzaville (+242)</option>
+<option value="+506">Costa Rica (+506)</option>
+<option value="+385">Croatia (+385)</option>
+<option value="+53">Cuba (+53)</option>
+<option value="+357">Cyprus (+357)</option>
+<option value="+420">Czech Republic (+420)</option>
+<option value="+45">Denmark (+45)</option>
+<option value="+253">Djibouti (+253)</option>
+<option value="+1-767">Dominica (+1-767)</option>
+<option value="+1-809">Dominican Republic (+1-809)</option>
+<option value="+593">Ecuador (+593)</option>
+<option value="+20">Egypt (+20)</option>
+<option value="+503">El Salvador (+503)</option>
+<option value="+240">Equatorial Guinea (+240)</option>
+<option value="+291">Eritrea (+291)</option>
+<option value="+372">Estonia (+372)</option>
+<option value="+268">Eswatini (+268)</option>
+<option value="+251">Ethiopia (+251)</option>
+<option value="+679">Fiji (+679)</option>
+<option value="+358">Finland (+358)</option>
+<option value="+33">France (+33)</option>
+<option value="+241">Gabon (+241)</option>
+<option value="+220">Gambia (+220)</option>
+<option value="+995">Georgia (+995)</option>
+<option value="+49">Germany (+49)</option>
+<option value="+233">Ghana (+233)</option>
+<option value="+30">Greece (+30)</option>
+<option value="+299">Greenland (+299)</option>
+<option value="+502">Guatemala (+502)</option>
+<option value="+224">Guinea (+224)</option>
+<option value="+245">Guinea-Bissau (+245)</option>
+<option value="+592">Guyana (+592)</option>
+<option value="+509">Haiti (+509)</option>
+<option value="+504">Honduras (+504)</option>
+<option value="+852">Hong Kong (+852)</option>
+<option value="+36">Hungary (+36)</option>
+<option value="+354">Iceland (+354)</option>
+<option value="+91">India (+91)</option>
+<option value="+62">Indonesia (+62)</option>
+<option value="+98">Iran (+98)</option>
+<option value="+964">Iraq (+964)</option>
+<option value="+353">Ireland (+353)</option>
+<option value="+972">Israel (+972)</option>
+<option value="+39">Italy (+39)</option>
+<option value="+81">Japan (+81)</option>
+<option value="+962">Jordan (+962)</option>
+<option value="+7">Kazakhstan (+7)</option>
+<option value="+254">Kenya (+254)</option>
+<option value="+82">South Korea (+82)</option>
+<option value="+965">Kuwait (+965)</option>
+<option value="+996">Kyrgyzstan (+996)</option>
+<option value="+856">Laos (+856)</option>
+<option value="+371">Latvia (+371)</option>
+<option value="+961">Lebanon (+961)</option>
+<option value="+266">Lesotho (+266)</option>
+<option value="+231">Liberia (+231)</option>
+<option value="+218">Libya (+218)</option>
+<option value="+370">Lithuania (+370)</option>
+<option value="+352">Luxembourg (+352)</option>
+<option value="+853">Macau (+853)</option>
+<option value="+261">Madagascar (+261)</option>
+<option value="+265">Malawi (+265)</option>
+<option value="+60">Malaysia (+60)</option>
+<option value="+960">Maldives (+960)</option>
+<option value="+223">Mali (+223)</option>
+<option value="+356">Malta (+356)</option>
+<option value="+222">Mauritania (+222)</option>
+<option value="+230">Mauritius (+230)</option>
+<option value="+52">Mexico (+52)</option>
+<option value="+373">Moldova (+373)</option>
+<option value="+377">Monaco (+377)</option>
+<option value="+976">Mongolia (+976)</option>
+<option value="+212">Morocco (+212)</option>
+<option value="+95">Myanmar (+95)</option>
+<option value="+264">Namibia (+264)</option>
+<option value="+977">Nepal (+977)</option>
+<option value="+31">Netherlands (+31)</option>
+<option value="+64">New Zealand (+64)</option>
+<option value="+505">Nicaragua (+505)</option>
+<option value="+227">Niger (+227)</option>
+<option value="+234">Nigeria (+234)</option>
+<option value="+47">Norway (+47)</option>
+<option value="+92">Pakistan (+92)</option>
+<option value="+507">Panama (+507)</option>
+<option value="+675">Papua New Guinea (+675)</option>
+<option value="+595">Paraguay (+595)</option>
+<option value="+51">Peru (+51)</option>
+<option value="+63">Philippines (+63)</option>
+<option value="+48">Poland (+48)</option>
+<option value="+351">Portugal (+351)</option>
+<option value="+974">Qatar (+974)</option>
+<option value="+40">Romania (+40)</option>
+<option value="+7">Russia (+7)</option>
+<option value="+250">Rwanda (+250)</option>
+<option value="+966">Saudi Arabia (+966)</option>
+<option value="+221">Senegal (+221)</option>
+<option value="+65">Singapore (+65)</option>
+<option value="+421">Slovakia (+421)</option>
+<option value="+386">Slovenia (+386)</option>
+<option value="+27">South Africa (+27)</option>
+<option value="+34">Spain (+34)</option>
+<option value="+94">Sri Lanka (+94)</option>
+<option value="+249">Sudan (+249)</option>
+<option value="+46">Sweden (+46)</option>
+<option value="+41">Switzerland (+41)</option>
+<option value="+963">Syria (+963)</option>
+<option value="+886">Taiwan (+886)</option>
+<option value="+992">Tajikistan (+992)</option>
+<option value="+255">Tanzania (+255)</option>
+<option value="+66">Thailand (+66)</option>
+<option value="+228">Togo (+228)</option>
+<option value="+216">Tunisia (+216)</option>
+<option value="+90">Turkey (+90)</option>
+<option value="+993">Turkmenistan (+993)</option>
+<option value="+256">Uganda (+256)</option>
+<option value="+380">Ukraine (+380)</option>
+<option value="+971">United Arab Emirates (+971)</option>
+<option value="+44">United Kingdom (+44)</option>
+<option value="+1">United States (+1)</option>
+<option value="+598">Uruguay (+598)</option>
+<option value="+998">Uzbekistan (+998)</option>
+<option value="+58">Venezuela (+58)</option>
+<option value="+84">Vietnam (+84)</option>
+<option value="+967">Yemen (+967)</option>
+<option value="+260">Zambia (+260)</option>
+<option value="+263">Zimbabwe (+263)</option>
+
                         </select>
                             <input type="text" class="form-control" id="areaCode" placeholder="Area Code (if applicable)">
                             <input type="text" class="form-control" id="phoneNumber" placeholder="Number">
@@ -358,16 +514,169 @@
                     <label for="altPhoneNumber" class="form-label">Alternative Phone Number:</label>
                     <div class="mb-3">                        <div class="d-flex gap-2">
                         <select class="form-control" id="countryCode">
-                            <option value="+61">Australia (+61)</option>
-                            <option value="+86">China (+86)</option>
-                            <option value="+33">France (+33)</option>
-                            <option value="+49">Germany (+49)</option>
-                            <option value="+91">India (+91)</option>
-                            <option value="+62">Indonesia (+62)</option>
-                            <option value="+81">Japan (+81)</option>
-                            <option value="+65">Singapore (+65)</option>
-                            <option value="+44">United Kingdom (+44)</option>
-                            <option value="+1">United States (+1)</option>
+                            <option value="+93">Afghanistan (+93)</option>
+<option value="+355">Albania (+355)</option>
+<option value="+213">Algeria (+213)</option>
+<option value="+376">Andorra (+376)</option>
+<option value="+244">Angola (+244)</option>
+<option value="+54">Argentina (+54)</option>
+<option value="+374">Armenia (+374)</option>
+<option value="+61">Australia (+61)</option>
+<option value="+43">Austria (+43)</option>
+<option value="+994">Azerbaijan (+994)</option>
+<option value="+973">Bahrain (+973)</option>
+<option value="+880">Bangladesh (+880)</option>
+<option value="+375">Belarus (+375)</option>
+<option value="+32">Belgium (+32)</option>
+<option value="+501">Belize (+501)</option>
+<option value="+229">Benin (+229)</option>
+<option value="+975">Bhutan (+975)</option>
+<option value="+591">Bolivia (+591)</option>
+<option value="+387">Bosnia and Herzegovina (+387)</option>
+<option value="+267">Botswana (+267)</option>
+<option value="+55">Brazil (+55)</option>
+<option value="+673">Brunei (+673)</option>
+<option value="+359">Bulgaria (+359)</option>
+<option value="+226">Burkina Faso (+226)</option>
+<option value="+257">Burundi (+257)</option>
+<option value="+855">Cambodia (+855)</option>
+<option value="+237">Cameroon (+237)</option>
+<option value="+1">Canada (+1)</option>
+<option value="+238">Cape Verde (+238)</option>
+<option value="+236">Central African Republic (+236)</option>
+<option value="+235">Chad (+235)</option>
+<option value="+56">Chile (+56)</option>
+<option value="+86">China (+86)</option>
+<option value="+57">Colombia (+57)</option>
+<option value="+269">Comoros (+269)</option>
+<option value="+243">Congo - Kinshasa (+243)</option>
+<option value="+242">Congo - Brazzaville (+242)</option>
+<option value="+506">Costa Rica (+506)</option>
+<option value="+385">Croatia (+385)</option>
+<option value="+53">Cuba (+53)</option>
+<option value="+357">Cyprus (+357)</option>
+<option value="+420">Czech Republic (+420)</option>
+<option value="+45">Denmark (+45)</option>
+<option value="+253">Djibouti (+253)</option>
+<option value="+1-767">Dominica (+1-767)</option>
+<option value="+1-809">Dominican Republic (+1-809)</option>
+<option value="+593">Ecuador (+593)</option>
+<option value="+20">Egypt (+20)</option>
+<option value="+503">El Salvador (+503)</option>
+<option value="+240">Equatorial Guinea (+240)</option>
+<option value="+291">Eritrea (+291)</option>
+<option value="+372">Estonia (+372)</option>
+<option value="+268">Eswatini (+268)</option>
+<option value="+251">Ethiopia (+251)</option>
+<option value="+679">Fiji (+679)</option>
+<option value="+358">Finland (+358)</option>
+<option value="+33">France (+33)</option>
+<option value="+241">Gabon (+241)</option>
+<option value="+220">Gambia (+220)</option>
+<option value="+995">Georgia (+995)</option>
+<option value="+49">Germany (+49)</option>
+<option value="+233">Ghana (+233)</option>
+<option value="+30">Greece (+30)</option>
+<option value="+299">Greenland (+299)</option>
+<option value="+502">Guatemala (+502)</option>
+<option value="+224">Guinea (+224)</option>
+<option value="+245">Guinea-Bissau (+245)</option>
+<option value="+592">Guyana (+592)</option>
+<option value="+509">Haiti (+509)</option>
+<option value="+504">Honduras (+504)</option>
+<option value="+852">Hong Kong (+852)</option>
+<option value="+36">Hungary (+36)</option>
+<option value="+354">Iceland (+354)</option>
+<option value="+91">India (+91)</option>
+<option value="+62">Indonesia (+62)</option>
+<option value="+98">Iran (+98)</option>
+<option value="+964">Iraq (+964)</option>
+<option value="+353">Ireland (+353)</option>
+<option value="+972">Israel (+972)</option>
+<option value="+39">Italy (+39)</option>
+<option value="+81">Japan (+81)</option>
+<option value="+962">Jordan (+962)</option>
+<option value="+7">Kazakhstan (+7)</option>
+<option value="+254">Kenya (+254)</option>
+<option value="+82">South Korea (+82)</option>
+<option value="+965">Kuwait (+965)</option>
+<option value="+996">Kyrgyzstan (+996)</option>
+<option value="+856">Laos (+856)</option>
+<option value="+371">Latvia (+371)</option>
+<option value="+961">Lebanon (+961)</option>
+<option value="+266">Lesotho (+266)</option>
+<option value="+231">Liberia (+231)</option>
+<option value="+218">Libya (+218)</option>
+<option value="+370">Lithuania (+370)</option>
+<option value="+352">Luxembourg (+352)</option>
+<option value="+853">Macau (+853)</option>
+<option value="+261">Madagascar (+261)</option>
+<option value="+265">Malawi (+265)</option>
+<option value="+60">Malaysia (+60)</option>
+<option value="+960">Maldives (+960)</option>
+<option value="+223">Mali (+223)</option>
+<option value="+356">Malta (+356)</option>
+<option value="+222">Mauritania (+222)</option>
+<option value="+230">Mauritius (+230)</option>
+<option value="+52">Mexico (+52)</option>
+<option value="+373">Moldova (+373)</option>
+<option value="+377">Monaco (+377)</option>
+<option value="+976">Mongolia (+976)</option>
+<option value="+212">Morocco (+212)</option>
+<option value="+95">Myanmar (+95)</option>
+<option value="+264">Namibia (+264)</option>
+<option value="+977">Nepal (+977)</option>
+<option value="+31">Netherlands (+31)</option>
+<option value="+64">New Zealand (+64)</option>
+<option value="+505">Nicaragua (+505)</option>
+<option value="+227">Niger (+227)</option>
+<option value="+234">Nigeria (+234)</option>
+<option value="+47">Norway (+47)</option>
+<option value="+92">Pakistan (+92)</option>
+<option value="+507">Panama (+507)</option>
+<option value="+675">Papua New Guinea (+675)</option>
+<option value="+595">Paraguay (+595)</option>
+<option value="+51">Peru (+51)</option>
+<option value="+63">Philippines (+63)</option>
+<option value="+48">Poland (+48)</option>
+<option value="+351">Portugal (+351)</option>
+<option value="+974">Qatar (+974)</option>
+<option value="+40">Romania (+40)</option>
+<option value="+7">Russia (+7)</option>
+<option value="+250">Rwanda (+250)</option>
+<option value="+966">Saudi Arabia (+966)</option>
+<option value="+221">Senegal (+221)</option>
+<option value="+65">Singapore (+65)</option>
+<option value="+421">Slovakia (+421)</option>
+<option value="+386">Slovenia (+386)</option>
+<option value="+27">South Africa (+27)</option>
+<option value="+34">Spain (+34)</option>
+<option value="+94">Sri Lanka (+94)</option>
+<option value="+249">Sudan (+249)</option>
+<option value="+46">Sweden (+46)</option>
+<option value="+41">Switzerland (+41)</option>
+<option value="+963">Syria (+963)</option>
+<option value="+886">Taiwan (+886)</option>
+<option value="+992">Tajikistan (+992)</option>
+<option value="+255">Tanzania (+255)</option>
+<option value="+66">Thailand (+66)</option>
+<option value="+228">Togo (+228)</option>
+<option value="+216">Tunisia (+216)</option>
+<option value="+90">Turkey (+90)</option>
+<option value="+993">Turkmenistan (+993)</option>
+<option value="+256">Uganda (+256)</option>
+<option value="+380">Ukraine (+380)</option>
+<option value="+971">United Arab Emirates (+971)</option>
+<option value="+44">United Kingdom (+44)</option>
+<option value="+1">United States (+1)</option>
+<option value="+598">Uruguay (+598)</option>
+<option value="+998">Uzbekistan (+998)</option>
+<option value="+58">Venezuela (+58)</option>
+<option value="+84">Vietnam (+84)</option>
+<option value="+967">Yemen (+967)</option>
+<option value="+260">Zambia (+260)</option>
+<option value="+263">Zimbabwe (+263)</option>
+
                         </select>
                             <input type="text" class="form-control" id="areaCode" placeholder="Area Code (if applicable)">
                             <input type="text" class="form-control" id="phoneNumber" placeholder="Number">
@@ -392,7 +701,7 @@
 
 <!-- SECTION E -->
 <div class="form-container">
-    <div class="form-header">Section E: Nominated Third Party</div>
+    <div class="form-header">Section E: Nominated Third Party</div><br>
     <form>
       <p style="background-color: #f0eccd; padding: 10px; border-radius: 5px;">
         The University of Oxford will normally only discuss your application with you. If you wish to nominate a third party with whom we may discuss your application and accept direction on its handling, please provide their details. Note that a nominated third party will be able to amend or withdraw your application on your behalf.
@@ -436,13 +745,13 @@
 <!-- SECTION F -->
         <div class="form-container">
 
-            <div class="form-header">Section F: Nationality</div>
+            <div class="form-header">Section F: Nationality</div><br>
             <form>
                 <p style="background-color: #f0eccd; padding: 10px; border-radius: 5px;">The details you provide on this page will be used to determine your fee status and eligibility for many scholarships. The details you give below should reflect your current situation, at the date you submit your application.</p>
                 
                 <div class="mb-3">
                     <label for="birthCountry" class="form-label">COUNTRY OF BIRTH<span class="required">*</span>:</label>
-                    <input type="text" class="form-control" id="birthCountry">
+                    <input type="text" class="form-control" id="birthCountry" required>
                 </div>
         
                 <div class="mb-3">
@@ -462,18 +771,18 @@
                           </thead>
                           <tbody>
                             <tr>
-                              <td><input type="text" class="form-control" id="nationality1"></td>
-                              <td><input type="date" class="form-control" id="nationalityDate1"></td>
-                              <td><input type="text" class="form-control" id="passportNumber1"></td>
-                              <td><input type="text" class="form-control" id="issueCountry1"></td>
-                              <td><input type="date" class="form-control" id="passportExpiry1"></td>
+                              <td><input type="text" class="form-control" id="nationality1" required></td>
+                              <td><input type="date" class="form-control" id="nationalityDate1" required></td>
+                              <td><input type="text" class="form-control" id="passportNumber1" required></td>
+                              <td><input type="text" class="form-control" id="issueCountry1" required></td>
+                              <td><input type="date" class="form-control" id="passportExpiry1" required></td>
                             </tr>
                       
                             <!-- Dual Nationality Radio Button -->
                             <tr>
                               <td colspan="5">
                                 <div class="mt-2">
-                                  <label class="form-label mb-1">Are you a dual national?</label>
+                                  <label class="form-label mb-1">Are you a dual national?<span class="required">*</span></label>
                                   <div class="d-flex gap-3">
                                     <div class="form-check">
                                       <input class="form-check-input" type="radio" name="dualNationalityOption" id="dualYes" value="yes">
@@ -571,24 +880,24 @@
                 
                     <div class="mb-3">
                         <label for="currentResidence" class="form-label"><h5>Current Country of Ordinary Residence<span class="required">*</span></h5></label>
-                        <input type="text" class="form-control" id="currentResidence" name="currentResidence" placeholder="Enter country">
+                        <input type="text" class="form-control" id="currentResidence" name="currentResidence" placeholder="Enter country" required>
                     </div>
                 
                     <div class="row">
                         <div class="col-md-6">
                             <label for="fromDate" class="form-label">FROM (dd/mm/yyyy)</label>
-                            <input type="date" class="form-control" id="fromDate" name="fromDate">
+                            <input type="date" class="form-control" id="fromDate" name="fromDate" required>
                         </div>
                         <div class="col-md-6">
                             <label for="toDate" class="form-label">TO (dd/mm/yyyy)</label>
-                            <input type="date" class="form-control" id="toDate" name="toDate">
+                            <input type="date" class="form-control" id="toDate" name="toDate" required>
                         </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label"><br>I am an EU national resident in the UK for the main purpose of full-time education<span class="required">*</span></label>
                         <div class="d-flex gap-3">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="euNationalEducation" id="yesEuEducation" value="yes">
+                                <input class="form-check-input" type="radio" name="euNationalEducation" id="yesEuEducation" value="yes" required>
                                 <label class="form-check-label" for="yesEuEducation">Yes</label>
                             </div>
                             <div class="form-check">
@@ -633,8 +942,8 @@
                                 </div>
                             </div>
                             <div class="col-md-8" id="grantedDateContainer" style="display: none;">
-                                <label for="grantedDate" class="form-label">If yes, when was it granted?</label>
-                                <input type="date" class="form-control" id="grantedDate">
+                                <label for="grantedDate" class="form-label">If yes, when was it granted? <span class="required">*</span></label>
+                                <input type="date" class="form-control" id="grantedDate" required>
                             </div>
                         </div>
                     </div>
@@ -695,7 +1004,7 @@
             }
         }
     </script>
-         <h2 class="form-header">Section G: Accommodation</h2>
+         <h2 class="form-header">Section G: Accommodation</h2><br>
          <div style="background-color: #f0eccd; padding: 10px; border-radius: 5px;">
              This section is for information only and does not constitute an application to University or college accommodation. For further information, please visit the Accommodation Office website <a href="http://www.spuni.or.ac.uk/accommodation/">here</a>.
          </div>
@@ -733,7 +1042,7 @@
     
 <!-- SECTION H -->
 <div class="form-container">
-<h4 class="form-header">Section H: Referees Information</h4>
+<h4 class="form-header">Section H: Referees Information</h4><br>
 <p style="background-color: #f0eccd; padding: 10px; border-radius: 5px;">Please enter contact details for three referees below.<br><br>
 
     References should be academic or, where specifically permitted on the course page 
@@ -756,140 +1065,246 @@
     and their signature covered with clear adhesive tape.
 </p>
 
-<!-- Table for referees' details -->
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Referee title, name and role</th>
-            <th>Referee institutional/professional postal and email address</th>
-            <th>Type of reference (academic or professional)</th>
-            <th>Reference submission type</th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- Three rows for referees -->
-        <tr>
-            <td><input type="text" class="form-control" name="referee1_name"></td>
-            <td><input type="text" class="form-control" name="referee1_address"></td>
-            <td>
-              <select class="form-control" name="referee1_type">
-                <option value="academic">Academic</option>
-                <option value="professional">Professional</option>
-              </select>
-            </td>
-            <td>
-              <input type="radio" name="referee1_submission" value="email"> Referee will submit by email<br>
-              <input type="radio" name="referee1_submission" value="sealed"> Sealed reference enclosed
-            </td>
-          </tr>
-          <tr>
-            <td><input type="text" class="form-control" name="referee2_name"></td>
-            <td><input type="text" class="form-control" name="referee2_address"></td>
-            <td>
-              <select class="form-control" name="referee2_type">
-                <option value="academic">Academic</option>
-                <option value="professional">Professional</option>
-              </select>
-            </td>
-            <td>
-              <input type="radio" name="referee2_submission" value="email"> Referee will submit by email<br>
-              <input type="radio" name="referee2_submission" value="sealed"> Sealed reference enclosed
-            </td>
-          </tr>
-          <tr>
-            <td><input type="text" class="form-control" name="referee3_name"></td>
-            <td><input type="text" class="form-control" name="referee3_address"></td>
-            <td>
-              <select class="form-control" name="referee3_type">
-                <option value="academic">Academic</option>
-                <option value="professional">Professional</option>
-              </select>
-            </td>
-            <td>
-              <input type="radio" name="referee3_submission" value="email"> Referee will submit by email<br>
-              <input type="radio" name="referee3_submission" value="sealed"> Sealed reference enclosed
-            </td>
-          </tr>
-          
-    </tbody>
-</table>
+<!-- Referee Section -->
+    
+    <div id="refereeContainer"></div>
+  
+    <button type="button" class="btn btn-primary mb-3" onclick="addReferee()">Add Referee</button>
+
 </div>
+
+<script>
+    let refereeCount = 0;
+  
+    function addReferee() {
+      refereeCount++;
+      const container = document.getElementById('refereeContainer');
+  
+      const row = document.createElement('div');
+      row.classList.add('mb-4', 'border', 'p-3', 'rounded');
+      row.innerHTML = `
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Referee title, name and role</th>
+                <th>Institutional/professional address</th>
+                <th>Type of reference</th>
+                <th>Reference submission</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="text" class="form-control" name="referee${refereeCount}_name"></td>
+                <td><input type="text" class="form-control" name="referee${refereeCount}_address"></td>
+                <td>
+                  <select class="form-control" name="referee${refereeCount}_type">
+                    <option value="academic">Academic</option>
+                    <option value="professional">Professional</option>
+                  </select>
+                </td>
+                <td>
+                  <div class="form-check">
+                    <input type="radio" class="form-check-input" name="referee${refereeCount}_submission" value="email" id="email${refereeCount}">
+                    <label class="form-check-label" for="email${refereeCount}">Submit by email</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="radio" class="form-check-input" name="referee${refereeCount}_submission" value="sealed" id="sealed${refereeCount}">
+                    <label class="form-check-label" for="sealed${refereeCount}">Sealed reference enclosed</label>
+                  </div>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+                            <button type="button" class="btn btn-danger remove-btn mb-3" onclick="removeReferee(this)">Remove</button>
+
+        </div>
+      `;
+  
+      container.appendChild(row);
+    }
+  
+    function removeReferee(button) {
+      const refereeRow = button.closest('.mb-4');
+      refereeRow.remove();
+    }
+  </script>
 
 <!-- SECTION I -->
 <div class="form-container">
-    <div class="form-header">Section I: Details of Current & Previous Education</div>
+    <div class="form-header">Section I: Details of Current & Previous Education</div><br>
     <form>
+        <h5>Education History<span class="required">*</span>        </h5>
         <p style="background-color: #f0eccd; padding: 10px; border-radius: 5px;">Please enter your previous and current qualifications, newest first. You should include details of all qualifications gained at 
            degree level (i.e. university) and above, but not earlier education. For further guidance, please see our <a href="https://www.graduate.ox.ac.uk/applicationguide">Application Guide</a>.</p>
         
-        <div class="table-responsive mb-4">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>University/Institution attended<span class="required">*</span></th>
-                        <th>Start date (dd/mm/yyyy)<span class="required">*</span></th>
-                        <th>Date of completion/ expected completion (dd/mm/yyyy)<span class="required">*</span></th>
-                        <th>Qualification obtained or studying for (e.g. BA, MSc)<span class="required">*</span></th>
-                        <th>Main subject (e.g. Chemistry, English)<span class="required">*</span></th>
-                        <th>Result/expected result (grade, classification, etc.)<span class="required">*</span></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="text" class="form-control" name="institution"></td>
-                        <td><input type="date" class="form-control" name="start_date"></td>
-                        <td><input type="date" class="form-control" name="completion_date"></td>
-                        <td><input type="text" class="form-control" name="qualification"></td>
-                        <td><input type="text" class="form-control" name="subject"></td>
-                        <td><input type="text" class="form-control" name="result"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" class="form-control" name="institution2"></td>
-                        <td><input type="date" class="form-control" name="start_date2"></td>
-                        <td><input type="date" class="form-control" name="completion_date2"></td>
-                        <td><input type="text" class="form-control" name="qualification2"></td>
-                        <td><input type="text" class="form-control" name="subject2"></td>
-                        <td><input type="text" class="form-control" name="result2"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        
+      <!-- Education Section -->
+<div id="educationSection">
+    <div id="educationContainer"></div>
+
+    <div class="d-flex justify-content-between align-items-center mt-3 mb-3">
+        <button type="button" class="btn btn-primary" id="addEducationBtn">Add Education</button>
+        <button type="button" class="btn btn-danger ms-2 mt-1 d-none" id="removeLastEducationBtn">Remove</button>
+    </div>
+</div>
+
+<script>
+    let educationIndex = 0;
+
+    function updateRemoveButtonVisibility() {
+        const entries = document.querySelectorAll('.education-entry');
+        const removeBtn = document.getElementById('removeLastEducationBtn');
+        if (entries.length >= 2) {
+            removeBtn.classList.remove('d-none');
+        } else {
+            removeBtn.classList.add('d-none');
+        }
+    }
+
+    function createEducationRow(index) {
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('education-entry', 'mb-4');
+
+        wrapper.innerHTML = `
+            <div class="d-flex align-items-start">
+                <div class="flex-grow-1 me-2">
+                    <div class="table-responsive">
+                        <table class="table table-bordered mb-0">
+                            <thead>
+                                <tr>
+                                    <th>University/Institution attended<span class="required">*</span></th>
+                                    <th>Start date (dd/mm/yyyy)<span class="required">*</span></th>
+                                    <th>Date of completion/expected completion (dd/mm/yyyy)<span class="required">*</span></th>
+                                    <th>Qualification obtained or studying for (e.g. BA, MSc)<span class="required">*</span></th>
+                                    <th>Main subject (e.g. Chemistry, English)<span class="required">*</span></th>
+                                    <th>Result/expected result (grade, classification, etc.)<span class="required">*</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" class="form-control" name="institution${index}" required></td>
+                                    <td><input type="date" class="form-control" name="start_date${index}" required></td>
+                                    <td><input type="date" class="form-control" name="completion_date${index}" required></td>
+                                    <td><input type="text" class="form-control" name="qualification${index}" required></td>
+                                    <td><input type="text" class="form-control" name="subject${index}" required></td>
+                                    <td><input type="text" class="form-control" name="result${index}" required></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        return wrapper;
+    }
+
+    // Add Education button logic
+    document.getElementById('addEducationBtn').addEventListener('click', () => {
+        const container = document.getElementById('educationContainer');
+        const newRow = createEducationRow(educationIndex++);
+        container.appendChild(newRow);
+        updateRemoveButtonVisibility();
+    });
+
+    // Remove Last Education button logic
+    document.getElementById('removeLastEducationBtn').addEventListener('click', () => {
+        const entries = document.querySelectorAll('.education-entry');
+        if (entries.length > 1) {
+            entries[entries.length - 1].remove();
+            updateRemoveButtonVisibility();
+        }
+    });
+
+    // Initialize with one education entry
+    window.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('addEducationBtn').click();
+    });
+</script>
+
+<h5>UK Education History        </h5>
         <p style="background-color: #f0eccd; padding: 10px; border-radius: 5px;">If you require a Tier 4 student visa, please give details below of any periods of study (including non-degree level courses), 
            complete or incomplete, undertaken in the UK that are not already listed above.
         <br><br>
         You should include years abroad spent in the UK while registered at an overseas institution. Please list start and end dates, course 
            title, level and institution.</p>
-        
-        <div class="table-responsive mb-4">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>University/Institution attended<span class="required">*</span></th>
-                        <th>Start date (dd/mm/yyyy)<span class="required">*</span></th>
-                        <th>Date of completion/ expected completion (dd/mm/yyyy)<span class="required">*</span></th>
-                        <th>Course title<span class="required">*</span></th>
-                        <th>Level<span class="required">*</span></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="text" class="form-control" name="uk_institution"></td>
-                        <td><input type="date" class="form-control" name="uk_start_date"></td>
-                        <td><input type="date" class="form-control" name="uk_completion_date"></td>
-                        <td><input type="text" class="form-control" name="course_title"></td>
-                        <td><input type="text" class="form-control" name="level"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" class="form-control" name="uk_institution2"></td>
-                        <td><input type="date" class="form-control" name="uk_start_date2"></td>
-                        <td><input type="date" class="form-control" name="uk_completion_date2"></td>
-                        <td><input type="text" class="form-control" name="course_title2"></td>
-                        <td><input type="text" class="form-control" name="level2"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <!-- UK Education Section -->
+<div id="ukEducationSection">
+    <div id="ukEducationContainer"></div>
+
+    <div class="d-flex justify-content-between align-items-center mt-3 mb-3">
+        <button type="button" class="btn btn-primary" id="addUKEducationBtn">Add UK Education</button>
+        <button type="button" class="btn btn-danger d-none" id="removeLastUKEducationBtn">Remove</button>
+    </div>
+</div>
+
+<script>
+    let ukEducationIndex = 0;
+
+    function updateUKRemoveBtnVisibility() {
+        const entries = document.querySelectorAll('.uk-education-entry');
+        const removeBtn = document.getElementById('removeLastUKEducationBtn');
+        if (entries.length >= 1) {
+            removeBtn.classList.remove('d-none');
+        } else {
+            removeBtn.classList.add('d-none');
+        }
+    }
+
+    function createUKEducationRow(index) {
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('uk-education-entry', 'mb-4');
+
+        wrapper.innerHTML = `
+            <div class="table-responsive">
+                <table class="table table-bordered mb-0">
+                    <thead>
+                        <tr>
+                            <th>University/Institution attended<span class="required">*</span></th>
+                            <th>Start date (dd/mm/yyyy)<span class="required">*</span></th>
+                            <th>Date of completion/expected completion (dd/mm/yyyy)<span class="required">*</span></th>
+                            <th>Course title<span class="required">*</span></th>
+                            <th>Level<span class="required">*</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="text" class="form-control" name="uk_institution${index}" required></td>
+                            <td><input type="date" class="form-control" name="uk_start_date${index}" required></td>
+                            <td><input type="date" class="form-control" name="uk_completion_date${index}" required></td>
+                            <td><input type="text" class="form-control" name="course_title${index}" required></td>
+                            <td><input type="text" class="form-control" name="level${index}" required></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        `;
+
+        return wrapper;
+    }
+
+    // Add UK Education button
+    document.getElementById('addUKEducationBtn').addEventListener('click', () => {
+        const container = document.getElementById('ukEducationContainer');
+        const newRow = createUKEducationRow(ukEducationIndex++);
+        container.appendChild(newRow);
+        updateUKRemoveBtnVisibility();
+    });
+
+    // Remove UK Education button
+    document.getElementById('removeLastUKEducationBtn').addEventListener('click', () => {
+        const entries = document.querySelectorAll('.uk-education-entry');
+        if (entries.length > 0) {
+            entries[entries.length - 1].remove();
+            updateUKRemoveBtnVisibility();
+        }
+    });
+
+    // No initial entry (default is zero entries)
+</script>
+
         
         <div class="mb-3">
             <label class="form-label">Have you undertaken degree-level study at any institution, which you have not completed, excluding any qualification you are currently working towards?<span class="required">*</span></label>
@@ -959,7 +1374,7 @@
     
 <!-- SECTION J -->
 <div class="form-container">
-    <div class="form-header">Section J: GRE (if applicable)</div>
+    <div class="form-header">Section J: GRE (if applicable)</div><br>
     <p style="background-color: #f0eccd; padding: 10px; border-radius: 5px;">For further information on whether a GRE score is required please see our Application Guide 
   <a href="https://www.graduate.ox.ac.uk/applicationguide">(www.graduate.ox.ac.uk/applicationguide)</a>.
 </p>
@@ -1044,7 +1459,7 @@
 
 <!-- SECTION L -->
 <div class="form-container">
-    <div class="form-header">Section L: English language proficiency</div>
+    <div class="form-header">Section L: English language proficiency</div><br>
     <p style="background-color: #f0eccd; padding: 10px; border-radius: 5px;">
             If your first language is not English, or if your first language is English but you are not a national of the UK, Ireland or a majority English-speaking country recognised by the UK Home Office 
             (<a href="https://www.graduate.ox.ac.uk/englishproficiency" target="_blank">www.graduate.ox.ac.uk/englishproficiency</a>), 
@@ -1069,30 +1484,36 @@
           
     </p>
     
-    <div style="overflow-x: auto;">
-        <table border="1" style="width: 100%;">
-            <tr>
-                <th>Test type (e.g. TOEFL, IELTS, etc.)</th>
-                <th>Date taken</th>
-                <th>Overall result</th>
-                <th>Listening</th>
-                <th>Reading</th>
-                <th>Writing</th>
-                <th>Speaking</th>
-            </tr>
-            <tr>
-                <td><input type="text" name="test_type" /></td>
-                <td><input type="date" name="date_taken" /></td>
-                <td><input type="text" name="overall_result" /></td>
-                <td><input type="text" name="listening_score" /></td>
-                <td><input type="text" name="reading_score" /></td>
-                <td><input type="text" name="writing_score" /></td>
-                <td><input type="text" name="speaking_score" /></td>
-            </tr>
+    <div class="table-responsive ">
+        
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Test type (e.g. TOEFL, IELTS, etc.)</th>
+                    <th>Date taken</th>
+                    <th>Overall result</th>
+                    <th>Listening</th>
+                    <th>Reading</th>
+                    <th>Writing</th>
+                    <th>Speaking</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" class="form-control" name="test_type" /></td>
+                    <td><input type="date" class="form-control" name="date_taken" /></td>
+                    <td><input type="text" class="form-control" name="overall_result" /></td>
+                    <td><input type="text" class="form-control" name="listening_score" /></td>
+                    <td><input type="text" class="form-control" name="reading_score" /></td>
+                    <td><input type="text" class="form-control" name="writing_score" /></td>
+                    <td><input type="text" class="form-control" name="speaking_score" /></td>
+                </tr>
+            </tbody>
         </table>
     </div>
+    
 
-    <p><br>I intend to submit a test waiver request with my supporting materials:</p>
+    <p>I intend to submit a test waiver request with my supporting materials:</p>
 
     <div class="mb-3 d-flex gap-3">
         <div class="form-check">
@@ -1120,25 +1541,219 @@
     <p style="background-color: #f0eccd; padding: 10px; border-radius: 5px;">If you have a working knowledge of languages other than English (including your native language), please specify, and state 
         whether the level of your competence in Reading, Writing, Speaking and Understanding is Advanced, Intermediate or Basic:</p>
     
-    <div style="overflow-x: auto;">
-        <table border="1" style="width: 100%;">
-            <tr>
-                <th>Language</th>
-                <th>Reading</th>
-                <th>Writing</th>
-                <th>Speaking</th>
-                <th>Understanding</th>
-            </tr>
-            <tr>
-                <td><input type="text" name="language_name" /></td>
-                <td><input type="text" name="reading_level" /></td>
-                <td><input type="text" name="writing_level" /></td>
-                <td><input type="text" name="speaking_level" /></td>
-                <td><input type="text" name="understanding_level" /></td>
-            </tr>
-        </table>
+        <div>
+            <div id="languageContainer" class="table-responsive "></div>
+          
+            <div class="d-flex justify-content-between align-items-center mt-3">
+              <button type="button" class="btn btn-primary" id="addLanguageBtn">Add Language</button>
+              <button type="button" class="btn btn-danger" id="removeLanguageBtn" style="display: none;">Remove</button>
+            </div>
+          </div>
+          
+          <script>
+            let languageIndex = 0;
+            const container = document.getElementById("languageContainer");
+            const removeBtn = document.getElementById("removeLanguageBtn");
+            const addBtn = document.getElementById("addLanguageBtn");
+          
+            function createLanguageRow(index) {
+              const wrapper = document.createElement("div");
+              wrapper.classList.add("language-entry", "mb-2");
+          
+              wrapper.innerHTML = `
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Language</th>
+                      <th>Reading</th>
+                      <th>Writing</th>
+                      <th>Speaking</th>
+                      <th>Understanding</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><input type="text" class="form-control" name="language_name${index}" /></td>
+                      <td><input type="text" class="form-control" name="reading_level${index}" /></td>
+                      <td><input type="text" class="form-control" name="writing_level${index}" /></td>
+                      <td><input type="text" class="form-control" name="speaking_level${index}" /></td>
+                      <td><input type="text" class="form-control" name="understanding_level${index}" /></td>
+                    </tr>
+                  </tbody>
+                </table>
+              `;
+          
+              return wrapper;
+            }
+          
+            function updateRemoveButtonVisibility() {
+              const totalRows = document.querySelectorAll(".language-entry").length;
+              removeBtn.style.display = totalRows > 0 ? "inline-block" : "none";
+            }
+          
+            addBtn.addEventListener("click", () => {
+              const newRow = createLanguageRow(languageIndex++);
+              container.appendChild(newRow);
+              updateRemoveButtonVisibility();
+            });
+          
+            removeBtn.addEventListener("click", () => {
+              const entries = document.querySelectorAll(".language-entry");
+              if (entries.length > 0) {
+                entries[entries.length - 1].remove();
+              }
+              updateRemoveButtonVisibility();
+            });
+          </script>
+          
+        
     </div>
+    
+    <!-- SECTION M -->
+        <div class="form-container">
+            <div class="form-header h4 mb-4">Section M: Proposed Funding Arrangements</div><br>
+            <form>
+                <p style="background-color: #f0eccd; padding: 10px; border-radius: 5px;">
+                    If you are not offered a scholarship by the University, please indicate the main source(s) of funding you plan to use to fund your fees and living expenses.
+                    This will not affect the assessment of your application in any way. Please do not include any Oxford scholarships.
+                </p>
+    
+                <div class="mb-3">
+                    <label class="form-label">Do you have information on any alternative funding arrangements?<span class="required">*</span></label>
+                    <div class="d-flex gap-3 mt-2">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="alternativeFunding" id="fundingYes" required>
+                        <label class="form-check-label" for="fundingYes">Yes</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="alternativeFunding" id="fundingNo">
+                        <label class="form-check-label" for="fundingNo">No</label>
+                      </div>
+                    </div>
+                  </div>
+    
+                <!-- Funding Table -->
+                <div class="table-responsive mb-3">
+                    <div class="table-responsive mb-4">
+                        <table class="table table-bordered">
+                            <thead class="text-center">
+                                <tr>
+                                    <th>Proposed Funding Sources (e.g., family, scholarship, government funds)</th>
+                                    <th>Amount of funding per year (£)</th>
+                                    <th>Period Covered (e.g., 1yr, 2yrs)</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="fundingTableBody">
+                                <tr>
+                                    <td><input type="text" class="form-control" name="source1"></td>
+                                    <td><input type="number" class="form-control" name="amount1"></td>
+                                    <td><input type="text" class="form-control" name="period1"></td>
+                                    <td>
+                                        <div class="d-flex flex-column gap-1">
+                                            <div class="form-check">
+                                                <input type="radio" class="form-check-input" name="status1" id="intend1">
+                                                <label class="form-check-label" for="intend1">Intend to apply</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="radio" class="form-check-input" name="status1" id="applied1">
+                                                <label class="form-check-label" for="applied1">Applied for</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input type="radio" class="form-check-input" name="status1" id="secured1">
+                                                <label class="form-check-label" for="secured1">Firmly secured</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                </div>
+    
+                <!-- Add/Remove Row Buttons -->
+                <div class="d-flex justify-content-between align-items-center mt-3 mb-3">
+                    <button type="button" class="btn btn-primary" id="addRowBtn">Add Row</button>
+                    <button type="button" class="btn btn-danger" id="removeRowBtn">Remove Row</button>
+                </div>
+                
+                <!-- Departmental Studentship Applications -->
+                <div class="mb-3">
+                    <label class="form-label">Are you applying for an advertised studentship(s) competition(s)?</label>
+                    <div class="d-flex gap-3 mt-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="studentshipApply" id="studentshipYes">
+                            <label class="form-check-label" for="studentshipYes">Yes</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="studentshipApply" id="studentshipNo">
+                            <label class="form-check-label" for="studentshipNo">No</label>
+                        </div>
+                    </div>
+                </div>
+                
+    
+                <!-- Conditional Reference Code Field -->
+                <div class="mb-3" id="referenceCodeGroup">
+                    <label for="referenceCode" class="form-label">If yes, please provide the advertised reference code:</label>
+                    <input type="text" class="form-control" id="referenceCode" name="referenceCode">
+                </div>
+    
+                <hr>
+    
+                <!-- Oxford Scholarships -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">University of Oxford Scholarships:</label>
+                    <p style="background-color: #f0eccd; padding: 10px; border-radius: 5px;">
+                        Many Oxford scholarships (<a href="https://www.graduate.ox.ac.uk/scholarships" target="_blank">graduate.ox.ac.uk/scholarships</a>) are considered automatically. However, if you are eligible and wish to be considered for one of the six scholarships listed below, you need to tick the relevant 
+                        box(es). Where a scholarship is marked with a '*', you also need to supply an additional supporting document by attaching it in 
+                        the Supporting Documents section of this form. You can check the eligibility criteria and requirements for supporting documents 
+                        by visiting the relevant scholarship links below. Please note that the University reserves the right to consider any eligible 
+                        candidates for Oxford scholarships.
+                    </p>
+    
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="hillFoundation">
+                        <label class="form-check-label" for="hillFoundation">
+                            Hill Foundation (<a href="https://www.graduate.ox.ac.uk/hill" target="_blank">www.graduate.ox.ac.uk/hill</a>)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="ertetgun">
+                        <label class="form-check-label" for="ertetgun">
+                            Mica and Ahmet Ertegun Postgraduate Scholarships in the Humanities<span class="required">*</span> (<a href="https://www.graduate.ox.ac.uk/ertegun" target="_blank">www.graduate.ox.ac.uk/ertegun</a>)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="ocis">
+                        <label class="form-check-label" for="ocis">
+                            Oxford Centre for Islamic Studies<span class="required">*</span> (<a href="https://www.graduate.ox.ac.uk/ocis" target="_blank">www.graduate.ox.ac.uk/ocis</a>)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="weidenfeld">
+                        <label class="form-check-label" for="weidenfeld">
+                            Weidenfeld-Hoffmann Scholarships and Leadership Programme<span class="required">*</span> (<a href="https://www.graduate.ox.ac.uk/weidenfeld" target="_blank">www.graduate.ox.ac.uk/weidenfeld</a>)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="ahrc">
+                        <label class="form-check-label" for="ahrc">
+                            AHRC: OOC DTP<span class="required">*</span> (<a href="https://www.oocdtp.ac.uk/" target="_blank">https://www.oocdtp.ac.uk/</a>)
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="grandUnion">
+                        <label class="form-check-label" for="grandUnion">
+                            Grand Union DTP <span class="required">*</span> (<a href="https://www.granduniondtp.ac.uk/how-apply" target="_blank">www.granduniondtp.ac.uk/how-apply</a>)
+                        </label>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
+
 <!-- Section N: Supporting documents checklist -->
 <div class="form-container">
     <section id="section-n">
@@ -1235,6 +1850,76 @@
       </fieldset>
     </section>
   </div>
+  <!-- SECTION O -->
+<div class="form-container">
+    <div class="form-header">Section O: Application Fee Payment</div>
+    <p style="background-color: #f0eccd; padding: 10px; border-radius: 5px;">
+        The application fee is &pound;75 per application. Payment can be made by any MasterCard, Visa, Visa debit,
+        Visa Electron or Maestro card. If you intend to submit more than one application, you must make separate payments and
+        provide us with the order number for each application. Fee waivers may be available if you are resident in an eligible
+        country. <a href="https://www.graduate.ox.ac.uk/applicationfee" target="_blank">More info here</a>.
+    </p>
+    <div class="mb-3">
+        <label for="paymentMethod" class="form-label">How will you pay the application fee?<span class="required">*</span></label>
+        <select class="form-select" id="paymentMethod" required>
+            <option value="">Select a payment method</option>
+            <option value="card">Online Card Payment</option>
+            <option value="western_union">Western Union</option>
+            <option value="cheque">Cheque</option>
+            <option value="waiver">Fee Waiver Request</option>
+        </select>
+    </div>
+
+    <div class="mb-3" id="orderNumberField" style="display: none;">
+        <label for="orderNumber" class="form-label">Application Fee Order Number (e.g., OXF123456):</label>
+        <input type="text" class="form-control" id="orderNumber">
+    </div>
+
+    <div id="waiverDeclaration" style="display: none;">
+        <p><strong>Application Fee Waiver:</strong></p>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="waiverCheck1">
+            <label class="form-check-label" for="waiverCheck1">I confirm that I cannot afford to pay the application fee and would not be able to apply to the University without an application fee waiver.</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="waiverCheck2">
+            <label class="form-check-label" for="waiverCheck2">I confirm that I will meet the entry requirements for my course.</label>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("paymentMethod").addEventListener("change", function() {
+        const selected = this.value;
+        document.getElementById("orderNumberField").style.display = (selected === "card" || selected === "western_union" || selected === "cheque") ? "block" : "none";
+        document.getElementById("waiverDeclaration").style.display = (selected === "waiver") ? "block" : "none";
+    });
+</script>
+
+<!-- SECTION P -->
+<div class="form-container">
+    <div class="form-header">Section P: Final Checklist</div>
+    <div class="mb-3">
+        <p>Before submitting your application, please confirm the following:<span class="required">*</span></p>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="checkCompleteForm">
+            <label class="form-check-label" for="checkCompleteForm">I have filled out all required sections of the application form.</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="checkMaterials">
+            <label class="form-check-label" for="checkMaterials">I have gathered all supporting materials required for my course.</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="checkReferences">
+            <label class="form-check-label" for="checkReferences">I have requested references from my referees and informed them of the deadline.</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="checkPayment">
+            <label class="form-check-label" for="checkPayment">I have enclosed the application fee, provided the payment order number, or requested a fee waiver.</label>
+        </div>
+    </div>
+</div>
+
     <!-- Section Q + Submit Section -->
 
     <!-- Submit Section -->
@@ -1311,6 +1996,72 @@
 
 
 <script>
+//SECTION M JAVASCRIPT
+document.addEventListener("DOMContentLoaded", function () {
+    const tableBody = document.getElementById("fundingTableBody");
+    const addRowBtn = document.getElementById("addRowBtn");
+    const removeRowBtn = document.getElementById("removeRowBtn");
+    let rowCount = tableBody.rows.length;
+
+    addRowBtn.addEventListener("click", () => {
+        rowCount++;
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td><input type="text" class="form-control" name="source${rowCount}"></td>
+            <td><input type="number" class="form-control" name="amount${rowCount}"></td>
+            <td><input type="text" class="form-control" name="period${rowCount}"></td>
+            <td>
+                <div class="form-check">
+                    <input type="radio" name="status${rowCount}" class="form-check-input" id="intend${rowCount}">
+                    <label class="form-check-label" for="intend${rowCount}">Intend to apply</label><br>
+                    <input type="radio" name="status${rowCount}" class="form-check-input" id="applied${rowCount}">
+                    <label class="form-check-label" for="applied${rowCount}">Applied for</label><br>
+                    <input type="radio" name="status${rowCount}" class="form-check-input" id="secured${rowCount}">
+                    <label class="form-check-label" for="secured${rowCount}">Firmly secured</label>
+                </div>
+            </td>
+        `;
+        tableBody.appendChild(row);
+    });
+
+    removeRowBtn.addEventListener("click", () => {
+        if (tableBody.rows.length > 1) {
+            tableBody.removeChild(tableBody.lastElementChild);
+            rowCount--;
+        }
+    });
+
+    // Show/hide reference code field
+    const refCodeGroup = document.getElementById("referenceCodeGroup");
+    document.getElementById("studentshipYes").addEventListener("change", () => {
+        refCodeGroup.style.display = "block";
+    });
+    document.getElementById("studentshipNo").addEventListener("change", () => {
+        refCodeGroup.style.display = "none";
+    });
+});
+
+// END OF SECTION M JAVASCRIPT
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const refCodeGroup = document.getElementById("referenceCodeGroup");
+
+    // Initially hide the reference code input
+    refCodeGroup.style.display = "none";
+
+    // Show it when "Yes" is selected
+    document.getElementById("studentshipYes").addEventListener("change", () => {
+        refCodeGroup.style.display = "block";
+    });
+
+    // Hide it again when "No" is selected
+    document.getElementById("studentshipNo").addEventListener("change", () => {
+        refCodeGroup.style.display = "none";
+    });
+});
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const courses = [
         "MPhil in Development Studies",
@@ -1462,6 +2213,7 @@ function addChild() {
       fieldDiv.innerHTML = "";
         }
   }
+
 
 </script>      
 </body>
