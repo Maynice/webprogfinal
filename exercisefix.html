@@ -1136,93 +1136,22 @@
 <div class="form-container">
     <div class="form-header">Section I: Details of Current & Previous Education</div><br>
     <form>
-        <h5>Education History<span class="required">*</span>        </h5>
-        <p style="background-color: #f0eccd; padding: 10px; border-radius: 5px;">Please enter your previous and current qualifications, newest first. You should include details of all qualifications gained at 
-           degree level (i.e. university) and above, but not earlier education. For further guidance, please see our <a href="https://www.graduate.ox.ac.uk/applicationguide">Application Guide</a>.</p>
-        
-      <!-- Education Section -->
+        <h5>Education History<span class="required">*</span></h5>
+        <p style="background-color: #f0eccd; padding: 10px; border-radius: 5px;">
+            Please enter your previous and current qualifications, newest first. You should include details of all qualifications gained at 
+            degree level (i.e. university) and above, but not earlier education. For further guidance, please see our 
+            <a href="https://www.graduate.ox.ac.uk/applicationguide">Application Guide</a>.
+        </p>
+
+       <!-- EDUCATION HISTORY SECTION -->
 <div id="educationSection">
     <div id="educationContainer"></div>
 
-    <div class="d-flex justify-content-between align-items-center mt-3 mb-3">
+    <div class="d-flex gap-2 mt-3 mb-3">
         <button type="button" class="btn btn-primary" id="addEducationBtn">Add Education</button>
-        <button type="button" class="btn btn-danger ms-2 mt-1 d-none" id="removeLastEducationBtn">Remove</button>
+        <button type="button" class="btn btn-danger d-none" id="removeLastEducationBtn">Remove Education</button>
     </div>
 </div>
-
-<script>
-    let educationIndex = 0;
-
-    function updateRemoveButtonVisibility() {
-        const entries = document.querySelectorAll('.education-entry');
-        const removeBtn = document.getElementById('removeLastEducationBtn');
-        if (entries.length >= 2) {
-            removeBtn.classList.remove('d-none');
-        } else {
-            removeBtn.classList.add('d-none');
-        }
-    }
-
-    function createEducationRow(index) {
-        const wrapper = document.createElement('div');
-        wrapper.classList.add('education-entry', 'mb-4');
-
-        wrapper.innerHTML = `
-            <div class="d-flex align-items-start">
-                <div class="flex-grow-1 me-2">
-                    <div class="table-responsive">
-                        <table class="table table-bordered mb-0">
-                            <thead>
-                                <tr>
-                                    <th>University/Institution attended<span class="required">*</span></th>
-                                    <th>Start date (dd/mm/yyyy)<span class="required">*</span></th>
-                                    <th>Date of completion/expected completion (dd/mm/yyyy)<span class="required">*</span></th>
-                                    <th>Qualification obtained or studying for (e.g. BA, MSc)<span class="required">*</span></th>
-                                    <th>Main subject (e.g. Chemistry, English)<span class="required">*</span></th>
-                                    <th>Result/expected result (grade, classification, etc.)<span class="required">*</span></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><input type="text" class="form-control" name="institution${index}" required></td>
-                                    <td><input type="date" class="form-control" name="start_date${index}" required></td>
-                                    <td><input type="date" class="form-control" name="completion_date${index}" required></td>
-                                    <td><input type="text" class="form-control" name="qualification${index}" required></td>
-                                    <td><input type="text" class="form-control" name="subject${index}" required></td>
-                                    <td><input type="text" class="form-control" name="result${index}" required></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        `;
-
-        return wrapper;
-    }
-
-    // Add Education button logic
-    document.getElementById('addEducationBtn').addEventListener('click', () => {
-        const container = document.getElementById('educationContainer');
-        const newRow = createEducationRow(educationIndex++);
-        container.appendChild(newRow);
-        updateRemoveButtonVisibility();
-    });
-
-    // Remove Last Education button logic
-    document.getElementById('removeLastEducationBtn').addEventListener('click', () => {
-        const entries = document.querySelectorAll('.education-entry');
-        if (entries.length > 1) {
-            entries[entries.length - 1].remove();
-            updateRemoveButtonVisibility();
-        }
-    });
-
-    // Initialize with one education entry
-    window.addEventListener('DOMContentLoaded', () => {
-        document.getElementById('addEducationBtn').click();
-    });
-</script>
 
 <h5>UK Education History        </h5>
         <p style="background-color: #f0eccd; padding: 10px; border-radius: 5px;">If you require a Tier 4 student visa, please give details below of any periods of study (including non-degree level courses), 
@@ -1230,41 +1159,94 @@
         <br><br>
         You should include years abroad spent in the UK while registered at an overseas institution. Please list start and end dates, course 
            title, level and institution.</p>
-        <!-- UK Education Section -->
+
+<!-- UK EDUCATION HISTORY SECTION -->
 <div id="ukEducationSection">
     <div id="ukEducationContainer"></div>
 
-    <div class="d-flex justify-content-between align-items-center mt-3 mb-3">
+    <div class="d-flex gap-2 mt-3 mb-3">
         <button type="button" class="btn btn-primary" id="addUKEducationBtn">Add UK Education</button>
-        <button type="button" class="btn btn-danger d-none" id="removeLastUKEducationBtn">Remove</button>
+        <button type="button" class="btn btn-danger d-none" id="removeLastUKEducationBtn">Remove UK Education</button>
     </div>
 </div>
 
 <script>
-    let ukEducationIndex = 0;
+    // ========== EDUCATION HISTORY SECTION ==========
+    let educationIndex = 0;
 
-    function updateUKRemoveBtnVisibility() {
-        const entries = document.querySelectorAll('.uk-education-entry');
-        const removeBtn = document.getElementById('removeLastUKEducationBtn');
-        if (entries.length >= 1) {
-            removeBtn.classList.remove('d-none');
-        } else {
-            removeBtn.classList.add('d-none');
-        }
+    function updateRemoveEducationBtnVisibility() {
+        const entries = document.querySelectorAll('.education-entry');
+        const removeBtn = document.getElementById('removeLastEducationBtn');
+        removeBtn.classList.toggle('d-none', entries.length <= 1);
     }
 
-    function createUKEducationRow(index) {
+    function createEducationRow(index) {
         const wrapper = document.createElement('div');
-        wrapper.classList.add('uk-education-entry', 'mb-4');
-
+        wrapper.classList.add('education-entry', 'mb-4');
         wrapper.innerHTML = `
             <div class="table-responsive">
                 <table class="table table-bordered mb-0">
                     <thead>
                         <tr>
-                            <th>University/Institution attended<span class="required">*</span></th>
-                            <th>Start date (dd/mm/yyyy)<span class="required">*</span></th>
-                            <th>Date of completion/expected completion (dd/mm/yyyy)<span class="required">*</span></th>
+                            <th>University/Institution<span class="required">*</span></th>
+                            <th>Start date<span class="required">*</span></th>
+                            <th>Completion date<span class="required">*</span></th>
+                            <th>Qualification<span class="required">*</span></th>
+                            <th>Subject<span class="required">*</span></th>
+                            <th>Result<span class="required">*</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="text" class="form-control" name="institution${index}" required></td>
+                            <td><input type="date" class="form-control" name="start_date${index}" required></td>
+                            <td><input type="date" class="form-control" name="completion_date${index}" required></td>
+                            <td><input type="text" class="form-control" name="qualification${index}" required></td>
+                            <td><input type="text" class="form-control" name="subject${index}" required></td>
+                            <td><input type="text" class="form-control" name="result${index}" required></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        `;
+        return wrapper;
+    }
+
+    document.getElementById('addEducationBtn').addEventListener('click', () => {
+        const container = document.getElementById('educationContainer');
+        container.appendChild(createEducationRow(educationIndex++));
+        updateRemoveEducationBtnVisibility();
+    });
+
+    document.getElementById('removeLastEducationBtn').addEventListener('click', () => {
+        const container = document.getElementById('educationContainer');
+        const entries = container.querySelectorAll('.education-entry');
+        if (entries.length > 1) {
+            container.removeChild(entries[entries.length - 1]);
+            updateRemoveEducationBtnVisibility();
+        }
+    });
+
+    // ========== UK EDUCATION HISTORY ==========
+    let ukEducationIndex = 0;
+
+    function updateRemoveUKEducationBtnVisibility() {
+        const entries = document.querySelectorAll('.uk-education-entry');
+        const removeBtn = document.getElementById('removeLastUKEducationBtn');
+        removeBtn.classList.toggle('d-none', entries.length === 0);
+    }
+
+    function createUKEducationRow(index) {
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('uk-education-entry', 'mb-4');
+        wrapper.innerHTML = `
+            <div class="table-responsive">
+                <table class="table table-bordered mb-0">
+                    <thead>
+                        <tr>
+                            <th>University/Institution<span class="required">*</span></th>
+                            <th>Start date<span class="required">*</span></th>
+                            <th>Completion date<span class="required">*</span></th>
                             <th>Course title<span class="required">*</span></th>
                             <th>Level<span class="required">*</span></th>
                         </tr>
@@ -1281,31 +1263,33 @@
                 </table>
             </div>
         `;
-
         return wrapper;
     }
 
-    // Add UK Education button
     document.getElementById('addUKEducationBtn').addEventListener('click', () => {
         const container = document.getElementById('ukEducationContainer');
-        const newRow = createUKEducationRow(ukEducationIndex++);
-        container.appendChild(newRow);
-        updateUKRemoveBtnVisibility();
+        container.appendChild(createUKEducationRow(ukEducationIndex++));
+        updateRemoveUKEducationBtnVisibility();
     });
 
-    // Remove UK Education button
     document.getElementById('removeLastUKEducationBtn').addEventListener('click', () => {
-        const entries = document.querySelectorAll('.uk-education-entry');
+        const container = document.getElementById('ukEducationContainer');
+        const entries = container.querySelectorAll('.uk-education-entry');
         if (entries.length > 0) {
-            entries[entries.length - 1].remove();
-            updateUKRemoveBtnVisibility();
+            container.removeChild(entries[entries.length - 1]);
+            updateRemoveUKEducationBtnVisibility();
         }
     });
 
-    // No initial entry (default is zero entries)
+    // INIT on page load
+    window.addEventListener('DOMContentLoaded', () => {
+        // Start with at least one education entry
+        document.getElementById('addEducationBtn').click();
+    });
 </script>
 
-        
+
+        <!-- Radio Button Logic for Incomplete/Concurrent Study -->
         <div class="mb-3">
             <label class="form-label">Have you undertaken degree-level study at any institution, which you have not completed, excluding any qualification you are currently working towards?<span class="required">*</span></label>
             <div class="d-flex gap-3">
@@ -1319,12 +1303,12 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="mb-4" id="incompleteStudyDetails" style="display: none;">
             <label class="form-label">If "Yes", please state the course(s) and the institution(s) and the reason(s) the qualification was not completed.</label>
             <textarea class="form-control" name="incomplete_study_details" rows="3"></textarea>
         </div>
-        
+
         <div class="mb-3">
             <label class="form-label">Are you planning to begin, or to continue studying for, a degree at any institution, at the same time as you would also be studying at Oxford for the course for which you are now applying?<span class="required">*</span></label>
             <div class="d-flex gap-3">
@@ -1338,39 +1322,39 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="mb-4" id="concurrentStudyDetails" style="display: none;">
             <label class="form-label">If "Yes", please provide details of the course and the institution and how you believe it will be possible to pursue both courses at the same time.</label>
             <textarea class="form-control" name="concurrent_study_details" rows="3"></textarea>
         </div>
-        
+
         <script>
             document.addEventListener("DOMContentLoaded", function () {
                 const yesIncomplete = document.getElementById("yes_incomplete");
                 const noIncomplete = document.getElementById("no_incomplete");
                 const incompleteStudyDetails = document.getElementById("incompleteStudyDetails");
-        
+
                 const yesConcurrent = document.getElementById("yes_concurrent");
                 const noConcurrent = document.getElementById("no_concurrent");
                 const concurrentStudyDetails = document.getElementById("concurrentStudyDetails");
-        
+
                 function toggleIncompleteDetails() {
                     incompleteStudyDetails.style.display = yesIncomplete.checked ? "block" : "none";
                 }
-        
+
                 function toggleConcurrentDetails() {
                     concurrentStudyDetails.style.display = yesConcurrent.checked ? "block" : "none";
                 }
-        
+
                 yesIncomplete.addEventListener("change", toggleIncompleteDetails);
                 noIncomplete.addEventListener("change", toggleIncompleteDetails);
-                
                 yesConcurrent.addEventListener("change", toggleConcurrentDetails);
                 noConcurrent.addEventListener("change", toggleConcurrentDetails);
             });
-        </script>        
+        </script>
     </form>
-    </div>
+</div>
+
     
 <!-- SECTION J -->
 <div class="form-container">
@@ -1633,6 +1617,7 @@
                   </div>
     
                 <!-- Funding Table -->
+                <div id="fundingTableSection" style="display: none;">
                 <div class="table-responsive mb-3">
                     <div class="table-responsive mb-4">
                         <table class="table table-bordered">
@@ -1672,11 +1657,11 @@
                     
                 </div>
     
-                <!-- Add/Remove Row Buttons -->
                 <div class="d-flex justify-content-between align-items-center mt-3 mb-3">
                     <button type="button" class="btn btn-primary" id="addRowBtn">Add Row</button>
                     <button type="button" class="btn btn-danger" id="removeRowBtn">Remove Row</button>
                 </div>
+            </div>
                 
                 <!-- Departmental Studentship Applications -->
                 <div class="mb-3">
@@ -1753,7 +1738,25 @@
             </form>
         </div>
     </div>
-
+    <script>
+        // Get radio buttons and table section
+        const fundingYes = document.getElementById('fundingYes');
+        const fundingNo = document.getElementById('fundingNo');
+        const fundingTableSection = document.getElementById('fundingTableSection');
+        
+        // Add event listeners to radio buttons
+        fundingYes.addEventListener('change', function() {
+            if(this.checked) {
+                fundingTableSection.style.display = 'block';
+            }
+        });
+        
+        fundingNo.addEventListener('change', function() {
+            if(this.checked) {
+                fundingTableSection.style.display = 'none';
+            }
+        });
+    </script>
 <!-- Section N: Supporting documents checklist -->
 <div class="form-container">
     <section id="section-n">
