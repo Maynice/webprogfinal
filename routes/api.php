@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserManagementController;
 use App\Http\Controllers\FormsController;
+use App\Http\Controllers\SubmissionController;
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -21,6 +22,7 @@ Route::prefix('user')->middleware('auth:sanctum')->group(function () {
 
 Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
     Route::get('/users', [UserManagementController::class, 'index']);
+    Route::get('/users/reviewer', [UserManagementController::class, 'reviewer']);
     Route::get('/users/{userId}', [UserManagementController::class, 'user']);
     Route::post('/users', [UserManagementController::class, 'store']);
     Route::put('/users/{userId}', [UserManagementController::class, 'update']);
@@ -29,4 +31,12 @@ Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
 
 Route::prefix('applicant')->middleware('auth:sanctum')->group(function () {
     Route::post('/apply', [FormsController::class, 'create']);
+});
+
+Route::prefix('submissions')->middleware('auth:sanctum')->group(function () {
+    Route::get('/', [SubmissionController::class, 'get']);
+    Route::get('/applicant', [SubmissionController::class, 'applicant']);
+    Route::get('/reviewer', [SubmissionController::class, 'reviewer']);
+    Route::post('/update/{id}', [SubmissionController::class, 'update']);
+    Route::post('/assign', [SubmissionController::class, 'assign']);
 });

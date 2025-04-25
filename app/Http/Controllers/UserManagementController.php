@@ -26,6 +26,16 @@ class UserManagementController extends Controller
         return User::find($id);
     }
 
+    public function reviewer(Request $request)
+    {
+        if ($request->user()->role !== 'admin') {
+            return response()->json(['error' => 'Forbidden'], 403);
+        }
+
+        $reviewers = User::where('role', 'reviewer')->get();
+        return response()->json($reviewers);
+    }
+
     public function store(Request $request)
     {
         if ($request->user()->role !== 'admin') {

@@ -159,16 +159,16 @@
                     if (user.role === "admin") {
                         html += `
             <a href="/admin/users.html" class="btn btn-secondary me-2 mb-2">Manage Users</a>
-            <a href="/admin/assign.html" class="btn btn-secondary me-2 mb-2">Assign Reviewers</a>
+            <a href="/admin/applications.html" class="btn btn-secondary me-2 mb-2">Assign Reviewers</a>
             <a href="/admin/reports.html" class="btn btn-secondary me-2 mb-2">View Reports</a>
           `;
                     } else if (user.role === "reviewer") {
                         html += `
-            <a href="/reviewer/index.html" class="btn btn-secondary me-2 mb-2">Assigned Applications</a>
+            <a href="/reviewer/applications.html" class="btn btn-secondary me-2 mb-2">Assigned Applications</a>
           `;
                     } else {
                         html += `
-            <a href="/application.html" class="btn btn-secondary me-2 mb-2">My Application</a>
+            <a href="/applicant/applications.html" class="btn btn-secondary me-2 mb-2">My Application</a>
             <a href="/status.html" class="btn btn-secondary me-2 mb-2">Check Status</a>
           `;
                     }

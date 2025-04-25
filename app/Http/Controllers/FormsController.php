@@ -38,12 +38,14 @@ class FormsController extends Controller
 
         $submission = Submission::create([
             'applicant_id' => $request->user()->id,
-            'status' => 'wait',
+            'status' => 'hold',
         ]);
 
         $form = Form::create([
             'submission_id' => $submission->id
         ]);
+        $submission->update(['active_form_id' => $form->id]);
+        $submission->save();
 
         $dataA = $data['sectionA'] ?? [];
         FormsA::create([

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Applications</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    </head>
+    <body>
+        <div class="container py-5">
+            <a href="/dashboard.html" class="btn btn-secondary mb-4">Back to Dashboard</a>
+            <h1 class="mb-4">Applications</h1>
+            <table class="table table-striped table-bordered align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Application ID</th>
+                        <th>Applicant Name</th>
+                        <th>Applicant Email</th>
+                        <th>Reviewer Name</th>
+                        <th>Reviewer Email</th>
+                        <th>Status</th>
+                        <th>Form</th>
+                    </tr>
+                </thead>
+                <tbody id="submissionsBody">
+                    <!-- rows go here -->
+                </tbody>
+            </table>
+        </div>
+
+        <script src="/js/api.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", async () => {
+                const tbody = document.getElementById("submissionsBody");
+
+                try {
+                    const data = await API.request("/submissions/applicant");
+                    data.forEach((item) => {
+                        const tr = document.createElement("tr");
+    
+                        // Submission ID
+                        tr.appendChild(td(item.id));
+    
+                        // Applicant
+                        tr.appendChild(td(item.applicant.name));
+                        tr.appendChild(td(item.applicant.email));
+    
+                        // Reviewer (may be null)
+                        tr.appendChild(
+                            td(item.reviewer ? item.reviewer.name : "—")
+                        );
+                        tr.appendChild(
+                            td(item.reviewer ? item.reviewer.email : "—")
+                        );
+    
+                        // Status badge
+                        const badge = document.createElement("span");
+                        badge.textContent = item.status;
+                        badge.className = "badge " + badgeClass(item.status);
+                        const tdStatus = document.createElement("td");
+                        tdStatus.appendChild(badge);
+                        tr.appendChild(tdStatus);
+    
+                        // Form link
+                        const tdLink = document.createElement("td");
+                        if (item.active_form_id) {
+                            const a = document.createElement("a");
+                            a.href = `/forms/${item.active_form_id}`;
+                            a.className = "btn btn-sm btn-primary";
+                            a.textContent = "Open";
+                            tdLink.appendChild(a);
+                        } else {
+                            tdLink.textContent = "—";
+                        }
+                        tr.appendChild(tdLink);
+    
+                        tbody.appendChild(tr);
+                    });
+                } catch (err) {
+                    console.error("Failed to load submissions:", err);
+                    const tr = document.createElement("tr");
+                    const td = document.createElement("td");
+                    td.colSpan = 7;
+                    td.className = "text-center text-danger";
+                    td.textContent = "Error loading data";
+                    tr.appendChild(td);
+                    tbody.appendChild(tr);
+                }
+
+                // helper to create a <td> with text
+                function td(text) {
+                    const cell = document.createElement("td");
+                    cell.textContent = text;
+                    return cell;
+                }
+
+                // create badge bootstrap
+                function badgeClass(status) {
+                    switch (status) {
+                        case "wait":
+                            return "bg-warning text-dark";
+                        case "approved":
+                            return "bg-success";
+                        case "rejected":
+                            return "bg-danger";
+                        default:
+                            return "bg-secondary";
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
