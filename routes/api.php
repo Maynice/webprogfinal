@@ -28,5 +28,5 @@ Route::prefix('admin')->middleware('auth:sanctum')->group(function () {
 });
 
 Route::prefix('applicant')->middleware('auth:sanctum')->group(function () {
-    Route::put('/apply', [FormsController::class, 'create']);
+    Route::post('/apply', [FormsController::class, 'create']);
 });

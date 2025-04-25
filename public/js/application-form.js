@@ -58,7 +58,8 @@ document.addEventListener('DOMContentLoaded', function() {
             sectionP: getSectionPData(),
             sectionQ: getSectionQData()
         };
-        return cleanPayload(payload);
+        return payload;
+        // return cleanPayload(payload);
     }
     
     // remove null or empty values
@@ -332,6 +333,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 understanding: entry.querySelector('[name^="understanding_level"]')?.value
             });
         });
+
+        const testWaiverRequest = document.querySelector('input[name="testWaiverIntent"]:checked')?.value === 'yes';
         
         return {
             englishTest: {
@@ -343,8 +346,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 writing: document.querySelector('[name="writing_score"]')?.value,
                 speaking: document.querySelector('[name="speaking_score"]')?.value
             },
-            testWaiverRequest: document.querySelector('input[name="testWaiverIntent"]:checked')?.value === 'yes',
-            otherLanguages: languages.length > 0 ? languages : null
+            testWaiverRequest: testWaiverRequest,
+            otherLanguages: languages.length > 0 ? languages : []
         };
     }
     
@@ -380,40 +383,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function getSectionNData() {
-        const documents = [];
-        
-        // Mandatory documents
-        documents.push({
-            type: 'transcript',
-            uploaded: !!document.querySelector('[name="transcriptUpload"]')?.files[0]
-        });
-        documents.push({
-            type: 'cv',
-            uploaded: !!document.querySelector('[name="CVUpload"]')?.files[0]
-        });
-        documents.push({
-            type: 'statement',
-            uploaded: !!document.querySelector('[name="statementUpload"]')?.files[0]
-        });
-        
-        // Additional documents
-        const additionalDocs = [
-            'written1', 'written2', 'singleWritten', 'portfolio', 
-            'englishTest', 'gre', 'waiverLetter', 'scholarshipSupport'
-        ];
-        
-        additionalDocs.forEach(doc => {
-            const checkbox = document.querySelector(`[name="documents"][value="${doc}"]`);
-            if (checkbox?.checked) {
-                documents.push({
-                    type: doc,
-                    uploaded: !!document.querySelector(`[name="${doc}Upload"]`)?.files[0]
-                });
-            }
-        });
-        
         return {
-            documents: documents,
             numScholarships: document.getElementById('numScholarships')?.value || 0
         };
     }
@@ -445,18 +415,92 @@ document.addEventListener('DOMContentLoaded', function() {
     function getSectionQData() {
         return {
             declaration: {
-                signatureUploaded: !!document.getElementById('signature-upload')?.files[0],
                 date: document.getElementById('date')?.value,
                 printedName: document.getElementById('print-name')?.value
             }
         };
     }
     
-    async function sendFormData(formData) {
+    async function sendFormData(payload) {
         try {
-            const data = await API.request("/applicant/apply", {
-                method: "PUT",
-                body: JSON.stringify(formData),
+            const fd = new FormData();
+            // send payload
+            fd.append('payload', JSON.stringify(payload));
+
+            // section L
+            const waiverFile = document.getElementById('waiverFile')?.files[0] || null;
+            if (waiverFile) {
+                fd.append('waiver', waiverFile);
+            }
+
+            // section N
+            const transcriptFile = document.getElementById('transcriptUpload')?.files[0] || null;
+            if (transcriptFile) {
+                fd.append('transcript', transcriptFile);
+            }
+            const cvFile         = document.getElementById('CVUpload')?.files[0] || null;
+            if (cvFile) {
+                fd.append('cv', cvFile);
+            }
+            const statementFile  = document.getElementById('statementUpload')?.files[0] || null;
+            if (statementFile) {
+                fd.append('statement', statementFile);
+            }
+            const written1Checkbox      = document.querySelector('[name="documents"][value="written1"]');
+            const written1File          = written1Checkbox?.checked ? document.querySelector('[name="written1Upload"]')?.files[0] || null : null;
+            if (written1File) {
+                fd.append('written1', written1File);
+            }
+            const written2Checkbox      = document.querySelector('[name="documents"][value="written2"]');
+            const written2File          = written2Checkbox?.checked ? document.querySelector('[name="written2Upload"]')?.files[0] || null : null;
+            if (written2File) {
+                fd.append('written2', written2File);
+            }
+            const singleWrittenCheckbox = document.querySelector('[name="documents"][value="singleWritten"]');
+            const singleWrittenFile     = singleWrittenCheckbox?.checked ? document.querySelector('[name="singleWrittenUpload"]')?.files[0] || null : null;
+            if (singleWrittenFile) {
+                fd.append('singleWritten', singleWrittenFile);
+            }
+            const portfolioCheckbox     = document.querySelector('[name="documents"][value="portfolio"]');
+            const portfolioFile         = portfolioCheckbox?.checked ? document.querySelector('[name="portfolioUpload"]')?.files[0] || null : null;
+            if (portfolioFile) {
+                fd.append('portfolio', portfolioFile);
+            }
+            const englishTestCheckbox   = document.querySelector('[name="documents"][value="englishTest"]');
+            const englishTestFile       = englishTestCheckbox?.checked ? document.querySelector('[name="englishTestUpload"]')?.files[0] || null : null;
+            if (englishTestFile) {
+                fd.append('englishTest', englishTestFile);
+            }
+            const greCheckbox           = document.querySelector('[name="documents"][value="gre"]');
+            const greFile               = greCheckbox?.checked ? document.querySelector('[name="greUpload"]')?.files[0] || null : null;
+            if  (greFile) {            
+                fd.append('gre', greFile);
+            }
+            const waiverLetterCheckbox  = document.querySelector('[name="documents"][value="waiverLetter"]');
+            const waiverLetterFile      = waiverLetterCheckbox?.checked ? document.querySelector('[name="waiverLetterUpload"]')?.files[0] || null : null;
+            if (waiverLetterFile) {
+                fd.append('waiverLetter', waiverLetterFile);
+            }
+            const scholarshipCheckbox   = document.querySelector('[name="documents"][value="scholarshipSupport"]');
+            const scholarshipFile       = scholarshipCheckbox?.checked ? document.querySelector('[name="scholarshipSupportUpload"]')?.files[0] || null : null;
+            if (scholarshipFile) {
+                fd.append('scholarshipSupport', scholarshipFile);
+            }
+
+            // section Q
+            const signatureFile = document.getElementById('signature-upload')?.files[0] || null;
+            if (signatureFile) {
+                fd.append('signature', signatureFile);
+            }
+
+            const token = localStorage.getItem("token");
+            const data = await fetch("/api/applicant/apply", {
+                method: "POST",
+                body: fd,
+                headers: {
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                }
             });
             console.log('Success:', data);
         } catch (error) {

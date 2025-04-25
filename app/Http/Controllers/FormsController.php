@@ -27,12 +27,14 @@ use App\Models\FormsN;
 use App\Models\FormsO;
 use App\Models\FormsP;
 use App\Models\FormsQ;
+use Illuminate\Support\Facades\Storage;
 
 class FormsController extends Controller
 {
     public function create(Request $request)
     {
-        $data = $request->all();
+        $data = json_decode($request->input('payload', '{}'), true);
+        // return response()->json($data);
 
         $submission = Submission::create([
             'applicant_id' => $request->user()->id,
@@ -43,7 +45,7 @@ class FormsController extends Controller
             'submission_id' => $submission->id
         ]);
 
-        $dataA = $data['sectionA'];
+        $dataA = $data['sectionA'] ?? [];
         FormsA::create([
             'form_id'           => $form->id,
             'course_code'       => $dataA['courseCode'] ?? '',
@@ -55,14 +57,14 @@ class FormsController extends Controller
             'is_degree'         => $dataA['researchIntent'] ?? '',
         ]);
 
-        $dataB = $data['sectionB'];
+        $dataB = $data['sectionB'] ?? [];
         FormsB::create([
             'form_id' => $form->id,
             'is_preference' => $dataB['hasPreference'] ?? null,
             'college_preference' => $dataB['collegePreference'] ?? '',
         ]);
 
-        $dataC = $data['sectionC'];
+        $dataC = $data['sectionC'] ?? [];
         FormsC::create([
             'form_id'                     => $form->id,
             'name_given'                  => $dataC['givenName'] ?? '',
@@ -80,7 +82,7 @@ class FormsController extends Controller
             'name_family_prev_eff_to'     => $dataC['nameChangeDates']['familyTo'] ?? null,
         ]);
 
-        $dataD = $data['sectionD'];
+        $dataD = $data['sectionD'] ?? [];
         FormsD::create([
             'form_id'            => $form->id,
             'home_address'       => $dataD['homeAddress']['address'] ?? '',
@@ -105,7 +107,7 @@ class FormsController extends Controller
             'email_alt'          => $dataD['altEmail'] ?? '',
         ]);
 
-        $dataE = $data['sectionE'];
+        $dataE = $data['sectionE'] ?? [];
         FormsE::create([
             'form_id'      => $form->id,
             'is_nominated' => $dataE['hasThirdParty'] ?? false,
@@ -121,7 +123,7 @@ class FormsController extends Controller
         FormsF::create([
             'form_id'                   => $form->id,
             'country_birth'             => $dataF['birthCountry'] ?? '',
-            'requires_visa'             => $dataF['requiresVisa'] === 'yes',
+            'requires_visa'             => $dataF['requiresVisa'] ?? '' === 'yes',
 
             'country_nationality'       => $nationality1['nationality'] ?? '',
             'nationality_start_date'    => $nationality1['startDate'] ?? null,
@@ -243,6 +245,10 @@ class FormsController extends Controller
             'requests_waiver' => $dataL['testWaiverRequest'] ?? null,
             'file_waiver' => null,
         ]);
+        if ($waiver = $request->file('waiver')) {
+            $formsL->file_waiver = $waiver->store("waivers/{$form->id}", 'public');
+            $formsL->save();
+        }
         foreach ($dataL['otherLanguages'] as $language) {
             FormsLLang::create([
                 'form_id' => $form->id,
@@ -271,33 +277,104 @@ class FormsController extends Controller
             foreach ($dataM['fundingSources'] as $funding) {
                 FormsMFunding::create([
                     'form_id' => $form->id,
-                    'source' => $funding['source'],
-                    'amount' => $funding['amount'],
-                    'period' => $funding['period'],
-                    'status' => $funding['status'],
+                    'source' => $funding['source'] ?? '',
+                    'amount' => $funding['amount'] ?? '',
+                    'period' => $funding['period'] ?? '',
+                    'status' => $funding['status'] ?? '',
                 ]);
             }
         }
 
         $dataN = $data['sectionN'] ?? [];
-        $formsN = FormsN::create([
-            'form_id' => $form->id,
-            // Mandatory documents
-            'transcripts_submitted' => $dataN['documents']['transcript'] ?? false,
-            'cv_submitted' => $dataN['documents']['cv'] ?? false,
-            'statement_submitted' => $dataN['documents']['statement'] ?? false,
+        // $formsN = FormsN::create([
+        //     'form_id' => $form->id,
+        //     // Mandatory documents
+        //     'transcripts_submitted' => $dataN['documents']['transcript'] ?? false,
+        //     'cv_submitted' => $dataN['documents']['cv'] ?? false,
+        //     'statement_submitted' => $dataN['documents']['statement'] ?? false,
             
-            // Additional documents
-            'written_work1_submitted' => $dataN['documents']['written1'] ?? false,
-            'written_work2_submitted' => $dataN['documents']['written2'] ?? false,
-            'alternative_work_submitted' => $dataN['documents']['singleWritten'] ?? false,
-            'portfolio_submitted' => $dataN['documents']['portfolio'] ?? false,
-            'english_test_submitted' => $dataN['documents']['englishTest'] ?? false,
-            'gre_submitted' => $dataN['documents']['gre'] ?? false,
-            'waiver_letter_submitted' => $dataN['documents']['waiverLetter'] ?? false,
-            'scholarship_statement' => $dataN['documents']['scholarshipSupport'] ?? false,
-            'scholarship_statements_count' => $dataN['numScholarships'] ?? 0,
-        ]);
+        //     // Additional documents
+        //     'written_work1_submitted' => $dataN['documents']['written1'] ?? false,
+        //     'written_work2_submitted' => $dataN['documents']['written2'] ?? false,
+        //     'alternative_work_submitted' => $dataN['documents']['singleWritten'] ?? false,
+        //     'portfolio_submitted' => $dataN['documents']['portfolio'] ?? false,
+        //     'english_test_submitted' => $dataN['documents']['englishTest'] ?? false,
+        //     'gre_submitted' => $dataN['documents']['gre'] ?? false,
+        //     'waiver_letter_submitted' => $dataN['documents']['waiverLetter'] ?? false,
+        //     'scholarship_statement' => $dataN['documents']['scholarshipSupport'] ?? false,
+        //     'scholarship_statements_count' => $dataN['numScholarships'] ?? 0,
+        // ]);
+        $formsN = new FormsN();
+        $formsN->form_id = $form->id;
+        // handle each file manually
+        if ($file = $request->file('transcript')) {
+            $formsN->transcripts_submitted = true;
+            $formsN->file_transcripts = $file->store("documents/{$form->id}", 'public');
+        } else {
+            $formsN->transcripts_submitted = false;
+        }
+        if ($file = $request->file('cv')) {
+            $formsN->cv_submitted = true;
+            $formsN->file_cv = $file->store("documents/{$form->id}", 'public');
+        } else {
+            $formsN->cv_submitted = false;
+        }
+        if ($file = $request->file('statement')) {
+            $formsN->statement_submitted = true;
+            $formsN->file_statement = $file->store("documents/{$form->id}", 'public');
+        } else {
+            $formsN->statement_submitted = false;
+        }
+        if ($file = $request->file('written1')) {
+            $formsN->written_work1_submitted = true;
+            $formsN->file_written1 = $file->store("documents/{$form->id}", 'public');
+        } else {
+            $formsN->written_work1_submitted = false;
+        }
+        if ($file = $request->file('written2')) {
+            $formsN->written_work2_submitted = true;
+            $formsN->file_written2 = $file->store("documents/{$form->id}", 'public');
+        } else {
+            $formsN->written_work2_submitted = false;
+        }
+        if ($file = $request->file('singleWritten')) {
+            $formsN->alternative_work_submitted = true;
+            $formsN->file_work = $file->store("documents/{$form->id}", 'public');
+        } else {
+            $formsN->alternative_work_submitted = false;
+        }
+        if ($file = $request->file('portfolio')) {
+            $formsN->portfolio_submitted = true;
+            $formsN->file_portfolio = $file->store("documents/{$form->id}", 'public');
+        } else {
+            $formsN->portfolio_submitted = false;
+        }
+        if ($file = $request->file('englishTest')) {
+            $formsN->english_test_submitted = true;
+            $formsN->file_english_test = $file->store("documents/{$form->id}", 'public');
+        } else {
+            $formsN->english_test_submitted = false;
+        }
+        if ($file = $request->file('gre')) {
+            $formsN->gre_submitted = true;
+            $formsN->file_gre = $file->store("documents/{$form->id}", 'public');
+        } else {
+            $formsN->gre_submitted = false;
+        }
+        if ($file = $request->file('waiverLetter')) {
+            $formsN->waiver_letter_submitted = true;
+            $formsN->file_waiver = $file->store("documents/{$form->id}", 'public');
+        } else {
+            $formsN->waiver_letter_submitted = false;
+        }
+        if ($file = $request->file('scholarshipSupport')) {
+            $formsN->scholarship_statement  = true;
+            $formsN->file_scholarship = $file->store("documents/{$form->id}", 'public');
+        } else {
+            $formsN->scholarship_statement  = false;
+        }
+        $formsN->scholarship_statements_count = $dataN['numScholarships'];
+        $formsN->save(); // save to db
 
         $dataO = $data['sectionO'] ?? [];
         $formsO = FormsO::create([
@@ -320,10 +397,13 @@ class FormsController extends Controller
         $dataQ = $data['sectionQ'] ?? [];
         $formsQ = FormsQ::create([
             'form_id' => $form->id,
-            'file_signature' => $dataQ['declaration']['signatureUploaded'] ?? false,
+            'file_signature' => null,
             'declaration_date' => $dataQ['declaration']['date'] ?? null,
             'declaration_name' => $dataQ['declaration']['printedName'] ?? null,
         ]);
+        if ($file = $request->file('signature')) {
+            $formsQ->file_signature = $file->store("signatures/{$form->id}", 'public');
+        }
 
         return response()->json([
             'message' => 'Form created successfully',
