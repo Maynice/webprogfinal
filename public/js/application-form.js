@@ -109,22 +109,20 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function getSectionCData() {
         return {
-            personalDetails: {
-                givenName: document.getElementById('givenName')?.value,
-                preferredName: document.getElementById('preferredName')?.value,
-                middleName: document.getElementById('middleName')?.value,
-                familyName: document.getElementById('familyName')?.value,
-                previousFamilyName: document.getElementById('previousFamilyName')?.value,
-                title: document.getElementById('title')?.value,
-                sex: document.querySelector('input[name="sex"]:checked')?.value,
-                dob: document.getElementById('dob')?.value,
-                previousGivenName: document.getElementById('previousGivenName')?.value,
-                nameChangeDates: {
-                    familyFrom: document.getElementById('previousFamilyFrom')?.value,
-                    familyTo: document.getElementById('previousFamilyTo')?.value,
-                    givenFrom: document.getElementById('previousGivenFrom')?.value,
-                    givenTo: document.getElementById('previousGivenTo')?.value
-                }
+            givenName: document.getElementById('givenName')?.value,
+            preferredName: document.getElementById('preferredName')?.value,
+            middleName: document.getElementById('middleName')?.value,
+            familyName: document.getElementById('familyName')?.value,
+            previousFamilyName: document.getElementById('previousFamilyName')?.value,
+            title: document.getElementById('title')?.value,
+            sex: document.querySelector('input[name="sex"]:checked')?.value,
+            dob: document.getElementById('dob')?.value,
+            previousGivenName: document.getElementById('previousGivenName')?.value,
+            nameChangeDates: {
+                familyFrom: document.getElementById('previousFamilyFrom')?.value,
+                familyTo: document.getElementById('previousFamilyTo')?.value,
+                givenFrom: document.getElementById('previousGivenFrom')?.value,
+                givenTo: document.getElementById('previousGivenTo')?.value
             }
         };
     }
@@ -430,6 +428,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // section L
             const waiverFile = document.getElementById('waiverFile')?.files[0] || null;
             if (waiverFile) {
+                console.log('waiver ok')
                 fd.append('waiver', waiverFile);
             }
 
@@ -490,6 +489,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // section Q
             const signatureFile = document.getElementById('signature-upload')?.files[0] || null;
             if (signatureFile) {
+                console.log('signature ok')
                 fd.append('signature', signatureFile);
             }
 

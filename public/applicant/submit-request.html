@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Upload Revision File</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container py-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Upload Revision File</h2>
+            <a id="back-btn" href="#" class="btn btn-secondary">&larr; Back</a>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="mb-4">
+                    <h5>Revision Request Info</h5>
+                    <p id="request-info" class="text-muted">Loading...</p>
+                </div>
+
+                <form id="upload-form" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="file" class="form-label">Upload Your File</label>
+                        <input type="file" name="file" id="file" class="form-control" required />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                </form>
+
+                <div id="status" class="mt-3"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/api.js"></script>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const requestId = params.get("request_id");
+
+        if (!requestId) {
+            document.getElementById("request-info").innerHTML = '<div class="alert alert-warning">Missing request ID.</div>';
+            document.getElementById("upload-form").style.display = "none";
+        } else {
+            // set back button to preious page
+            document.getElementById("back-btn").addEventListener("click", () => window.history.back());
+
+            async function fetchRequestInfo() {
+                try {
+                    // fill request info
+                    const request = await API.request(`/submissions/applicant/request/${requestId}`);
+                    console.log(request[0])
+                    
+                    if (request && request[0]?.info) {
+                        document.getElementById("request-info").textContent = request[0].info;
+                    } else {
+                        document.getElementById("request-info").innerHTML = '<div class="alert alert-info">No info found.</div>';
+                    }
+                } catch (err) {
+                    console.error(err);
+                    document.getElementById("request-info").innerHTML = '<div class="alert alert-danger">Failed to load request info.</div>';
+                }
+            }
+
+            fetchRequestInfo();
+
+            document.getElementById("upload-form").addEventListener("submit", async (e) => {
+                e.preventDefault();
+
+                const formData = new FormData();
+                const fileInput = document.getElementById("file");
+
+                if (!fileInput.files.length) {
+                    document.getElementById("status").innerHTML = '<div class="alert alert-warning">Please select a file.</div>';
+                    return;
+                }
+
+                formData.append("file", fileInput.files[0]);
+
+                try {
+                    const response = await fetch("/submissions/applicant/request/${requestId}", {
+                        method: "POST",
+                        body: formData,
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    });
+
+                    document.getElementById("status").innerHTML = '<div class="alert alert-success">File uploaded successfully!</div>';
+                    fileInput.value = ""; // Clear file input
+                } catch (err) {
+                    console.error(err);
+                    document.getElementById("status").innerHTML = '<div class="alert alert-danger">Failed to upload file.</div>';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

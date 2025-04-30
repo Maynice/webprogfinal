@@ -154,7 +154,7 @@ class FormsController extends Controller
         $accomDetails = $dataG['accompanyingDetails'] ?? [];
         $formsG = FormsG::create([
             'form_id' => $form->id,
-            'intends_college_accom' => $dataG['requiresAccommodation'] ?? false,
+            'intends_college_accom' => $dataG['requiresAccommodation'] ?? 'no',
             'accompanying_adults_count' => $accomDetails['adults'] ?? 0,
         ]);
         if (!empty($accomDetails['children'])) {
@@ -235,7 +235,7 @@ class FormsController extends Controller
         ]);
 
         $dataL = $data['sectionL'] ?? [];
-        $formsL = FormsL::create([
+        $formsL = new FormsL([
             'form_id' => $form->id,
             'test_type' => $dataL['englishTest']['testType'] ?? null,
             'test_date' => $dataL['englishTest']['dateTaken'] ?? null,
@@ -249,8 +249,8 @@ class FormsController extends Controller
         ]);
         if ($waiver = $request->file('waiver')) {
             $formsL->file_waiver = $waiver->store("waivers/{$form->id}", 'public');
-            $formsL->save();
         }
+        $formsL->save();
         foreach ($dataL['otherLanguages'] as $language) {
             FormsLLang::create([
                 'form_id' => $form->id,
@@ -265,7 +265,7 @@ class FormsController extends Controller
         $dataM = $data['sectionM'] ?? [];
         $formsM = FormsM::create([
             'form_id' => $form->id,
-            'has_funding_info' => $dataM['fundingSources'] ? 1 : 0,
+            'has_funding_info' => $dataM['alternativeFunding'] ? 1 : 0,
             'applies_studentship' => $dataM['applyingForStudentship'] ?? null,
             'studentship_code' => $dataM['studentshipReferenceCode'] ?? null,
             'scholarship_hill' => $dataM['oxfordScholarships']['hillFoundation'] ?? 0,
@@ -288,24 +288,6 @@ class FormsController extends Controller
         }
 
         $dataN = $data['sectionN'] ?? [];
-        // $formsN = FormsN::create([
-        //     'form_id' => $form->id,
-        //     // Mandatory documents
-        //     'transcripts_submitted' => $dataN['documents']['transcript'] ?? false,
-        //     'cv_submitted' => $dataN['documents']['cv'] ?? false,
-        //     'statement_submitted' => $dataN['documents']['statement'] ?? false,
-            
-        //     // Additional documents
-        //     'written_work1_submitted' => $dataN['documents']['written1'] ?? false,
-        //     'written_work2_submitted' => $dataN['documents']['written2'] ?? false,
-        //     'alternative_work_submitted' => $dataN['documents']['singleWritten'] ?? false,
-        //     'portfolio_submitted' => $dataN['documents']['portfolio'] ?? false,
-        //     'english_test_submitted' => $dataN['documents']['englishTest'] ?? false,
-        //     'gre_submitted' => $dataN['documents']['gre'] ?? false,
-        //     'waiver_letter_submitted' => $dataN['documents']['waiverLetter'] ?? false,
-        //     'scholarship_statement' => $dataN['documents']['scholarshipSupport'] ?? false,
-        //     'scholarship_statements_count' => $dataN['numScholarships'] ?? 0,
-        // ]);
         $formsN = new FormsN();
         $formsN->form_id = $form->id;
         // handle each file manually
@@ -397,7 +379,7 @@ class FormsController extends Controller
         ]);
 
         $dataQ = $data['sectionQ'] ?? [];
-        $formsQ = FormsQ::create([
+        $formsQ = new FormsQ([
             'form_id' => $form->id,
             'file_signature' => null,
             'declaration_date' => $dataQ['declaration']['date'] ?? null,
@@ -406,10 +388,71 @@ class FormsController extends Controller
         if ($file = $request->file('signature')) {
             $formsQ->file_signature = $file->store("signatures/{$form->id}", 'public');
         }
+        $formsQ->save();
 
         return response()->json([
             'message' => 'Form created successfully',
             'form_id' => $form->id
+        ]);
+    }
+
+    public function get(Request $request, $form_id)
+    {
+        $submission = Submission::where('active_form_id', $form_id)->first();
+
+        if (!$request->user()) {
+            return response()->json(['error' => 'Forbidden'], 403);
+        }
+        else if ($request->user()->role === 'reviewer') {
+            // reviewer can only access their own form
+            if ($request->user()->id !== $submission->reviewer_id)
+            {
+                return response()->json(['error' => 'Forbidden'], 403);
+            }
+        }
+        else if ($request->user()->role === 'applicant') {
+            // applicant can only access their own form
+            if ($request->user()->id !== $submission->applicant_id)
+            {
+                return response()->json(['error' => 'Forbidden'], 403);
+            }
+        }
+
+        $formA = FormsA::where('form_id', $form_id)->first();
+        $formB = FormsB::where('form_id', $form_id)->first();
+        $formC = FormsC::where('form_id', $form_id)->first();
+        $formD = FormsD::where('form_id', $form_id)->first();
+        $formE = FormsE::where('form_id', $form_id)->first();
+        $formF = FormsF::where('form_id', $form_id)->first();
+        $formG = FormsG::where('form_id', $form_id)->with('children')->first();
+        $formH = FormsHReferee::where('form_id', $form_id)->get();
+        $formI = FormsI::where('form_id', $form_id)->with(['education', 'educationUk'])->first();
+        $formJ = FormsJ::where('form_id', $form_id)->first();
+        $formK = FormsK::where('form_id', $form_id)->first();
+        $formL = FormsL::where('form_id', $form_id)->with('languages')->first();
+        $formM = FormsM::where('form_id', $form_id)->with('fundings')->first();
+        $formN = FormsN::where('form_id', $form_id)->first();
+        $formO = FormsO::where('form_id', $form_id)->first();
+        $formP = FormsP::where('form_id', $form_id)->first();
+        $formQ = FormsQ::where('form_id', $form_id)->first();
+        return response()->json([
+            'forms_a' => $formA,
+            'forms_b' => $formB,
+            'forms_c' => $formC,
+            'forms_d' => $formD,
+            'forms_e' => $formE,
+            'forms_f' => $formF,
+            'forms_g' => $formG,
+            'forms_h_referee' => $formH,
+            'forms_i' => $formI,
+            'forms_j' => $formJ,
+            'forms_k' => $formK,
+            'forms_l' => $formL,
+            'forms_m' => $formM,
+            'forms_n' => $formN,
+            'forms_o' => $formO,
+            'forms_p' => $formP,
+            'forms_q' => $formQ,
         ]);
     }
 }

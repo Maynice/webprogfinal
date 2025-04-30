@@ -18,6 +18,6 @@ class FormsI extends Model
     ];
 
     public function form() { return $this->belongsTo(Form::class); }
-    public function education() { return $this->hasMany(FormsIEducation::class); }
-    public function educationUK() { return $this->hasMany(FormsIEducationUK::class); }
+    public function education() { return $this->hasMany(FormsIEducation::class, 'form_id', 'form_id'); }
+    public function educationUk() { return $this->hasMany(FormsIEducationUK::class, 'form_id', 'form_id'); }
 }

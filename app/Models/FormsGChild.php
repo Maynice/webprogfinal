@@ -15,5 +15,5 @@ class FormsGChild extends Model
         'dob',
     ];
 
-    public function form() { return $this->belongsTo(Form::class, 'form_id'); }
+    public function forms_g() { return $this->belongsTo(FormsG::class, 'form_id'); }
 }

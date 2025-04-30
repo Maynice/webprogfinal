@@ -23,6 +23,7 @@ return new class extends Migration
         Schema::create('requests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('submission_id')->constrained()->onDelete('cascade');
+            $table->string('info')->nullable();
             $table->string('file')->nullable();
             $table->timestamps();
         });
@@ -139,7 +140,7 @@ return new class extends Migration
 
         Schema::create('forms_g_children', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('form_id')->references('id')->on('forms')->onDelete('cascade');
+            $table->foreignId('form_id')->references('form_id')->on('forms_g')->onDelete('cascade');
             $table->string('sex')->nullable();
             $table->date('dob')->nullable();
         });
@@ -164,7 +165,7 @@ return new class extends Migration
 
         Schema::create('forms_i_education', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('form_id')->references('id')->on('forms')->onDelete('cascade');
+            $table->foreignId('form_id')->references('form_id')->on('forms_i')->onDelete('cascade');
             $table->string('name')->nullable();
             $table->date('start')->nullable();
             $table->date('end')->nullable();
@@ -175,7 +176,7 @@ return new class extends Migration
 
         Schema::create('forms_i_education_uk', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('form_id')->references('id')->on('forms')->onDelete('cascade');
+            $table->foreignId('form_id')->references('form_id')->on('forms_i')->onDelete('cascade');
             $table->string('name')->nullable();
             $table->date('start')->nullable();
             $table->date('end')->nullable();
@@ -219,7 +220,7 @@ return new class extends Migration
 
         Schema::create('forms_l_lang', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('form_id')->references('id')->on('forms')->onDelete('cascade');
+            $table->foreignId('form_id')->references('form_id')->on('forms_l')->onDelete('cascade');
             $table->string('name')->nullable();
             $table->string('reading')->nullable();
             $table->string('writing')->nullable();
@@ -243,7 +244,7 @@ return new class extends Migration
 
         Schema::create('forms_m_funding', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('form_id')->references('id')->on('forms')->onDelete('cascade');
+            $table->foreignId('form_id')->references('form_id')->on('forms_m')->onDelete('cascade');
             $table->string('source')->nullable();
             $table->integer('amount')->nullable();
             $table->string('period')->nullable();

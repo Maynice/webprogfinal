@@ -23,6 +23,7 @@
                         <th>Reviewer Email</th>
                         <th>Assign Reviewer</th>
                         <th>Status</th>
+                        <th>Requests</th>
                         <th>Form</th>
                     </tr>
                 </thead>
@@ -93,6 +94,13 @@
                         // Status Dropdown
                         const tdStatus = createStatusDropdown(item, tr);
                         tr.appendChild(tdStatus);
+
+                        // requests
+                        const tdRevision = document.createElement("td");
+                        tdRevision.innerHTML = `
+                            <a href="requests.html?submission_id=${item.id}" class="btn btn-primary btn-sm">View</a>
+                        `;
+                        tr.appendChild(tdRevision)
 
                         // Form Column (assuming placeholder)
                         tr.appendChild(td("View Form"));

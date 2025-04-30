@@ -23,5 +23,5 @@ class FormsL extends Model
     ];
 
     public function form() { return $this->belongsTo(Form::class); }
-    public function languages() { return $this->hasMany(FormsLLang::class); }
+    public function languages() { return $this->hasMany(FormsLLang::class, 'form_id', 'form_id'); }
 }

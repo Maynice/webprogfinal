@@ -1,0 +1,1607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Graduate Application</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #002147;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .form-header {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #cba344;
+        }
+        .btn-custom {
+            background: #e7ce92;
+            border: none;
+            padding: 10px 20px;
+            width: 100%;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            transition: background 0.3s;
+            font-weight: bolder;
+        }
+        .btn-custom:hover {
+            background: #e7a711;
+        }
+        .form-control[disabled], .form-control[readonly] {
+            background-color: #f8f9fa;
+            opacity: 1;
+            border: 1px solid #ced4da;
+        }
+        .form-check-input[disabled] + .form-check-label {
+            color: #6c757d;
+        }
+        .view-only-value {
+            padding: 0.375rem 0.75rem;
+            margin-bottom: 1rem;
+            background-color: #f8f9fa;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+            min-height: 38px;
+        }
+        .required {
+    color: red;
+    margin-left: 3px;
+}
+    </style>
+</head>
+<body>
+    <div class="text-center mb-4">
+        <img src="/images/circlet.png" 
+             alt="Oxford University Logo" 
+             style="max-width: 100px;">
+    </div>
+
+    <!-- SECTION A -->
+    <div class="form-container">
+        <div class="form-header">Section A: About Your Course</div><br>
+        <p style="background-color: #f0eccd; padding: 10px; border-radius: 5px;">
+            This is a read-only view of the submitted application form.
+        </p>
+        
+        <div class="mb-3">
+            <label class="form-label">(i) Course code:</label>
+            <div id="courseCode" class="view-only-value"></div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">(ii) Title of the Course:</label>
+            <div id="courseTitle" class="view-only-value"></div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">(iii) Proposed field and title of research project:</label>
+            <div id="researchField" class="view-only-value" style="min-height: 100px;"></div>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label">Proposed Supervisor(s):</label>
+            <div id="supervisor" class="view-only-value"></div>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label">(iv) Unavailable dates for interview or visit:</label>
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="form-label">From:</label>
+                    <div id="unavailableDatesStart" class="view-only-value"></div>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">To:</label>
+                    <div id="unavailableDatesEnd" class="view-only-value"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label">(v) Intend to apply for a research degree after completing this course:</label>
+            <div id="researchIntent" class="view-only-value"></div>
+        </div>
+    </div>
+
+    <!-- SECTION B -->
+    <div class="form-container">
+        <div class="form-header">Section B: College Preference</div>
+        <div class="mb-3">
+            <label class="form-label">College preference:</label>
+            <div id="collegePreference" class="view-only-value"></div>
+        </div>
+    </div>
+
+    <!-- SECTION C -->
+    <div class="form-container">
+        <div class="form-header">Section C: Personal Details</div><br>
+        
+        <div class="mb-3">
+            <label class="form-label">Given Name (Forename):</label>
+            <div id="givenName" class="view-only-value"></div>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label">Preferred Name:</label>
+            <div id="preferredName" class="view-only-value"></div>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label">Middle Name(s):</label>
+            <div id="middleName" class="view-only-value"></div>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label">Family Name (Surname):</label>
+            <div id="familyName" class="view-only-value"></div>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label">Title:</label>
+            <div id="title" class="view-only-value"></div>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label">Sex:</label>
+            <div id="sex" class="view-only-value"></div>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label">Date of Birth:</label>
+            <div id="dob" class="view-only-value"></div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Previous family name (Surname):</label>
+            <div id="previousFamilyName" class="view-only-value"></div>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label">Effective Dates (dd/mm/yyyy) for previous family name:</label>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="previousFamilyFrom" class="form-label">From:</label>
+                    <div id="previousFamilyFrom" class="view-only-value"></div>
+                </div>
+                <div class="col-md-6">
+                    <label for="previousFamilyTo" class="form-label">To:</label>
+                    <div id="previousFamilyTo" class="view-only-value"></div>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Effective Dates (dd/mm/yyyy) for previous given name:</label>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="previousGivenFrom" class="form-label">From:</label>
+                    <div id="previousGivenFrom" class="view-only-value"></div>
+                </div>
+                <div class="col-md-6">
+                    <label for="previousGivenTo" class="form-label">To:</label>
+                    <div id="previousGivenTo" class="view-only-value"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- SECTION D -->
+    <div class="form-container">
+        <div class="form-header">Section D: Contact Information</div><br>
+
+        <h5>Home Address</h5>
+        <div class="mb-3">
+            <label for="homeAddress" class="form-label">Home Address<span class="required">*</span>:</label>
+            <div id="homeAddress" class="view-only-value"></div>
+        </div>
+        <div class="mb-3">
+            <label for="homeCity" class="form-label">City<span class="required">*</span>:</label>
+            <div id="homeCity" class="view-only-value"></div>
+        </div>
+        <div class="mb-3">
+            <label for="homePostcode" class="form-label">Postcode/ZIP Code<span class="required">*</span>:</label>
+            <div id="homePostcode" class="view-only-value"></div>
+        </div>
+        <div class="mb-3">
+            <label for="homeState" class="form-label">State<span class="required">*</span>:</label>
+            <div id="homeState" class="view-only-value"></div>
+        </div>
+        <div class="mb-3">
+            <label for="homeCountry" class="form-label">Country<span class="required">*</span>:</label>
+            <div id="homeCountry" class="view-only-value"></div>
+        </div>
+
+        <h5>Correspondence Address</h5>
+        <div class="mb-3">
+            <label for="correspondenceAddress" class="form-label">Correspondence Address<span class="required">*</span>:</label>
+            <div id="correspondenceAddress" class="view-only-value"></div>
+        </div>
+        <div class="mb-3">
+            <label for="correspondenceCity" class="form-label">City<span class="required">*</span>:</label>
+            <div id="correspondenceCity" class="view-only-value"></div>
+        </div>
+        <div class="mb-3">
+            <label for="correspondencePostcode" class="form-label">Postcode/ZIP Code<span class="required">*</span>:</label>
+            <div id="correspondencePostcode" class="view-only-value"></div>
+        </div>
+        <div class="mb-3">
+            <label for="correspondenceState" class="form-label">State<span class="required">*</span>:</label>
+            <div id="correspondenceState" class="view-only-value"></div>
+        </div>
+        <div class="mb-3">
+            <label for="correspondenceCountry" class="form-label">Country<span class="required">*</span>:</label>
+            <div id="correspondenceCountry" class="view-only-value"></div>
+        </div>
+
+        <h5>Effective Dates</h5>
+        <div class="mb-3">
+            <label for="effectiveFrom" class="form-label">From<span class="required">*</span>:</label>
+            <div id="effectiveFrom" class="view-only-value"></div>
+        </div>
+        <div class="mb-3">
+            <label for="effectiveTo" class="form-label">To<span class="required">*</span>:</label>
+            <div id="effectiveTo" class="view-only-value"></div>
+        </div>
+
+        <h5>Telephone</h5>
+                <div class="mb-3">
+                    <label for="phoneNumber" class="form-label">Phone Number<span class="required">*</span>:</label>
+                    <div class="d-flex gap-2">
+                        <div id="phoneNumber" class="view-only-value col-6"></div>
+                        <div id="areaCode" class="view-only-value col-6"></div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="altPhoneNumber" class="form-label">Alternative Phone Number:</label>
+                    <div class="d-flex gap-2">
+                        <div id="altPhoneNumber" class="view-only-value col-6"></div>
+                        <div id="altAreaCode" class="view-only-value col-6"></div>
+                    </div>
+                </div>
+    </div>
+
+    <!-- SECTION E -->
+    <div class="form-container">
+        <div class="form-header">Section E: Nominated Third Party</div><br>
+        <form>
+          <div id="nomineeDetails">
+            <div class="mb-3">
+              <label for="nomineeName" class="form-label">Name of nominated third party:</label>
+              <div id="nomineeName" class="view-only-value"></div>
+            </div>
+      
+            <div class="mb-3">
+              <label for="nomineeEmail" class="form-label">Email address of nominated third party:</label>
+              <div id="nomineeEmail" class="view-only-value"></div>
+            </div>
+      
+            <div class="mb-3">
+              <label for="nomineeBirth" class="form-label">Date of birth of nominated third party:</label>
+              <div id="nomineeBirth" class="view-only-value"></div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- SECTION F -->
+      <div class="form-container">
+
+        <div class="form-header">Section F: Nationality</div><br>
+        <form>
+            <div class="mb-3">
+                <label for="birthCountry" class="form-label">COUNTRY OF BIRTH<span class="required">*</span>:</label>
+                <div id="birthCountry" class="view-only-value"></div>
+            </div>
+    
+            <div class="mb-3">
+                <label class="form-label">COUNTRY OF NATIONALITY/CITIZENSHIP<span class="required">*</span>:</label>
+                <div class="table-responsive mb-3">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Nationality</th>
+                          <th>Start Date of Nationality (dd/mm/yyyy)</th>
+                          <th>Passport Number</th>
+                          <th>Country Of Issue</th>
+                          <th>Passport Expiry Date <br> (dd/mm/yyyy)</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                            <td><div id="nationality1" class="view-only-value"></div></td>
+                            <td><div id="nationalityDate1" class="view-only-value"></div></td>
+                            <td><div id="passportNumber1" class="view-only-value"></div></td>
+                            <td><div id="issueCountry1" class="view-only-value"></div></td>
+                            <td><div id="passportExpiry1" class="view-only-value"></div></td>
+                        </tr>
+                  
+                        <!-- Dual Nationality Radio Button -->
+                        <tr>
+                          <td colspan="5">
+                            <div class="mt-2">
+                              <label class="form-label mb-1">Dual National?</label>
+                            </div>
+                          </td>
+                        </tr>
+                  
+                        <!-- Second Nationality Row (Hidden by Default) -->
+                        <tr id="secondNationalityRow">
+                            <td><div id="nationality2" class="view-only-value"></div></td>
+                            <td><div id="nationalityDate2" class="view-only-value"></div></td>
+                            <td><div id="passportNumber2" class="view-only-value"></div></td>
+                            <td><div id="issueCountry2" class="view-only-value"></div></td>
+                            <td><div id="passportExpiry2" class="view-only-value"></div></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+            </div>
+            
+            <div class="mb-3">
+                <label class="form-label">Do you expect to require a visa to enter the UK for your study?<span class="required">*</span></label>
+                <div class="d-flex gap-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="requireVisa" id="yesVisa" value="yes" disabled>
+                        <label class="form-check-label" for="yesVisa">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="requireVisa" id="noVisa" value="no" disabled>
+                        <label class="form-check-label" for="noVisa">No</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="requireVisa" id="uncertainVisa" value="uncertain" disabled>
+                        <label class="form-check-label" for="uncertainVisa">Uncertain</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section that should only appear when 'Yes' is selected -->
+            <div id="visaDetailsContainer">
+                <div class="mb-3">
+                    <label for="currentResidence" class="form-label"><h5>Current Country of Ordinary Residence<span class="required">*</span></h5></label>
+                    <div id="currentResidence" class="view-only-value"></div>
+                </div>
+            
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="fromDate" class="form-label">FROM (dd/mm/yyyy)</label>
+                        <div id="currfromDateentResidence" class="view-only-value"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="toDate" class="form-label">TO (dd/mm/yyyy)</label>
+                        <div id="toDate" class="view-only-value"></div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label"><br>I am an EU national resident in the UK for the main purpose of full-time education<span class="required">*</span></label>
+                    <div class="d-flex gap-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="euNationalEducation" id="yesEuEducation" value="yes" disabled>
+                            <label class="form-check-label" for="yesEuEducation">Yes</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="euNationalEducation" id="noEuEducation" value="no" disabled>
+                            <label class="form-check-label" for="noEuEducation">No</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="mb-3">
+                            <label for="previousResidence" class="form-label"><h5>Previous Country of Residence</h5></label>
+                            <div id="previousResidence" class="view-only-value"></div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="prevFromDate" class="form-label">FROM (dd/mm/yyyy)</label>
+                                <div id="prevFromDate" class="view-only-value"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="prevToDate" class="form-label">TO (dd/mm/yyyy)</label>
+                                <div id="prevToDate" class="view-only-value"></div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                        
+                <div class="mb-3">
+                    <label class="form-label">If you are not a UK or EU Citizen but you are currently living in the UK, do you have indefinite leave to remain status (which has been entered into your passport)?</label>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="indefiniteLeave" id="yesIndefiniteLeave" value="yes" disabled>
+                                <label class="form-check-label" for="yesIndefiniteLeave">Yes</label>
+                            <br>
+                                <input class="form-check-input" type="radio" name="indefiniteLeave" id="noIndefiniteLeave" value="no" disabled>
+                                <label class="form-check-label" for="noIndefiniteLeave">No</label>
+                            </div>
+                        </div>
+                        <div class="col-md-8" id="grantedDateContainer" style="display: none;">
+                            <label for="grantedDate" class="form-label">If yes, when was it granted? <span class="required">*</span></label>
+                            <div id="grantedDate" class="view-only-value"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</div>
+
+        </form>
+    </div>
+
+    <!-- SECTION G -->
+<div class="form-container">
+    <script>
+        function toggleAccommodationQuestions() {
+            var yesOption = document.getElementById("accommodationYes");
+            var accommodationDetails = document.getElementById("accommodationDetails");
+            if (yesOption.checked) {
+                accommodationDetails.style.display = "block";
+            } else {
+                accommodationDetails.style.display = "none";
+            }
+        }
+    </script>
+         <h2 class="form-header">Section G: Accommodation</h2>
+         
+         <div class="mb-3">
+    <label class="form-label">Do you intend to apply for accommodation owned by the college? <span class="required">*</span></label>
+    <div class="d-flex gap-3">
+        <div class="form-check">
+            <input class="form-check-input" type="radio" id="accommodationYes" name="accommodation" value="yes" onclick="toggleAccommodationQuestions()" disabled>
+            <label class="form-check-label" for="accommodationYes">Yes</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" id="accommodationNo" name="accommodation" value="no" onclick="toggleAccommodationQuestions()" disabled>
+            <label class="form-check-label" for="accommodationNo">No</label>
+        </div>
+    </div>
+</div>
+<div id="accommodationDetails" style="display: none;">
+    <br>
+    <div class="mb-3">
+        <label class="form-label">Children:</label>
+
+        <div id="childrenContainer"></div>
+    </div>
+
+    <div class="mb-3">
+        <label for="accompanying_adults" class="form-label">Excluding yourself, how many adults will be accompanying you? <span class="required">*</span></label>
+        <div id="accompanying_adults" class="view-only-value"></div>
+    </div>
+</div>
+</div> </div>
+
+<!-- SECTION H -->
+<div class="form-container">
+    <h4 class="form-header">Section H: Referees Information</h4><br>
+    
+    <!-- Referee Section -->
+        
+        <div id="refereeContainer"></div>
+    
+    </div>
+
+<!-- SECTION I -->
+<div class="form-container">
+    <div class="form-header">Section I: Details of Current & Previous Education</div><br>
+    <form>
+        <h5>Education History<span class="required">*</span></h5>
+
+       <!-- EDUCATION HISTORY SECTION -->
+<div id="educationSection">
+    <div id="educationContainer"></div>
+
+</div>
+
+<h5>UK Education History        </h5>
+
+<!-- UK EDUCATION HISTORY SECTION -->
+<div id="ukEducationSection">
+    <div id="ukEducationContainer"></div>
+</div>
+
+        <!-- Radio Button Logic for Incomplete/Concurrent Study -->
+        <div class="mb-3">
+            <label class="form-label">Have you undertaken degree-level study at any institution, which you have not completed, excluding any qualification you are currently working towards?<span class="required">*</span></label>
+            <div class="d-flex gap-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="incomplete_study" id="yes_incomplete" value="yes" required disabled>
+                    <label class="form-check-label" for="yes_incomplete">Yes</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="incomplete_study" id="no_incomplete" value="no" required disabled>
+                    <label class="form-check-label" for="no_incomplete">No</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-4" id="incompleteStudyDetailsCon" style="display: none;">
+            <label class="form-label">If "Yes", please state the course(s) and the institution(s) and the reason(s) the qualification was not completed.</label>
+            <div id="incompleteStudyDetails" class="view-only-value"></div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Are you planning to begin, or to continue studying for, a degree at any institution, at the same time as you would also be studying at Oxford for the course for which you are now applying?<span class="required">*</span></label>
+            <div class="d-flex gap-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="concurrent_study" id="yes_concurrent" value="yes" required disabled>
+                    <label class="form-check-label" for="yes_concurrent">Yes</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="concurrent_study" id="no_concurrent" value="no" required disabled>
+                    <label class="form-check-label" for="no_concurrent">No</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-4" id="concurrentStudyDetailsCon" style="display: none;">
+            <label class="form-label">If "Yes", please provide details of the course and the institution and how you believe it will be possible to pursue both courses at the same time.</label>
+            <div id="concurrentStudyDetails" class="view-only-value"></div>
+        </div>
+    </form>
+</div>
+
+<!-- SECTION J -->
+<div class="form-container">
+    <div class="form-header">Section J: GRE (if applicable)</div><br>
+
+<div class="mb-3">
+<p>GRE date of test:</p>
+<div id="GRE_date" class="view-only-value"></div>
+</div>
+<div class="mb-3">
+<p>Verbal score:</p>
+<div id="verbal_score" class="view-only-value"></div>
+</div>
+<div class="mb-3">
+<p>Verbal %:</p>
+<div id="verbal_percent" class="view-only-value"></div>
+</div>
+<div class="mb-3">
+<p>Quantitative score:</p>
+<div id="quantiative_score" class="view-only-value"></div>
+</div>
+<div class="mb-3">
+<p>Quantitative %:</p>
+<div id="quantiative_percent" class="view-only-value"></div>
+</div>
+<div class="mb-3">
+<p>Analytical writing score:</p>
+<div id="writing_score" class="view-only-value"></div>
+</div>
+<div class="mb-3">
+<p>Analytical writing %:</p>
+<div id="writing_percentage" class="view-only-value"></div>
+</div>
+</div>
+
+<!-- SECTION K -->
+<div class="form-container">
+    <div class="form-header">Section K: English language skills</div>
+  
+    <div class="mb-3">
+      <label class="form-label">Is English your first language?<span class="required">*</span></label>
+      <div class="d-flex gap-3">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="english_first" id="english_first_yes" value="yes" disabled>
+          <label class="form-check-label" for="english_first_yes">Yes</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="english_first" id="english_first_no" value="no" disabled>
+          <label class="form-check-label" for="english_first_no">No</label>
+        </div>
+      </div>
+    </div>
+  
+    <div class="mb-3">
+      <label class="form-label">Have you completed, or are you completing, a full-time qualification equivalent to a UK degree entirely taught and assessed in English?<span class="required">*</span></label>
+      <div class="d-flex gap-3">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="qualification" id="qualification_yes" value="yes" disabled>
+          <label class="form-check-label" for="qualification_yes">Yes</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="qualification" id="qualification_no" value="no" disabled>
+          <label class="form-check-label" for="qualification_no">No</label>
+        </div>
+      </div>
+    </div>
+  
+    <div class="mb-3">
+      <label class="form-label">Have you completed a course under a United Kingdom Tier 4 child visa?<span class="required">*</span></label>
+      <div class="d-flex gap-3">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="tier4_visa" id="tier4_yes" value="yes" disabled>
+          <label class="form-check-label" for="tier4_yes">Yes</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="tier4_visa" id="tier4_no" value="no" disabled>
+          <label class="form-check-label" for="tier4_no">No</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION L -->
+<div class="form-container">
+    <div class="form-header">Section L: English language proficiency</div><br>
+    
+    <div class="table-responsive ">
+        
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Test type (e.g. TOEFL, IELTS, etc.)</th>
+                    <th>Date taken</th>
+                    <th>Overall result</th>
+                    <th>Listening</th>
+                    <th>Reading</th>
+                    <th>Writing</th>
+                    <th>Speaking</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><div id="test_type" class="view-only-value"></div></td>
+                    <td><div id="date_taken" class="view-only-value"></div></td>
+                    <td><div id="overall_result" class="view-only-value"></div></td>
+                    <td><div id="listening_score" class="view-only-value"></div></td>
+                    <td><div id="reading_score" class="view-only-value"></div></td>
+                    <td><div id="writing_score" class="view-only-value"></div></td>
+                    <td><div id="speaking_score" class="view-only-value"></div></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+<div id="waiverUploadSection">
+    <label for="waiverFile" class="form-label">Upload supporting file:</label>
+    <br>
+    <a href="/" target="_blank" class="btn btn-outline-primary mb-3" id="waiverFile">No file attached</a>
+</div>
+
+    <h5>Knowledge of other languages</h5>
+    
+        <div>
+            <div id="languageContainer" class="table-responsive "></div>
+          </div>
+    </div>
+
+    <!-- SECTION M -->
+    <div class="form-container">
+        <div class="form-header h4 mb-4">Section M: Proposed Funding Arrangements</div><br>
+        <form>
+            <div class="mb-3">
+                <label class="form-label">Do you have information on any alternative funding arrangements?<span class="required">*</span></label>
+                <div class="d-flex gap-3 mt-2">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="alternativeFunding" id="fundingYes" value="yes" required disabled>
+                    <label class="form-check-label" for="fundingYes">Yes</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="alternativeFunding" id="fundingNo" value="no" disabled>
+                    <label class="form-check-label" for="fundingNo">No</label>
+                  </div>
+                </div>
+              </div>
+
+            <!-- Funding Table -->
+            <div id="fundingTableSection" style="display: none;">
+            <div class="table-responsive mb-3">
+                <div class="table-responsive mb-4">
+                    <table class="table table-bordered">
+                        <thead class="text-center">
+                            <tr>
+                                <th>Proposed Funding Sources (e.g., family, scholarship, government funds)</th>
+                                <th>Amount of funding per year (£)</th>
+                                <th>Period Covered (e.g., 1yr, 2yrs)</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="fundingTableBody">
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+        </div>
+            
+            <!-- Departmental Studentship Applications -->
+            <div class="mb-3">
+                <label class="form-label">Are you applying for an advertised studentship(s) competition(s)?</label>
+                <div class="d-flex gap-3 mt-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="studentshipApply" id="studentshipYes" value="yes" disabled>
+                        <label class="form-check-label" for="studentshipYes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="studentshipApply" id="studentshipNo" value="no" disabled>
+                        <label class="form-check-label" for="studentshipNo">No</label>
+                    </div>
+                </div>
+            </div>
+            
+
+            <!-- Conditional Reference Code Field -->
+            <div class="mb-3" id="referenceCodeGroup">
+                <label for="referenceCode" class="form-label">If yes, please provide the advertised reference code:</label>
+                <div id="referenceCode" class="view-only-value"></div>
+            </div>
+
+            <hr>
+
+            <!-- Oxford Scholarships -->
+            <div class="mb-3">
+                <label class="form-label fw-bold">University of Oxford Scholarships:</label>
+
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="hillFoundation" disabled>
+                    <label class="form-check-label" for="hillFoundation">
+                        Hill Foundation (<a href="https://www.graduate.ox.ac.uk/hill" target="_blank">www.graduate.ox.ac.uk/hill</a>)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="ertetgun" disabled>
+                    <label class="form-check-label" for="ertetgun">
+                        Mica and Ahmet Ertegun Postgraduate Scholarships in the Humanities<span class="required">*</span> (<a href="https://www.graduate.ox.ac.uk/ertegun" target="_blank">www.graduate.ox.ac.uk/ertegun</a>)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="ocis" disabled>
+                    <label class="form-check-label" for="ocis">
+                        Oxford Centre for Islamic Studies<span class="required">*</span> (<a href="https://www.graduate.ox.ac.uk/ocis" target="_blank">www.graduate.ox.ac.uk/ocis</a>)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="weidenfeld" disabled>
+                    <label class="form-check-label" for="weidenfeld">
+                        Weidenfeld-Hoffmann Scholarships and Leadership Programme<span class="required">*</span> (<a href="https://www.graduate.ox.ac.uk/weidenfeld" target="_blank">www.graduate.ox.ac.uk/weidenfeld</a>)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="ahrc" disabled>
+                    <label class="form-check-label" for="ahrc">
+                        AHRC: OOC DTP<span class="required">*</span> (<a href="https://www.oocdtp.ac.uk/" target="_blank">https://www.oocdtp.ac.uk/</a>)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="grandUnion" disabled>
+                    <label class="form-check-label" for="grandUnion">
+                        Grand Union DTP <span class="required">*</span> (<a href="https://www.granduniondtp.ac.uk/how-apply" target="_blank">www.granduniondtp.ac.uk/how-apply</a>)
+                    </label>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Section N: Supporting documents checklist -->
+<div class="form-container">
+    <section id="section-n">
+      <div class="form-header">Section N: Supporting documents checklist</div><br>
+  
+      <!-- MANDATORY DOCUMENTS -->
+      <fieldset>
+        <h5>Mandatory for All Courses</h5>
+  
+        <label>Transcripts:</label><br>
+        <a href="/" target="_blank" class="btn btn-outline-primary mb-3" id="transcriptUpload">No file attached</a>
+        <br>
+
+        <label>CV/Résumé:</label><br>
+        <small class="text-muted d-block">(Accepted formats: .pdf, .doc, .docx)</small>
+        <a href="/" target="_blank" class="btn btn-outline-primary mb-3" id="CVUpload">No file attached</a>
+        <br>
+        
+        <label>Statement of Purpose/Research Proposal: Must match the course-specific requirements on the 
+          <a href="https://www.graduate.ox.ac.uk/courses" target="_blank">course page</a>.
+        </label><br>
+        <small class="text-muted d-block">(Accepted formats: .pdf, .doc, .docx)</small>
+        <a href="/" target="_blank" class="btn btn-outline-primary mb-3" id="statementUpload">No file attached</a>
+      </fieldset>
+  
+      <!-- ADDITIONAL DOCUMENTS -->
+      <fieldset>
+    <h5>Additional Items That may be Mandatory for Your Application</h5> 
+        (<a href="https://www.ox.ac.uk/admissions/graduate/courses" target="_blank">Check requirements</a>)<br><br>
+  
+        <label>Written work 1</label><br>
+        <a href="/" target="_blank" class="btn btn-outline-primary mb-3" id="upload_written1">No file attached</a><br>
+  
+        <label>Written work 2</label><br>
+        <a href="/" target="_blank" class="btn btn-outline-primary mb-3" id="upload_written2">No file attached</a><br>
+  
+        <label>One longer written work (replaces two shorter)</label><br>
+        <a href="/" target="_blank" class="btn btn-outline-primary mb-3" id="upload_singleWritten">No file attached</a><br>
+  
+        <label>Portfolio/audio-visual/media/maths test/music scores</label><br>
+        <a href="/" target="_blank" class="btn btn-outline-primary mb-3" id="upload_portfolio">No file attached</a><br>
+  
+        <label>English Language Test Result (e.g. TOEFL, IELTS)</label><br>
+        <a href="/" target="_blank" class="btn btn-outline-primary mb-3" id="upload_englishTest">No file attached</a><br>
+  
+        <label>GRE admissions test certificate(s)</label><br>
+        <a href="/" target="_blank" class="btn btn-outline-primary mb-3" id="upload_gre">No file attached</a><br>
+      </fieldset>
+  
+      <!-- OTHER ITEMS -->
+      <fieldset>
+        <h5>Other items (tick as appropriate)</h5>
+        <label>English Test Waiver Letter (only if applicable)</label><br>
+        <a href="/" target="_blank" class="btn btn-outline-primary mb-3" id="upload_waiverLetter">No file attached</a><br>
+      </fieldset>
+  
+      <!-- SCHOLARSHIP SECTION -->
+      <fieldset>
+        <h5>Scholarship application(s)</h5>
+        <label>
+            Separate statement(s) for each scholarship applied for 
+          (<a href="https://www.ox.ac.uk/feesandfunding/prospectivestudents/graduate/scholarships" target="_blank">View scholarships</a>)
+        </label><br>
+        <a href="/" target="_blank" class="btn btn-outline-primary mb-3" id="upload_scholarshipSupport">No file attached</a><br>
+  
+        <label for="numScholarships">Number of scholarship applications being added:</label>
+        <div id="numScholarships" class="view-only-value"></div>
+      </fieldset>
+    </section>
+  </div>
+
+  <!-- SECTION O -->
+<div class="form-container">
+    <div class="form-header">Section O: Application Fee Payment</div>
+    <div class="mb-3">
+        <label for="paymentMethod" class="form-label">How will you pay the application fee?<span class="required">*</span></label>
+        <select class="form-select" id="paymentMethod" required disabled>
+            <option value="">Select a payment method</option>
+            <option value="card">Online Card Payment</option>
+            <option value="western_union">Western Union</option>
+            <option value="cheque">Cheque</option>
+            <option value="waiver">Fee Waiver Request</option>
+        </select>
+    </div>
+
+    <div class="mb-3" id="orderNumberField" style="display: none;">
+        <label for="orderNumber" class="form-label">Application Fee Order Number (e.g., OXF123456):</label>
+        <div id="orderNumber" class="view-only-value"></div>
+    </div>
+
+    <div id="waiverDeclaration" style="display: none;">
+        <p><strong>Application Fee Waiver:</strong></p>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="waiverCheck1" disabled>
+            <label class="form-check-label" for="waiverCheck1">I confirm that I cannot afford to pay the application fee and would not be able to apply to the University without an application fee waiver.</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="waiverCheck2" disabled>
+            <label class="form-check-label" for="waiverCheck2">I confirm that I will meet the entry requirements for my course.</label>
+        </div>
+    </div>
+</div>
+
+<!-- SECTION P -->
+<div class="form-container">
+    <div class="form-header">Section P: Final Checklist</div>
+    <div class="mb-3">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="checkCompleteForm" disabled>
+            <label class="form-check-label" for="checkCompleteForm">I have filled out all required sections of the application form.</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="checkMaterials" disabled>
+            <label class="form-check-label" for="checkMaterials">I have gathered all supporting materials required for my course.</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="checkReferences" disabled>
+            <label class="form-check-label" for="checkReferences">I have requested references from my referees and informed them of the deadline.</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="checkPayment" disabled>
+            <label class="form-check-label" for="checkPayment">I have enclosed the application fee, provided the payment order number, or requested a fee waiver.</label>
+        </div>
+    </div>
+</div>
+
+    <!-- Section Q + Submit Section -->
+
+    <!-- Submit Section -->
+        <div class="form-container">
+  <div class="form-header">Section Q: Data Protection Notice and Declaration</div>
+
+  <div class="row mb-3 align-items-end">
+    <!-- Upload Signature -->
+    <div class="col-md-6">
+      <label for="signature-upload" class="form-label d-block">
+        Upload Signature <span class="text-danger">*</span>
+        <small class="text-muted d-block">(Accepted formats: .pdf, .png, .jpg, .jpeg)</small>
+      </label>
+      <a href="/" target="_blank" class="btn btn-outline-primary mb-3" id="signature-upload">No file attached</a><br>
+    </div>
+  
+    <!-- Date -->
+    <div class="col-md-6">
+      <label for="date" class="form-label">Date <span class="text-danger">*</span></label>
+      <div id="date" class="view-only-value"></div>
+    </div>
+  </div>
+  
+  <!-- Print Name -->
+  <div class="mb-3">
+    <label for="print-name" class="form-label">Please Print Name <span class="text-danger">*</span></label>
+    <div id="print-name" class="view-only-value"></div>
+  </div>
+</div>
+</div>
+
+<script>
+    //SECTION M JAVASCRIPT
+    document.addEventListener("DOMContentLoaded", function () {
+        const tableBody = document.getElementById("fundingTableBody");
+        const addRowBtn = document.getElementById("addRowBtn");
+        const removeRowBtn = document.getElementById("removeRowBtn");
+        let rowCount = tableBody.rows.length;
+    
+        // addRowBtn.addEventListener("click", () => {
+        //     rowCount++;
+        //     const row = document.createElement("tr");
+        //     row.innerHTML = `
+        //         <td><input type="text" class="form-control" name="source${rowCount}"></td>
+        //         <td><input type="number" class="form-control" name="amount${rowCount}"></td>
+        //         <td><input type="text" class="form-control" name="period${rowCount}"></td>
+        //         <td>
+        //             <div class="form-check">
+        //                 <input type="radio" name="status${rowCount}" class="form-check-input" id="intend${rowCount}">
+        //                 <label class="form-check-label" for="intend${rowCount}">Intend to apply</label><br>
+        //                 <input type="radio" name="status${rowCount}" class="form-check-input" id="applied${rowCount}">
+        //                 <label class="form-check-label" for="applied${rowCount}">Applied for</label><br>
+        //                 <input type="radio" name="status${rowCount}" class="form-check-input" id="secured${rowCount}">
+        //                 <label class="form-check-label" for="secured${rowCount}">Firmly secured</label>
+        //             </div>
+        //         </td>
+        //     `;
+        //     tableBody.appendChild(row);
+        // });
+    
+        // removeRowBtn.addEventListener("click", () => {
+        //     if (tableBody.rows.length > 1) {
+        //         tableBody.removeChild(tableBody.lastElementChild);
+        //         rowCount--;
+        //     }
+        // });
+    
+        // Show/hide reference code field
+        const refCodeGroup = document.getElementById("referenceCodeGroup");
+        document.getElementById("studentshipYes").addEventListener("change", () => {
+            refCodeGroup.style.display = "block";
+        });
+        document.getElementById("studentshipNo").addEventListener("change", () => {
+            refCodeGroup.style.display = "none";
+        });
+    });
+    
+    // END OF SECTION M JAVASCRIPT
+    
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        const refCodeGroup = document.getElementById("referenceCodeGroup");
+    
+        // Initially hide the reference code input
+        refCodeGroup.style.display = "none";
+    
+        // Show it when "Yes" is selected
+        document.getElementById("studentshipYes").addEventListener("change", () => {
+            refCodeGroup.style.display = "block";
+        });
+    
+        // Hide it again when "No" is selected
+        document.getElementById("studentshipNo").addEventListener("change", () => {
+            refCodeGroup.style.display = "none";
+        });
+    });
+    
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        const courses = [
+            "MPhil in Development Studies",
+            "MPhil in International Relations",
+            "DPhil in Mathematics",
+            "MSc by Research in Chemistry",
+            "MSc in Artificial Intelligence",
+            "MSc in Business Analytics",
+            "MSc in Data Science",
+            "MSc in Environmental Sustainability",
+            "MSc in Genomic Medicine",
+            "MSc in Machine Learning"
+        ];
+    
+        const searchInput = document.getElementById("courseSearch");
+        const dropdown = document.getElementById("courseDropdown");
+    
+        function filterCourses(query) {
+            dropdown.innerHTML = ""; // Clear previous results
+            if (!query.trim()) {
+                dropdown.style.display = "none";
+                return;
+            }
+    
+            const filteredCourses = courses.filter(course =>
+                course.toLowerCase().includes(query.toLowerCase())
+            );
+    
+            if (filteredCourses.length === 0) {
+                dropdown.innerHTML = "<div class='dropdown-item text-muted'>No matches found</div>";
+            } else {
+                filteredCourses.forEach(course => {
+                    const item = document.createElement("div");
+                    item.classList.add("dropdown-item");
+                    item.textContent = course;
+                    item.onclick = () => {
+                        searchInput.value = course;
+                        dropdown.style.display = "none";
+                    };
+                    dropdown.appendChild(item);
+                });
+            }
+            dropdown.style.display = "block";
+        }
+    
+        // searchInput.addEventListener("keyup", () => filterCourses(searchInput.value));
+    
+        // Hide dropdown when clicking outside
+        document.addEventListener("click", (event) => {
+            if (!event.target.closest(".dropdown-container")) {
+                dropdown.style.display = "none";
+            }
+        });
+    
+        // Preference toggle logic
+        function togglePreference() {
+            const noPreference = document.getElementById("noPreference");
+            const preferenceField = document.getElementById("preferenceField");
+            const collegeInput = document.getElementById("collegePreference");
+    
+            if (noPreference.checked) {
+                preferenceField.style.display = "none";
+                collegeInput.value = ""; // Clear input
+            } else {
+                preferenceField.style.display = "block";
+            }
+        }
+    
+        document.getElementById("noPreference")?.addEventListener("change", togglePreference);
+    
+        // Email validation
+        function validateEmail(input, errorElement) {
+            if (input.value.trim() && !input.value.includes("@")) {
+                errorElement.style.display = "block";
+            } else {
+                errorElement.style.display = "none";
+            }
+        }
+    
+        const emailFields = [
+            { input: "email", error: "emailError" },
+            { input: "altEmail", error: "altEmailError" },
+            { input: "nomineeEmail", error: "nomineeEmailError" }
+        ];
+    
+        emailFields.forEach(({ input, error }) => {
+            const emailInput = document.getElementById(input);
+            const emailError = document.getElementById(error);
+    
+            if (emailInput && emailError) {
+                emailInput.addEventListener("input", () => validateEmail(emailInput, emailError));
+            }
+        });
+    });
+    function addChild() {
+            const container = document.getElementById('childrenContainer');
+    
+            const newChild = document.createElement('div');
+            newChild.className = 'row mb-2 child-entry';
+    
+            newChild.innerHTML = `
+                <div class="col-md-5">
+                    <label class="form-label">Sex:</label>
+                    <select name="child_sex" class="form-control">
+                        <option value="">-- Select --</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="col-md-5">
+                    <label class="form-label">Date of Birth:</label>
+                    <input type="date" name="child_dob" class="form-control">
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="button" class="btn btn-danger w-100 remove-btn">Remove</button>
+                </div>
+            `;
+    
+            container.appendChild(newChild);
+        }
+    
+        document.addEventListener('click', function(e) {
+            if (e.target && e.target.classList.contains('remove-btn')) {
+                const entry = e.target.closest('.child-entry');
+                if (entry) entry.remove();
+            }
+        });
+        const yesRadio = document.getElementById('yesNominate');
+      const noRadio = document.getElementById('noNominate');
+      const nomineeDetails = document.getElementById('nomineeDetails');
+    
+    //   yesRadio.addEventListener('change', () => {
+    //     nomineeDetails.style.display = 'block';
+    //   });
+    
+    //   noRadio.addEventListener('change', () => {
+    //     nomineeDetails.style.display = 'none';
+    //   });
+      function toggleWaiverUpload(show) {
+            document.getElementById('waiverUploadSection').style.display = show ? 'block' : 'none';
+        }
+        function toggleUpload(checkbox) {
+        const fieldId = "upload_" + checkbox.value;
+        const fieldDiv = document.getElementById(fieldId);
+            if (checkbox.checked) {
+          fieldDiv.innerHTML = `<input type="file" name="${checkbox.value}Upload" class="form-control" accept=".pdf,.doc,.docx">`;
+        } else {
+          fieldDiv.innerHTML = "";
+            }
+    }
+    
+    
+    </script>  
+
+    <!-- Add all other sections following the same pattern -->
+
+    <div class="form-container">
+        <a href="/dashboard.html" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+
+    <script src="/js/api.js"></script>
+    <script>
+        // This function will be called when the page loads and data is fetched from the API
+function populateFormData(data) {
+    // SECTION A: About Your Course
+    document.getElementById('courseCode').textContent = data.forms_a?.course_code || '';
+    document.getElementById('courseTitle').textContent = data.forms_a?.course_title || '';
+    document.getElementById('researchField').textContent = data.forms_a?.research_title || '';
+    document.getElementById('supervisor').textContent = data.forms_a?.reserach_spv || '';
+    document.getElementById('unavailableDatesStart').textContent = formatDate(data.forms_a?.unavailable_start) || '';
+    document.getElementById('unavailableDatesEnd').textContent = formatDate(data.forms_a?.unavailable_end) || '';
+    document.getElementById('researchIntent').textContent = data.forms_a?.is_degree || '';
+
+    // SECTION B: College Preference
+    document.getElementById('collegePreference').textContent = data.forms_b?.college_preference || '';
+
+    // SECTION C: Personal Details
+    document.getElementById('givenName').textContent = data.forms_c?.name_given || '';
+    document.getElementById('preferredName').textContent = data.forms_c?.name_preferred || '';
+    document.getElementById('middleName').textContent = data.forms_c?.name_middle || '';
+    document.getElementById('familyName').textContent = data.forms_c?.name_family || '';
+    document.getElementById('title').textContent = data.forms_c?.name_title || '';
+    document.getElementById('sex').textContent = data.forms_c?.sex || '';
+    document.getElementById('dob').textContent = formatDate(data.forms_c?.dob) || '';
+    document.getElementById('previousFamilyName').textContent = data.forms_c?.name_family_prev || '';
+    document.getElementById('previousFamilyFrom').textContent = formatDate(data.forms_c?.name_family_prev_eff_from) || '';
+    document.getElementById('previousFamilyTo').textContent = formatDate(data.forms_c?.name_family_prev_eff_to) || '';
+    document.getElementById('previousGivenFrom').textContent = formatDate(data.forms_c?.name_given_prev_eff_from) || '';
+    document.getElementById('previousGivenTo').textContent = formatDate(data.forms_c?.name_given_prev_eff_to) || '';
+
+    // SECTION D: Contact Information
+    document.getElementById('homeAddress').textContent = data.forms_d?.home_address || '';
+    document.getElementById('homeCity').textContent = data.forms_d?.home_city || '';
+    document.getElementById('homePostcode').textContent = data.forms_d?.home_postcode || '';
+    document.getElementById('homeState').textContent = data.forms_d?.home_state || '';
+    document.getElementById('homeCountry').textContent = data.forms_d?.home_country || '';
+    document.getElementById('correspondenceAddress').textContent = data.forms_d?.corr_address || '';
+    document.getElementById('correspondenceCity').textContent = data.forms_d?.corr_city || '';
+    document.getElementById('correspondencePostcode').textContent = data.forms_d?.corr_postcode || '';
+    document.getElementById('correspondenceState').textContent = data.forms_d?.corr_state || '';
+    document.getElementById('correspondenceCountry').textContent = data.forms_d?.corr_country || '';
+    document.getElementById('effectiveFrom').textContent = formatDate(data.forms_d?.corr_eff_from) || '';
+    document.getElementById('effectiveTo').textContent = formatDate(data.forms_d?.corr_eff_to) || '';
+    document.getElementById('phoneNumber').textContent = data.forms_d?.phone_number || '';
+    document.getElementById('areaCode').textContent = data.forms_d?.phone_area || '';
+    document.getElementById('altPhoneNumber').textContent = data.forms_d?.phone_alt_number || '';
+    document.getElementById('altAreaCode').textContent = data.forms_d?.phone_alt_area || '';
+
+    // SECTION E: Nominated Third Party
+    document.getElementById('nomineeName').textContent = data.forms_e?.name || '';
+    document.getElementById('nomineeEmail').textContent = data.forms_e?.email || '';
+    document.getElementById('nomineeBirth').textContent = formatDate(data.forms_e?.dob) || '';
+
+    // SECTION F: Nationality
+    document.getElementById('birthCountry').textContent = data.forms_f?.country_birth || '';
+    document.getElementById('nationality1').textContent = data.forms_f?.country_nationality || '';
+    document.getElementById('nationalityDate1').textContent = formatDate(data.forms_f?.nationality_start_date) || '';
+    document.getElementById('passportNumber1').textContent = data.forms_f?.passport_number || '';
+    document.getElementById('issueCountry1').textContent = data.forms_f?.passport_country || '';
+    document.getElementById('passportExpiry1').textContent = formatDate(data.forms_f?.passport_expiry) || '';
+    document.getElementById('nationality2').textContent = data.forms_f?.country_nationality_2 || '';
+    document.getElementById('nationalityDate2').textContent = formatDate(data.forms_f?.nationality_start_date_2) || '';
+    document.getElementById('passportNumber2').textContent = data.forms_f?.passport_number_2 || '';
+    document.getElementById('issueCountry2').textContent = data.forms_f?.passport_country_2 || '';
+    document.getElementById('passportExpiry2').textContent = formatDate(data.forms_f?.passport_expiry_2) || '';
+    
+    // Visa section
+    setRadioValue('requireVisa', data.forms_f?.requires_visa);
+    document.getElementById("visaDetailsContainer").style.display = data.forms_f?.requires_visa == "yes" ? "block" : "none";
+    document.getElementById('currentResidence').textContent = data.forms_f?.current_residence_country || '';
+    document.getElementById('currfromDateentResidence').textContent = formatDate(data.forms_f?.current_residence_from) || '';
+    document.getElementById('toDate').textContent = formatDate(data.forms_f?.current_residence_to) || '';
+    setRadioValue('euNationalEducation', data.forms_f?.is_eu_uk_education ? 'yes' : 'no');
+    document.getElementById('previousResidence').textContent = data.forms_f?.previous_residence_country || '';
+    document.getElementById('prevFromDate').textContent = formatDate(data.forms_f?.previous_residence_from) || '';
+    document.getElementById('prevToDate').textContent = formatDate(data.forms_f?.previous_residence_to) || '';
+    setRadioValue('indefiniteLeave', data.forms_f?.has_indefinite_leave ? 'yes' : 'no');
+    document.getElementById("grantedDateContainer").style.display = data.forms_f?.has_indefinite_leave == "yes" ? "block" : "none";
+    document.getElementById('grantedDate').textContent = formatDate(data.forms_f?.indefinite_leave_granted) || '';
+
+    // SECTION G: Accommodation
+    setRadioValue('accommodation', data.forms_g?.intends_college_accom ? 'yes' : 'no');
+    document.getElementById("accommodationDetails").style.display = data.forms_g?.intends_college_accom ? "block" : "none";
+    document.getElementById('accompanying_adults').textContent = data.forms_g?.accompanying_adults_count || '';
+    
+    // Populate children
+    const childrenContainer = document.getElementById('childrenContainer');
+    if (data.forms_g.children && data.forms_g.children.length > 0) {
+        data.forms_g.children.forEach(child => {
+            const childDiv = document.createElement('div');
+            childDiv.className = 'child-entry mb-2';
+            childDiv.innerHTML = `
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="view-only-value">${child.sex || ''}</div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="view-only-value">${formatDate(child.dob) || ''}</div>
+                    </div>
+                </div>
+            `;
+            childrenContainer.appendChild(childDiv);
+        });
+    }
+
+    // SECTION H: Referees Information
+    const refereeContainer = document.getElementById('refereeContainer');
+    if (data.forms_h_referee && data.forms_h_referee.length > 0) {
+        data.forms_h_referee.forEach(referee => {
+            const refereeDiv = document.createElement('div');
+            refereeDiv.className = 'mb-4 border p-3 rounded';
+            refereeDiv.innerHTML = `
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Referee title, name and role</th>
+                                <th>Institutional/professional address</th>
+                                <th>Type of reference</th>
+                                <th>Reference submission</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><div class="view-only-value">${referee.referee_name || ''}</div></td>
+                                <td><div class="view-only-value">${referee.referee_address || ''}</div></td>
+                                <td><div class="view-only-value">${referee.referee_type || ''}</div></td>
+                                <td><div class="view-only-value">${referee.referee_submission_type || ''}</div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            refereeContainer.appendChild(refereeDiv);
+        });
+    }
+
+    // SECTION I: Education History
+    const educationContainer = document.getElementById('educationContainer');
+    if (data.forms_i.education && data.forms_i.education.length > 0) {
+        data.forms_i.education.forEach(edu => {
+            const eduDiv = document.createElement('div');
+            eduDiv.className = 'education-entry mb-4';
+            eduDiv.innerHTML = `
+                <div class="table-responsive">
+                    <table class="table table-bordered mb-0">
+                        <thead>
+                            <tr>
+                                <th>University/Institution</th>
+                                <th>Start date</th>
+                                <th>Completion date</th>
+                                <th>Qualification</th>
+                                <th>Subject</th>
+                                <th>Result</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><div class="view-only-value">${edu.name || ''}</div></td>
+                                <td><div class="view-only-value">${formatDate(edu.start) || ''}</div></td>
+                                <td><div class="view-only-value">${formatDate(edu.end) || ''}</div></td>
+                                <td><div class="view-only-value">${edu.qualification || ''}</div></td>
+                                <td><div class="view-only-value">${edu.subject || ''}</div></td>
+                                <td><div class="view-only-value">${edu.result || ''}</div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            educationContainer.appendChild(eduDiv);
+        });
+    }
+
+    // UK Education History
+    const ukEducationContainer = document.getElementById('ukEducationContainer');
+    if (data.forms_i.education_uk && data.forms_i.education_uk.length > 0) {
+        data.forms_i.education_uk.forEach(edu => {
+            const eduDiv = document.createElement('div');
+            eduDiv.className = 'uk-education-entry mb-4';
+            eduDiv.innerHTML = `
+                <div class="table-responsive">
+                    <table class="table table-bordered mb-0">
+                        <thead>
+                            <tr>
+                                <th>University/Institution</th>
+                                <th>Start date</th>
+                                <th>Completion date</th>
+                                <th>Course title</th>
+                                <th>Level</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><div class="view-only-value">${edu.name || ''}</div></td>
+                                <td><div class="view-only-value">${formatDate(edu.start) || ''}</div></td>
+                                <td><div class="view-only-value">${formatDate(edu.end) || ''}</div></td>
+                                <td><div class="view-only-value">${edu.title || ''}</div></td>
+                                <td><div class="view-only-value">${edu.level || ''}</div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            ukEducationContainer.appendChild(eduDiv);
+        });
+    }
+
+    // Incomplete/Concurrent study
+    setRadioValue('incomplete_study', data.forms_i?.has_incomplete_degree ? 'yes' : 'no');
+    document.getElementById('incompleteStudyDetailsCon').style.display = data.forms_i?.has_incomplete_degree == 'yes' ? 'block' : 'none';
+    document.getElementById('incompleteStudyDetails').textContent = data.forms_i?.incomplete_degree_details || '';
+    setRadioValue('concurrent_study', data.forms_i?.plans_concurrent_degree ? 'yes' : 'no');
+    document.getElementById('concurrentStudyDetailsCon').style.display = data.forms_i?.plans_concurrent_degree == 'yes' ? 'block' : 'none';
+    document.getElementById('concurrentStudyDetails').textContent = data.forms_i?.concurrent_degree_details || '';
+
+    // SECTION J: GRE
+    document.getElementById('GRE_date').textContent = formatDate(data.forms_j?.gre_date) || '';
+    document.getElementById('verbal_score').textContent = data.forms_j?.gre_verbal_score || '';
+    document.getElementById('verbal_percent').textContent = data.forms_j?.gre_verbal_percent || '';
+    document.getElementById('quantiative_score').textContent = data.forms_j?.gre_quant_score || '';
+    document.getElementById('quantiative_percent').textContent = data.forms_j?.gre_quant_percent || '';
+    document.getElementById('writing_score').textContent = data.forms_j?.gre_analytical_score || '';
+    document.getElementById('writing_percentage').textContent = data.forms_j?.gre_analytical_percent || '';
+
+    // SECTION K: English language skills
+    setRadioValue('english_first', data.forms_k?.english_first_language);
+    setRadioValue('qualification', data.forms_k?.english_degree_qualification);
+    setRadioValue('tier4_visa', data.forms_k?.tier4_child_visa);
+
+    // SECTION L: English language proficiency
+    document.getElementById('test_type').textContent = data.forms_l?.test_type || '';
+    document.getElementById('date_taken').textContent = formatDate(data.forms_l?.test_date) || '';
+    document.getElementById('overall_result').textContent = data.forms_l?.test_overall || '';
+    document.getElementById('listening_score').textContent = data.forms_l?.test_listening || '';
+    document.getElementById('reading_score').textContent = data.forms_l?.test_reading || '';
+    document.getElementById('writing_score').textContent = data.forms_l?.test_writing || '';
+    document.getElementById('speaking_score').textContent = data.forms_l?.test_speaking || '';
+    
+    if (data.forms_l?.file_waiver) {
+        document.getElementById('waiverFile').href = `/storage/${data.forms_l?.file_waiver || ''}`;
+        document.getElementById('waiverFile').textContent = "View file"
+    }
+    
+    // Other languages
+    const languageContainer = document.getElementById('languageContainer');
+    if (data.forms_l.languages && data.forms_l.languages.length > 0) {
+        data.forms_l.languages.forEach(lang => {
+            const langDiv = document.createElement('div');
+            langDiv.className = 'language-entry mb-2';
+            langDiv.innerHTML = `
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Language</th>
+                            <th>Reading</th>
+                            <th>Writing</th>
+                            <th>Speaking</th>
+                            <th>Understanding</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><div class="view-only-value">${lang.name || ''}</div></td>
+                            <td><div class="view-only-value">${lang.reading || ''}</div></td>
+                            <td><div class="view-only-value">${lang.writing || ''}</div></td>
+                            <td><div class="view-only-value">${lang.speaking || ''}</div></td>
+                            <td><div class="view-only-value">${lang.understanding || ''}</div></td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+            languageContainer.appendChild(langDiv);
+        });
+    }
+
+    // SECTION M: Funding
+    setRadioValue('alternativeFunding', data.forms_m?.has_funding_info ? 'yes' : 'no');
+    document.getElementById('fundingTableSection').style.display = data.forms_m?.has_funding_info ? 'block' : 'none';
+    setRadioValue('studentshipApply', data.forms_m?.applies_studentship);
+    document.getElementById('referenceCodeGroup').style.display = data.forms_m?.applies_studentship ? 'block' : 'none';
+    document.getElementById('referenceCode').textContent = data.forms_m?.studentship_code || '';
+    
+    // Scholarship checkboxes
+    setCheckboxValue('hillFoundation', data.forms_m?.scholarship_hill);
+    setCheckboxValue('ertetgun', data.forms_m?.scholarship_ertegun);
+    setCheckboxValue('ocis', data.forms_m?.scholarship_ocis);
+    setCheckboxValue('weidenfeld', data.forms_m?.scholarship_weidenfeld);
+    setCheckboxValue('ahrc', data.forms_m?.scholarship_ahrc);
+    setCheckboxValue('grandUnion', data.forms_m?.scholarship_grand_union);
+    
+    // Funding table
+    const fundingTableBody = document.getElementById('fundingTableBody');
+    if (data.forms_m.fundings && data.forms_m.fundings.length > 0) {
+        data.forms_m.fundings.forEach((funding, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><div class="view-only-value">${funding.source || ''}</div></td>
+                <td><div class="view-only-value">${funding.amount || ''}</div></td>
+                <td><div class="view-only-value">${funding.period || ''}</div></td>
+                <td><div class="view-only-value">${funding.status || ''}</div></td>
+            `;
+            fundingTableBody.appendChild(row);
+        });
+    }
+
+    // SECTION N: Supporting documents
+    if (data.forms_n?.file_transcripts) {
+        document.getElementById('transcriptUpload').href = `/storage/${data.forms_n?.file_transcripts || ''}`;
+        document.getElementById('transcriptUpload').textContent = "View file"
+    }
+    if (data.forms_n?.file_cv) {
+        document.getElementById('CVUpload').href = `/storage/${data.forms_n?.file_cv || ''}`;
+        document.getElementById('CVUpload').textContent = "View file"
+    }
+    if (data.forms_n?.file_statement) {
+        document.getElementById('statementUpload').href = `/storage/${data.forms_n?.file_statement || ''}`;
+        document.getElementById('statementUpload').textContent = "View file"
+    }
+    if (data.forms_n?.file_written1) {
+        document.getElementById('upload_written1').href = `/storage/${data.forms_n?.file_written1 || ''}`;
+        document.getElementById('upload_written1').textContent = "View file"
+    }
+    if (data.forms_n?.file_written2) {
+        document.getElementById('upload_written2').href = `/storage/${data.forms_n?.file_written2 || ''}`;
+        document.getElementById('upload_written2').textContent = "View file"
+    }
+    if (data.forms_n?.file_work) {
+        document.getElementById('upload_singleWritten').href = `/storage/${data.forms_n?.file_work || ''}`;
+        document.getElementById('upload_singleWritten').textContent = "View file"
+    }
+    if (data.forms_n?.file_portfolio) {
+        document.getElementById('upload_portfolio').href = `/storage/${data.forms_n?.file_portfolio || ''}`;
+        document.getElementById('upload_portfolio').textContent = "View file"
+    }
+    if (data.forms_n?.file_english_test) {
+        document.getElementById('upload_englishTest').href = `/storage/${data.forms_n?.file_english_test || ''}`;
+        document.getElementById('upload_englishTest').textContent = "View file"
+    }
+    if (data.forms_n?.file_gre) {
+        document.getElementById('upload_gre').href = `/storage/${data.forms_n?.file_gre || ''}`;
+        document.getElementById('upload_gre').textContent = "View file"
+    }
+    if (data.forms_n?.file_waiver) {
+        document.getElementById('upload_waiverLetter').href = `/storage/${data.forms_n?.file_waiver || ''}`;
+        document.getElementById('upload_waiverLetter').textContent = "View file"
+    }
+    if (data.forms_n?.file_scholarship) {
+        document.getElementById('upload_scholarshipSupport').href = `/storage/${data.forms_n?.file_scholarship || ''}`;
+        document.getElementById('upload_scholarshipSupport').textContent = "View file"
+    }
+    document.getElementById('numScholarships').textContent = data.forms_n?.scholarship_statements_count || '';
+
+    // SECTION O: Payment
+    document.getElementById('paymentMethod').value = data.forms_o?.payment_method || '';
+    if (data.forms_o?.payment_method) {
+        const payment_method = data.forms_o?.payment_method;
+        if (payment_method == 'card' || payment_method == 'western_union' || payment_method == 'cheque') {
+            document.getElementById('orderNumberField').style.display = 'block';
+        } else {
+            document.getElementById('orderNumberField').style.display = 'none';
+        }
+        if (payment_method == 'waiver') {
+            document.getElementById('waiverDeclaration').style.display = 'block';
+        } else {
+            document.getElementById('waiverDeclaration').style.display = 'none';
+        }
+    }
+    document.getElementById('orderNumber').textContent = data.forms_o?.order_number || '';
+    setCheckboxValue('waiverCheck1', data.forms_o?.cannot_afford);
+    setCheckboxValue('waiverCheck2', data.forms_o?.meet_req);
+
+    // SECTION P: Final Checklist
+    setCheckboxValue('checkCompleteForm', data.forms_p?.sections_complete);
+    setCheckboxValue('checkMaterials', data.forms_p?.materials_gathered);
+    setCheckboxValue('checkReferences', data.forms_p?.references_requested);
+    setCheckboxValue('checkPayment', data.forms_p?.fee_paid);
+
+    // SECTION Q: Declaration
+    if (data.forms_q?.file_signature) {
+        document.getElementById('signature-upload').href = `/storage/${data.forms_q?.file_signature || ''}`;
+        document.getElementById('signature-upload').textContent = "View file"
+    }
+    document.getElementById('date').textContent = formatDate(data.forms_q?.declaration_date) || '';
+    document.getElementById('print-name').textContent = data.forms_q?.declaration_name || '';
+}
+
+// Helper function to format dates
+function formatDate(dateString) {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-GB'); // Formats as dd/mm/yyyy
+}
+
+// Helper function to set radio button values
+function setRadioValue(name, value) {
+    if (value === undefined || value === null) return;
+    
+    const radios = document.querySelectorAll(`input[name="${name}"]`);
+    radios.forEach(radio => {
+        if (radio.value === value.toString()) {
+            radio.checked = true;
+        }
+    });
+}
+
+// Helper function to set checkbox values
+function setCheckboxValue(id, value) {
+    if (value === undefined || value === null) return;
+    
+    const checkbox = document.getElementById(id);
+    if (checkbox) {
+        checkbox.checked = Boolean(value);
+    }
+}
+
+// fetch data and populate the form
+document.addEventListener('DOMContentLoaded', async function() {
+    try {
+        const urlParams = new URLSearchParams(window.location.search);
+        const formId = urlParams.get('formId');
+        const data = await API.request(`/form/${formId}`);
+        populateFormData(data);
+    } catch (error) {
+        console.error('Error fetching submission data:', error);
+    }
+});
+    </script>
+</body>
+</html>

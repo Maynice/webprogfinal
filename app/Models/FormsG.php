@@ -16,5 +16,5 @@ class FormsG extends Model
     ];
 
     public function form() { return $this->belongsTo(Form::class); }
-    public function children() { return $this->hasMany(FormsGChild::class, 'form_id'); }
+    public function children() { return $this->hasMany(FormsGChild::class, 'form_id', 'form_id'); }
 }

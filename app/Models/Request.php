@@ -11,6 +11,7 @@ class Request extends Model
 
     protected $fillable = [
         'submission_id',
+        'info',
         'file',
     ];
 

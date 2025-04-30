@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Admin Report</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <style>
+            .skeleton {
+                background-color: #e0e0e0;
+                border-radius: 4px;
+                min-height: 1em;
+                width: 100%;
+                animation: pulse 1.5s infinite ease-in-out;
+            }
+            
+            .stat-card {
+                border-radius: 8px;
+                padding: 20px;
+                margin-bottom: 20px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                background: white;
+            }
+            
+            .stat-value {
+                font-size: 2rem;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+            
+            .stat-label {
+                color: #6c757d;
+                font-size: 0.9rem;
+            }
+
+            @keyframes pulse {
+                0% {
+                    opacity: 1;
+                }
+                50% {
+                    opacity: 0.4;
+                }
+                100% {
+                    opacity: 1;
+                }
+            }
+        </style>
+    </head>
+    <body class="p-4">
+        <div class="container">
+            <a href="/dashboard.html" class="btn btn-secondary mb-4">Back to Dashboard</a>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="mb-0">Submission Report</h1>
+                <button id="refresh-btn" class="btn btn-primary">
+                    Refresh Data
+                </button>
+            </div>
+
+            <!-- Summary Stats -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <div class="stat-value" id="total-forms">
+                            <div class="skeleton" style="height: 2.5rem; width: 60%"></div>
+                        </div>
+                        <div class="stat-label">Total Forms</div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <div class="stat-value" id="assigned-forms">
+                            <div class="skeleton" style="height: 2.5rem; width: 60%"></div>
+                        </div>
+                        <div class="stat-label">Assigned Forms</div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <div class="stat-value" id="unassigned-forms">
+                            <div class="skeleton" style="height: 2.5rem; width: 60%"></div>
+                        </div>
+                        <div class="stat-label">Unassigned Forms</div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <div class="stat-value" id="open-requests">
+                            <div class="skeleton" style="height: 2.5rem; width: 60%"></div>
+                        </div>
+                        <div class="stat-label">Forms with Open Requests</div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <div class="stat-value" id="on-hold-forms">
+                            <div class="skeleton" style="height: 2.5rem; width: 60%"></div>
+                        </div>
+                        <div class="stat-label">On Hold Forms</div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <div class="stat-value" id="accepted-forms">
+                            <div class="skeleton" style="height: 2.5rem; width: 60%"></div>
+                        </div>
+                        <div class="stat-label">Accepted Forms</div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="stat-card">
+                        <div class="stat-value" id="rejected-forms">
+                            <div class="skeleton" style="height: 2.5rem; width: 60%"></div>
+                        </div>
+                        <div class="stat-label">Rejected Forms</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="/js/api.js"></script>
+        <script>
+            async function fetchReportData() {
+                try {
+                    const response = await API.request('/admin/report');
+                    const report = response.report;
+                    
+                    // Update all stat cards
+                    document.getElementById('total-forms').textContent = report.total_forms;
+                    document.getElementById('assigned-forms').textContent = report.assigned_forms;
+                    document.getElementById('unassigned-forms').textContent = report.unassigned_forms;
+                    document.getElementById('open-requests').textContent = report.forms_with_open_requests;
+                    document.getElementById('on-hold-forms').textContent = report.forms_by_status.on_hold;
+                    document.getElementById('accepted-forms').textContent = report.forms_by_status.accepted;
+                    document.getElementById('rejected-forms').textContent = report.forms_by_status.rejected;
+                    
+                } catch (err) {
+                    console.error(err);
+                    alert('Error loading report data');
+                }
+            }
+            
+            // Initial load
+            fetchReportData();
+            
+            // Refresh button
+            document.getElementById('refresh-btn').addEventListener('click', fetchReportData);
+        </script>
+    </body>
+</html>

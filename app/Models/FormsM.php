@@ -23,5 +23,5 @@ class FormsM extends Model
     ];
 
     public function form() { return $this->belongsTo(Form::class); }
-    public function fundings() { return $this->hasMany(FormsMFunding::class); }
+    public function fundings() { return $this->hasMany(FormsMFunding::class, 'form_id', 'form_id'); }
 }
