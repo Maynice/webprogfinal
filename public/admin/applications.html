@@ -25,6 +25,7 @@
                         <th>Status</th>
                         <th>Requests</th>
                         <th>Form</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody id="submissionRow">
@@ -102,8 +103,38 @@
                         `;
                         tr.appendChild(tdRevision)
 
-                        // Form Column (assuming placeholder)
-                        tr.appendChild(td("View Form"));
+                        // Form link
+                        const tdLink = document.createElement("td");
+                        if (item.active_form_id) {
+                            const a = document.createElement("a");
+                            a.href = `/view-form.html?formId=${item.active_form_id}`;
+                            a.className = "btn btn-sm btn-primary";
+                            a.textContent = "Open";
+                            tdLink.appendChild(a);
+                        } else {
+                            tdLink.textContent = "—";
+                        }
+                        tr.appendChild(tdLink);
+
+                        // Form link
+                        const tdDelete = document.createElement("td");
+                        if (item.active_form_id) {
+                            const el = document.createElement("div");
+                            el.className = "btn btn-sm btn-danger";
+                            el.textContent = "Delete";
+                            el.onclick = async () => {
+                                try {
+                                    await API.request(`/submissions/${item.id}`, { method: "DELETE" });
+                                    tr.remove();
+                                } catch (err) {
+                                    console.error(err);
+                                }
+                            }
+                            tdDelete.appendChild(el);
+                        } else {
+                            tdDelete.textContent = "—";
+                        }
+                        tr.appendChild(tdDelete);
 
                         tbody.appendChild(tr);
                     });

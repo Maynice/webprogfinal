@@ -190,4 +190,15 @@ class SubmissionController extends Controller
         $requestData->update(['file' => $path]);
         return response()->json($requestData);
     }
+
+    public function delete(Request $request, $id)
+    {
+        if ($request->user()->role !== 'admin') {
+            return response()->json(['error' => 'Forbidden'], 403);
+        }
+
+        $submission = Submission::find($id);
+        $submission->delete();
+        return response()->json($submission);
+    }
 }
