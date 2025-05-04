@@ -37,10 +37,11 @@
     <script src="/js/api.js"></script>
     <script>
         const params = new URLSearchParams(window.location.search);
+        const submissionId = params.get("submission_id");
         const requestId = params.get("request_id");
 
-        if (!requestId) {
-            document.getElementById("request-info").innerHTML = '<div class="alert alert-warning">Missing request ID.</div>';
+        if (!submissionId || !requestId) {
+            document.getElementById("request-info").innerHTML = '<div class="alert alert-warning">Missing submission or request ID.</div>';
             document.getElementById("upload-form").style.display = "none";
         } else {
             // set back button to preious page
@@ -49,11 +50,11 @@
             async function fetchRequestInfo() {
                 try {
                     // fill request info
-                    const request = await API.request(`/submissions/applicant/request/${requestId}`);
+                    const request = await API.request(`/submissions/applicant/submission/${submissionId}/request/${requestId}`);
                     console.log(request[0])
                     
-                    if (request && request[0]?.info) {
-                        document.getElementById("request-info").textContent = request[0].info;
+                    if (request && request?.info) {
+                        document.getElementById("request-info").textContent = request.info;
                     } else {
                         document.getElementById("request-info").innerHTML = '<div class="alert alert-info">No info found.</div>';
                     }
@@ -79,7 +80,8 @@
                 formData.append("file", fileInput.files[0]);
 
                 try {
-                    const response = await fetch("/submissions/applicant/request/${requestId}", {
+                    const token = localStorage.getItem("token");
+                    const response = await fetch(`/api/submissions/applicant/submission/${submissionId}/request/${requestId}`, {
                         method: "POST",
                         body: formData,
                         headers: { 'Authorization': `Bearer ${token}` }

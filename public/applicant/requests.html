@@ -42,7 +42,7 @@
         } else {
             async function fetchRequests() {
                 try {
-                    const data = await API.request(`/submissions/applicant/request/${submissionId}`);
+                    const data = await API.request(`/submissions/applicant/submission/${submissionId}/request`);
 
                     const tbody = document.getElementById("requests-body");
                     tbody.innerHTML = ""; // clear first
@@ -62,7 +62,7 @@
                                 ${request.file ? `<a href="/storage/${request.file}" target="_blank" class="btn btn-sm btn-outline-primary">View File</a>` : `<span class="text-muted">No file</span>`}
                             </td>
                             <td>
-                                <a href="submit-request.html?request_id=${request.id}" class="btn btn-sm btn-outline-primary">Submit File</a>
+                                <a href="submit-request.html?submission_id=${submissionId}&request_id=${request.id}" class="btn btn-sm btn-outline-primary">Submit File</a>
                             </td>
                         `;
                         tbody.appendChild(tr);

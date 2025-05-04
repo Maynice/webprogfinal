@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\UploadDocument;
 use Illuminate\Http\Request;
 use App\Models\Submission;
 use App\Models\Request as RequestModel;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ApplicantStatus;
+use App\Mail\RequestDocument;
 
 class SubmissionController extends Controller
 {
@@ -125,6 +127,31 @@ class SubmissionController extends Controller
             'submission_id' => $request->input('submission_id'),
             'info' => $request->input('info'),
         ]);
+
+        $submission = Submission::with('applicant')->find($request->input('submission_id'));
+        $applicant = $submission->applicant;
+        $reviewer = $submission->reviewer;
+
+        try {
+            Mail::to($applicant->email)
+                ->send(new RequestDocument(
+                    $submission->id,
+                    $applicant->name,
+                    $request->input('info'),
+                    $reviewer->name
+                ));
+
+            \Log::info("Request Document email sent successfully for submission ID: {$submission->id} to {$applicant->email}");
+
+        } catch (\Exception $e) {
+            \Log::error("Failed to send Request Document email for submission ID: {$submission->id}, request ID: {$requestData->id}. Error: " . $e->getMessage());
+            // still return success for the created request, but add warning about the failed email
+             return response()->json([
+                'data' => $requestData,
+                'warning' => 'Created document request but failed to send the notification email'
+            ]);
+        }
+
         return response()->json($requestData);
     }
 
@@ -146,48 +173,75 @@ class SubmissionController extends Controller
         return response()->json($requestData);
     }
 
-    public function applicant_get_single_request(Request $request, $request_id)
+    public function applicant_get_single_request(Request $request, $submission_id, $request_id)
     {
         if ($request->user()->role !== 'applicant') {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        // check if request id belongs to applicant
-        $requestData = RequestModel::where('id', $request_id)->first();
+        // check if request id and submission id valid
+        $requestData = RequestModel::where('id', $request_id)
+            ->where('submission_id', $submission_id)
+            ->with(['submission'])
+            ->first();
         if (!$requestData) {
             return response()->json(['error' => 'Request not found'], 404);
         }
-        $submission = Submission::where('id', $requestData->submission_id)
-            ->where('applicant_id', $request->user()->id)
-            ->first();
-        if (!$submission) {
+
+        // check if submission id belong to applicant
+        $submission = $requestData->submission;
+        if ($submission->applicant_id !== $request->user()->id) {
             return response()->json(['error' => 'Request not found'], 404);
         }
 
         return response()->json($requestData);
     }
 
-    public function applicant_upload_request(Request $request, $request_id)
+    public function applicant_upload_request(Request $request, $submission_id, $request_id)
     {
         if ($request->user()->role !== 'applicant') {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        // check if request id belongs to applicant
-        $requestData = RequestModel::where('id', $request_id)->first();
+        // check if request id and submission id valid
+        $requestData = RequestModel::where('id', $request_id)
+            ->where('submission_id', $submission_id)
+            ->with(['submission'])
+            ->first();
         if (!$requestData) {
             return response()->json(['error' => 'Request not found'], 404);
         }
-        $submission = Submission::where('id', $requestData->submission_id)
-            ->where('applicant_id', $request->user()->id)
-            ->first();
-        if (!$submission) {
+
+        // check if submission id belong to applicant
+        $submission = $requestData->submission;
+        if ($submission->applicant_id !== $request->user()->id) {
             return response()->json(['error' => 'Request not found'], 404);
         }
 
         $file = $request->file('file');
         $path = $file->store("requests/{$requestData->submission_id}", 'public');
         $requestData->update(['file' => $path]);
+        
+        $submission->load(['reviewer', 'applicant']);
+        $recipient = $submission->reviewer;
+        $applicant = $submission->applicant;
+        $originalFileName = $file->getClientOriginalName();
+        try {
+            Mail::to($recipient->email)
+               ->send(new UploadDocument(
+                   $submission->id,
+                   $requestData->id,
+                   $applicant->name,
+                   $applicant->email,
+                   $requestData->info,
+                   $originalFileName
+               ));
+            \Log::info("Sent document uploaded email for Request ID {$request_id} to {$recipient->email}");
+
+       } catch (\Exception $e) {
+            \Log::error("Failed to send document uploaded email for Request ID {$request_id} to {$recipient->email}. Error: " . $e->getMessage());
+       }
+
         return response()->json($requestData);
     }
 

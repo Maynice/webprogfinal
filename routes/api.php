@@ -48,8 +48,8 @@ Route::prefix('submissions')->middleware('auth:sanctum')->group(function () {
     Route::get('/admin/request/{submission_id}', [SubmissionController::class, 'admin_get_request']);
     Route::get('/reviewer/request/{submission_id}', [SubmissionController::class, 'reviewer_get_request']);
     Route::post('/reviewer/request', [SubmissionController::class, 'create_request']);
-    Route::get('/applicant/request/{submission_id}', [SubmissionController::class, 'applicant_get_request']);
-    Route::post('/applicant/request/{request_id}', [SubmissionController::class, 'applicant_upload_request']);
-    Route::get('/applicant/request/{request_id}', [SubmissionController::class, 'applicant_get_single_request']);
+    Route::get('/applicant/submission/{submission_id}/request', [SubmissionController::class, 'applicant_get_request']);
+    Route::post('/applicant/submission/{submission_id}/request/{request_id}', [SubmissionController::class, 'applicant_upload_request']);
+    Route::get('/applicant/submission/{submission_id}/request/{request_id}', [SubmissionController::class, 'applicant_get_single_request']);
     Route::delete('/{id}', [SubmissionController::class, 'delete']);
 });
