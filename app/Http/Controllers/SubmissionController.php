@@ -247,12 +247,20 @@ class SubmissionController extends Controller
 
     public function delete(Request $request, $id)
     {
-        if ($request->user()->role !== 'admin') {
-            return response()->json(['error' => 'Forbidden'], 403);
+        if ($request->user()->role === 'admin') {
+            $submission = Submission::find($id);
+            $submission->delete();
+            return response()->json($submission);
+        } else if ($request->user()->role === 'reviewer') {
+            $submission = Submission::where('id', $id)
+                ->where('reviewer_id', $request->user()->id)
+                ->first();
+            if (!$submission) {
+                return response()->json(['error' => 'Submission not found'], 404);
+            }
+            $submission->delete();
+            return response()->json($submission);
         }
-
-        $submission = Submission::find($id);
-        $submission->delete();
-        return response()->json($submission);
+        return response()->json(['error' => 'Forbidden'], 403);
     }
 }
