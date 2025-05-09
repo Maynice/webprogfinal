@@ -6,9 +6,25 @@ document.addEventListener('DOMContentLoaded', function() {
         e.preventDefault();
         
         if (validateForm()) {
+            // disable button and add spinner
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="margin-right: 8px;"></span>
+                Submitting...
+            `;
+
             const formData = constructPayload();
             console.log('Form payload:', formData);
-            sendFormData(formData);
+            sendFormData(formData)
+                .then((data) => {
+                    // redirect to /applicant/submit-success.html?form_id={data.form_id}
+                    window.location.href = `/applicant/submit-success.html?form_id=${data.form_id}`;
+                })
+                .catch((error) => {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = 'Submit';
+                    alert('Submission failed. Please try again.');
+                });
         }
     });
     
@@ -494,7 +510,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             const token = localStorage.getItem("token");
-            const data = await fetch("/api/applicant/apply", {
+            const response = await fetch("/api/applicant/apply", {
                 method: "POST",
                 body: fd,
                 headers: {
@@ -502,7 +518,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     'Authorization': `Bearer ${token}`,
                 }
             });
+            const data = await response.json();
             console.log('Success:', data);
+            return data;
         } catch (error) {
             console.error('Error:', error);
             alert('Error submitting application. Please try again.');
