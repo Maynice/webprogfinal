@@ -16,6 +16,7 @@
                 flex-direction: column;
                 align-items: center;
                 padding: 20px;
+                padding-top: 60px;
                 overflow-y: auto;
             }
             .form-container {
@@ -110,11 +111,60 @@
         .btn-custom-small:hover {
                 background: #e7a711;
             }
+            .navbar {
+    background-color: #f6e8c1;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+.btn-custom-navbar {
+    background: white;
+    color: #002147;
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.btn-custom-navbar:hover {
+    background: #fdf7e2;
+    color: #002147;
+    border-color: #e7a711;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
         </style>
     </head>
     <body>
+        <nav class="navbar navbar-expand-lg px-4 py-2 w-100 fixed-top">
+            <div class="container-fluid">
+            <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="/">
+                <div class="text-center mb-0">
+                    <img src="/circlet.png" 
+                         alt="Oxford University Logo" 
+                         style="max-width: 30px;">    </div>
+                <h6 class="mb-0" style="font-weight: bold;">
+                    Graduate Admission Portal
+                </h6>
+            </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                    aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul id="nav-links" class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <!-- dynamic from navbar.js -->
+                    </ul>
+            
+                    <div id="auth-controls" class="d-flex align-items-center gap-3">
+                        <!-- dynamic from navbar.js -->
+                    </div>
+                </div>
+            </div>
+        </nav>
         <div class="container py-5">
-            <a href="/dashboard.html" class="btn btn-secondary mb-4">&larr; Back to Dashboard</a>
             <div class="form-container">
                 <h1 class="form-header">Submission Detail</h1>
                 <table class="table table-bordered">
@@ -138,6 +188,9 @@
         </div>
 
         <script src="/js/api.js"></script>
+        <script src="/js/navbar.js">
+            setupNavbar()
+        </script>
         <script>
             document.addEventListener("DOMContentLoaded", async () => {
                 const tbody = document.getElementById("submissionRow");
