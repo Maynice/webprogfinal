@@ -85,18 +85,10 @@
             <div class="success-message">Submission Successful!</div>
             <div class="button-group">
                 <a href="/dashboard.html" class="btn-custom">Back to Dashboard</a>
-                <a href="/view-form.html?form_id=1" class="btn-custom" id="view-form">
-                    View Submission
+                <a href="/applicant/applications.html" class="btn-custom" id="view-form">
+                    View Submission List
                 </a>
             </div>
         </div>
     </body>
-
-    <script>
-        // get query form_id
-        const urlParams = new URLSearchParams(window.location.search);
-        const formId = urlParams.get('form_id');
-
-        document.getElementById('view-form').href = `/view-form.html?form_id=${formId}`
-    </script>
 </html>

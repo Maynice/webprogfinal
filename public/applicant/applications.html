@@ -75,7 +75,7 @@
                         const tdLink = document.createElement("td");
                         if (item.active_form_id) {
                             const a = document.createElement("a");
-                            a.href = `/view-form.html?formId=${item.active_form_id}`;
+                            a.href = `/view-form.html?formId=${item.active_form_id}&submission_id=${item.id}`;
                             a.className = "btn btn-sm btn-primary";
                             a.textContent = "Open";
                             tdLink.appendChild(a);

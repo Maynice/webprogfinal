@@ -201,7 +201,7 @@
                             linkBtn.className = "btn-custom-small";
                             const a = document.createElement("a");
                             a.style = "text-decoration: none; color: inherit; text-align: center;";
-                            a.href = `/view-form.html?formId=${item.active_form_id}`;
+                            a.href = `/view-form.html?formId=${item.active_form_id}&submission_id=${item.id}`;
                             a.textContent = "View Submission";
                             linkBtn.appendChild(a);
                         } else {
