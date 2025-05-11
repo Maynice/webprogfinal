@@ -29,46 +29,212 @@
                     opacity: 1;
                 }
             }
+
+            body {
+            background: #002147;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            padding-top: 60px;
+            overflow-y: auto;
+        }
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            /* max-width: 1000px; */
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .form-header {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #cba344;
+        }
+        .btn-custom {
+            background: #e7ce92;
+            border: none;
+            padding: 10px 20px;
+            width: 100%;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            transition: background 0.3s;
+            font-weight: bolder;
+            color: #333;
+            text-decoration: none;
+        }
+        .btn-custom:hover {
+            background: #e7a711;
+        }
+        .btn-tertiary{
+            background: #b1b7bd;
+            border: none;
+            padding: 10px 20px;
+            width: 100%;
+            font-size: 1rem;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        .btn-tertiary:hover {
+            background: #808fa2;
+        }
+        .warning {
+            color: #e83e36;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .dropdown-container {
+    position: relative;
+    }
+.dropdown-menu {
+    position: absolute;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+    background-color: white;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+.dropdown-item {
+    padding: 8px 16px;
+    cursor: pointer;
+}
+.dropdown-item:hover {
+    background-color: #f1d89e;
+}
+.required {
+    color: red;
+    margin-left: 3px;
+}
+
+        .dashboard-header {
+            color: white;
+        }
+        .dashboard-header h2 {
+            margin-bottom: 0;
+        }
+
+        .navigation-actions .btn-custom {
+            width: auto;
+            display: flex;
+            justify-content: center;
+        }
+        .navbar {
+    background-color: #f6e8c1;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+.btn-custom-navbar {
+    background: white;
+    color: #002147;
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.btn-custom-navbar:hover {
+    background: #fdf7e2;
+    color: #002147;
+    border-color: #e7a711;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-custom-small {
+            background: #e7ce92;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 8px;
+            transition: background 0.3s;
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+            text-align: center;
+        }
+        .btn-custom-small:hover {
+                background: #e7a711;
+            }
         </style>
     </head>
-    <body class="p-4">
-        <div class="container">
-            <a href="/dashboard.html" class="btn btn-secondary mb-4">Back to Dashboard</a>
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h1 class="mb-0">User List</h1>
-                <a href="/admin/user-create.html" class="btn btn-success"
-                    >+ Create New User</a
-                >
+    <body>
+        <nav class="navbar navbar-expand-lg px-4 py-2 w-100 fixed-top">
+            <div class="container-fluid">
+            <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="/">
+                <div class="text-center mb-0">
+                    <img src="/circlet.png" 
+                         alt="Oxford University Logo" 
+                         style="max-width: 30px;">    </div>
+                <h6 class="mb-0" style="font-weight: bold;">
+                    Graduate Admission Portal
+                </h6>
+            </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                    aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul id="nav-links" class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <!-- dynamic from navbar.js -->
+                    </ul>
+            
+                    <div id="auth-controls" class="d-flex align-items-center gap-3">
+                        <!-- dynamic from navbar.js -->
+                    </div>
+                </div>
             </div>
-
-            <table class="table table-bordered">
-                <thead class="table-light">
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Created</th>
-                        <th>Edit</th>
-                    </tr>
-                </thead>
-                <tbody id="user-table-body">
-                    <!-- Skeleton loading rows -->
-                    <tr>
-                        <td colspan="6">
-                            <div class="skeleton" style="height: 1.5em"></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="6">
-                            <div class="skeleton" style="height: 1.5em"></div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        </nav>
+        <div class="container py-5">
+            <div class="form-container">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h1 class="form-header">Manage Users</h1>
+                    <a href="/admin/user-create.html" class="btn btn-custom-small" style="width: auto;"
+                        >+ Create New User</a
+                    >
+                </div>
+    
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="text-center">
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Created</th>
+                            <th>Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody id="user-table-body">
+                        <!-- Skeleton loading rows -->
+                        <tr>
+                            <td colspan="6">
+                                <div class="skeleton" style="height: 1.5em"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <div class="skeleton" style="height: 1.5em"></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <script src="/js/api.js"></script>
+        <script src="/js/navbar.js">
+            setupNavbar()
+        </script>
         <script>
             async function fetchUsers() {
                 const tbody = document.getElementById("user-table-body");
@@ -90,7 +256,7 @@
                 <td>
                   <a href="user-info.html?id=${
                       user.id
-                  }" class="btn btn-primary btn-sm">Edit</a>
+                  }" class="btn btn-custom-small w-100">Edit</a>
                 </td>
               </tr>
             `;
