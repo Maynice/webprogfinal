@@ -27,6 +27,7 @@
             flex-direction: column;
             align-items: center;
             padding: 20px;
+            padding-top: 60px;
             overflow-y: auto;
         }
         .form-container {
@@ -115,18 +116,60 @@
             display: flex;
             justify-content: center;
         }
+        .navbar {
+    background-color: #f6e8c1;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+.btn-custom-navbar {
+    background: white;
+    color: #002147;
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.btn-custom-navbar:hover {
+    background: #fdf7e2;
+    color: #002147;
+    border-color: #e7a711;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
     </style>
     <body>
-        <div class="container mt-5">
-            <div class="d-flex justify-content-between align-items-center mb-4 dashboard-header">
-                <h2 id="greeting" class="placeholder-glow">
-                    <span class="placeholder col-6"></span>
-                </h2>
-                <button class="btn btn-danger" id="logout-btn" disabled>
-                    Logout
+        <nav class="navbar navbar-expand-lg px-4 py-2 w-100 fixed-top">
+            <div class="container-fluid">
+            <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="/">
+                <div class="text-center mb-0">
+                    <img src="/circlet.png" 
+                         alt="Oxford University Logo" 
+                         style="max-width: 30px;">    </div>
+                <h6 class="mb-0" style="font-weight: bold;">
+                    Graduate Admission Portal
+                </h6>
+            </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                    aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
+            
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul id="nav-links" class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <!-- dynamic from navbar.js -->
+                    </ul>
+            
+                    <div id="auth-controls" class="d-flex align-items-center gap-3">
+                        <!-- dynamic from navbar.js -->
+                    </div>
+                </div>
             </div>
+        </nav>
 
+        <div class="container mt-5">
             <div class="form-container">
                 <div class="form-header">Your Profile</div>
                 <div class="card-body">
@@ -200,17 +243,13 @@
         </div>
 
         <script src="js/api.js"></script>
+        <script src="/js/navbar.js">
+            setupNavbar()
+        </script>
         <script>
             async function init() {
                 try {
                     const user = await API.me();
-
-                    // Fill and enable greeting & logout
-                    document.getElementById(
-                        "greeting"
-                    ).textContent = `Welcome, ${user.name}`;
-                    document.getElementById("greeting").classList.remove("placeholder-glow", "placeholder", "col-6");
-                    document.getElementById("logout-btn").disabled = false;
 
                     // Populate form values
                     document.getElementById("name").value = user.name;
@@ -252,44 +291,11 @@
                     // Enable Update button
                     const updateBtn = document.getElementById("update-btn");
                     updateBtn.disabled = false;
-
-                    // Build navigation
-                    const actionsContainer = document.getElementById("actions-container");
-                    const actionsDiv = document.getElementById("actions");
-                    let html = ""; // Only buttons here
-                    if (user.role === "admin") {
-                        html += `
-                        <a href="/admin/users.html" class="btn-custom me-2 mb-2">Manage Users</a>
-                        <a href="/admin/applications.html" class="btn-custom me-2 mb-2">Assign Reviewers</a>
-                        <a href="/admin/reports.html" class="btn-custom me-2 mb-2">View Reports</a>
-                    `;
-                    } else if (user.role === "reviewer") {
-                        html += `
-                        <a href="/reviewer/applications.html" class="btn-custom me-2 mb-2">Assigned Applications</a>
-                    `;
-                    } else { // Applicant
-                        html += `
-                        <a href="/applicant/exercisefix.html" class="btn-custom me-2 mb-2">New Application</a>
-                        <a href="/applicant/applications.html" class="btn-custom me-2 mb-2">My Application</a>
-                    `;
-                    }
-                    actionsDiv.innerHTML = html;
-                    //  navigation container
-                    actionsContainer.style.display = 'block';
-                    actionsContainer.classList.remove("placeholder-glow");
                 } catch (err) {
                     alert("Unauthorized. Redirecting to login...");
                     window.location.href = "login.html";
                 }
             }
-
-            document
-                .getElementById("logout-btn")
-                .addEventListener("click", async () => {
-                    await API.logout();
-                    localStorage.removeItem("token");
-                    window.location.href = "login.html";
-                });
 
             document
                 .getElementById("profile-form")
