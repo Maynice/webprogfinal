@@ -29,13 +29,13 @@ async function setupNavbar() {
             .addEventListener("click", async () => {
                 await API.logout();
                 localStorage.removeItem("token");
-                window.location.href = "login.html";
+                window.location.href = "/login.html";
             });
     } catch {
         navLinks.innerHTML = "";
         authControls.innerHTML = `
-        <a class="btn btn-custom-navbar btn-sm" href="login.html">Login</a>
-        <a class="btn btn-custom-navbar btn-sm" href="register.html">Register</a>
+        <a class="btn btn-custom-navbar btn-sm" href="/login.html">Login</a>
+        <a class="btn btn-custom-navbar btn-sm" href="/register.html">Register</a>
       `;
     }
 }
