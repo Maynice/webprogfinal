@@ -86,11 +86,11 @@
     color: red;
     margin-left: 3px;
 }
-    </style>//help idk if the logo shud be from wikipedia or from laptop, if from wikipedia load so long
+    </style>
 </head>
 <body>
     <div class="text-center mb-4">
-        <img src="C:\Users\ASUS\Desktop\webprogfinal\webprogfinal\circlet.png" 
+        <img src="/circlet.png" 
              alt="Oxford University Logo" 
              style="max-width: 100px;">    </div>
 <!-- SECTION A -->
@@ -1668,11 +1668,11 @@
                     <label class="form-label">Are you applying for an advertised studentship(s) competition(s)?</label>
                     <div class="d-flex gap-3 mt-2">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="studentshipApply" id="studentshipYes">
+                            <input class="form-check-input" type="radio" name="studentshipApply" id="studentshipYes" value="yes">
                             <label class="form-check-label" for="studentshipYes">Yes</label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="studentshipApply" id="studentshipNo">
+                            <input class="form-check-input" type="radio" name="studentshipApply" id="studentshipNo" value="no">
                             <label class="form-check-label" for="studentshipNo">No</label>
                         </div>
                     </div>
@@ -1772,18 +1772,18 @@
         <h5>Mandatory for All Courses</h5>
   
         <label>Transcripts:</label><br>
-        <input class="form-control" type="file" name="transcriptUpload">
+        <input class="form-control" type="file" name="transcriptUpload" id="transcriptUpload">
         <br>
         <label>CV/Résumé:</label><br>
         <small class="text-muted d-block">(Accepted formats: .pdf, .doc, .docx)</small>
 
-        <input class="form-control" type="file" name="CVUpload" accept=".pdf,.doc,.docx"><br>
+        <input class="form-control" type="file" name="CVUpload" id="CVUpload" accept=".pdf,.doc,.docx"><br>
         <label>Statement of Purpose/Research Proposal: Must match the course-specific requirements on the 
           <a href="https://www.graduate.ox.ac.uk/courses" target="_blank">course page</a>.
         </label><br>
         <small class="text-muted d-block">(Accepted formats: .pdf, .doc, .docx)</small>
 
-        <input class="form-control" type="file" name="statementUpload" accept=".pdf,.doc,.docx"><br>
+        <input class="form-control" type="file" name="statementUpload" id="statementUpload" accept=".pdf,.doc,.docx"><br>
       </fieldset>
   
       <!-- ADDITIONAL DOCUMENTS -->
@@ -2214,10 +2214,12 @@ function addChild() {
       fieldDiv.innerHTML = `<input type="file" name="${checkbox.value}Upload" class="form-control" accept=".pdf,.doc,.docx">`;
     } else {
       fieldDiv.innerHTML = "";
-        }
-  }
+        }
+}
 
 
-</script>      
+</script>  
+<script src="/js/api.js"></script>
+<script src="/js/application-form.js"></script>    
 </body>
 </html>

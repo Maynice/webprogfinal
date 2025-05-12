@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <style>
+            .skeleton .form-control,
+            .skeleton .btn {
+                pointer-events: none;
+            }
+            .placeholder {
+                border-radius: 0.375rem;
+            }
+        </style>
+    </head>
+    <style>
+        body {
+            background: #002147;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            padding-top: 60px;
+            overflow-y: auto;
+        }
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            /* max-width: 1000px; */
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .form-header {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #cba344;
+        }
+        .btn-custom {
+            background: #e7ce92;
+            border: none;
+            padding: 10px 20px;
+            width: 100%;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            transition: background 0.3s;
+            font-weight: bolder;
+            color: #333;
+            text-decoration: none;
+        }
+        .btn-custom:hover {
+            background: #e7a711;
+        }
+        .btn-tertiary{
+            background: #b1b7bd;
+            border: none;
+            padding: 10px 20px;
+            width: 100%;
+            font-size: 1rem;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        .btn-tertiary:hover {
+            background: #808fa2;
+        }
+        .warning {
+            color: #e83e36;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .dropdown-container {
+    position: relative;
+    }
+.dropdown-menu {
+    position: absolute;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+    background-color: white;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+.dropdown-item {
+    padding: 8px 16px;
+    cursor: pointer;
+}
+.dropdown-item:hover {
+    background-color: #f1d89e;
+}
+.required {
+    color: red;
+    margin-left: 3px;
+}
+
+        .dashboard-header {
+            color: white;
+        }
+        .dashboard-header h2 {
+            margin-bottom: 0;
+        }
+
+        .navigation-actions .btn-custom {
+            width: auto;
+            display: flex;
+            justify-content: center;
+        }
+        .navbar {
+    background-color: #f6e8c1;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+.btn-custom-navbar {
+    background: white;
+    color: #002147;
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.btn-custom-navbar:hover {
+    background: #fdf7e2;
+    color: #002147;
+    border-color: #e7a711;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+    </style>
+    <body>
+        <nav class="navbar navbar-expand-lg px-4 py-2 w-100 fixed-top">
+            <div class="container-fluid">
+            <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="/">
+                <div class="text-center mb-0">
+                    <img src="/circlet.png" 
+                         alt="Oxford University Logo" 
+                         style="max-width: 30px;">    </div>
+                <h6 class="mb-0" style="font-weight: bold;">
+                    Graduate Admission Portal
+                </h6>
+            </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                    aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul id="nav-links" class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <!-- dynamic from navbar.js -->
+                    </ul>
+            
+                    <div id="auth-controls" class="d-flex align-items-center gap-3">
+                        <!-- dynamic from navbar.js -->
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container mt-5">
+            <div class="form-container">
+                <div class="form-header">Your Profile</div>
+                <div class="card-body">
+                    <form id="profile-form" class="skeleton">
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <input
+                                type="text"
+                                name="name"
+                                id="name"
+                                class="form-control placeholder-glow placeholder"
+                                placeholder="Loading..."
+                                disabled
+                            />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input
+                                type="email"
+                                id="email"
+                                class="form-control placeholder-glow placeholder"
+                                placeholder="Loading..."
+                                disabled
+                            />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Role</label>
+                            <input
+                                type="text"
+                                id="role"
+                                class="form-control placeholder-glow placeholder"
+                                placeholder="Loading..."
+                                disabled
+                            />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">New Password</label>
+                            <input
+                                type="password"
+                                name="password"
+                                id="password"
+                                class="form-control"
+                                placeholder="Leave empty to keep current"
+                                disabled
+                            />
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="btn-custom"
+                            id="update-btn"
+                            disabled
+                        >
+                            Update Profile
+                        </button>
+                    </form>
+                    <div class="mt-3" id="status"></div>
+                </div>
+            </div>
+
+            <div id="actions-container" class="form-container placeholder-glow" style="display: none;"> <div class="form-header mb-3" id="actions-header">Menu</div>
+                <div id="actions" class="navigation-actions">
+                    <span class="placeholder col-3 me-2 mb-2 d-inline-block p-3"></span>
+                    <span class="placeholder col-3 me-2 mb-2 d-inline-block p-3"></span>
+                    <span class="placeholder col-3 me-2 mb-2 d-inline-block p-3"></span>
+                </div>
+            </div>
+        </div>
+
+        <script src="js/api.js"></script>
+        <script src="/js/navbar.js">
+            setupNavbar()
+        </script>
+        <script>
+            async function init() {
+                try {
+                    const user = await API.me();
+
+                    // Populate form values
+                    document.getElementById("name").value = user.name;
+                    document.getElementById("email").value = user.email;
+                    document.getElementById("role").value = user.role;
+
+                    // Remove skeleton and enable only the right controls
+                    const form = document.getElementById("profile-form");
+                    form.classList.remove("skeleton");
+
+                    // Enable Name input
+                    const nameInput = document.getElementById("name");
+                    nameInput.disabled = false;
+                    nameInput.classList.remove(
+                        "placeholder",
+                        "placeholder-glow"
+                    );
+                    nameInput.removeAttribute("placeholder");
+
+                    // Leave email & role disabled
+                    document
+                        .getElementById("email")
+                        .classList.remove("placeholder", "placeholder-glow");
+                    document
+                        .getElementById("email")
+                        .removeAttribute("placeholder");
+
+                    document
+                        .getElementById("role")
+                        .classList.remove("placeholder", "placeholder-glow");
+                    document
+                        .getElementById("role")
+                        .removeAttribute("placeholder");
+
+                    // Enable Password input (keep its placeholder)
+                    const pw = document.getElementById("password");
+                    pw.disabled = false;
+
+                    // Enable Update button
+                    const updateBtn = document.getElementById("update-btn");
+                    updateBtn.disabled = false;
+                } catch (err) {
+                    alert("Unauthorized. Redirecting to login...");
+                    window.location.href = "login.html";
+                }
+            }
+
+            document
+                .getElementById("profile-form")
+                .addEventListener("submit", async (e) => {
+                    e.preventDefault();
+                    const statusDiv = document.getElementById("status");
+                    statusDiv.innerHTML = ""; //clear status
+
+                    const data = Object.fromEntries(
+                        new FormData(e.target).entries()
+                    );
+                    if (!data.password) delete data.password;
+
+                    try {
+                        await API.request("/user/me", {
+                            method: "PUT",
+                            body: JSON.stringify(data),
+                        });
+                        statusDiv.innerHTML =
+                            '<div class="alert alert-success">Profile updated!</div>';
+                        if (data.name) {
+                             document.getElementById("greeting").textContent = `Welcome, ${data.name}`;
+                        }
+                    } catch {
+                        document.getElementById("status").innerHTML =
+                            '<div class="alert alert-danger">Update failed.</div>';
+                    }
+                });
+
+            init();
+        </script>
+    </body>
+</html>

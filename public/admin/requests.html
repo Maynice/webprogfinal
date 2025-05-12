@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Revision Requests</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            background: #002147;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            padding-top: 60px;
+            overflow-y: auto;
+        }
+        .form-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .form-header {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #cba344;
+        }
+        .btn-custom {
+            background: #e7ce92;
+            border: none;
+            padding: 10px 20px;
+            width: 100%;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            transition: background 0.3s;
+            font-weight: bolder;
+        }
+        .btn-custom:hover {
+            background: #e7a711;
+        }
+        .btn-tertiary{
+            background: #b1b7bd;
+            border: none;
+            padding: 10px 20px;
+            width: 100%;
+            font-size: 1rem;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        .btn-tertiary:hover {
+            background: #808fa2;
+        }
+        .warning {
+            color: #e83e36;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .dropdown-container {
+    position: relative;
+}
+.dropdown-menu {
+    position: absolute;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+    background-color: white;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+.dropdown-item {
+    padding: 8px 16px;
+    cursor: pointer;
+}
+.dropdown-item:hover {
+    background-color: #f1d89e;
+}
+.required {
+    color: red;
+    margin-left: 3px;
+}
+.btn-custom-small {
+            background: #e7ce92;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: background 0.3s;
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+            text-align: center;
+        }
+        .btn-custom-small:hover {
+                background: #e7a711;
+            }
+            .navbar {
+    background-color: #f6e8c1;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+.btn-custom-navbar {
+    background: white;
+    color: #002147;
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.btn-custom-navbar:hover {
+    background: #fdf7e2;
+    color: #002147;
+    border-color: #e7a711;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg px-4 py-2 w-100 fixed-top">
+        <div class="container-fluid">
+        <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="/">
+            <div class="text-center mb-0">
+                <img src="/circlet.png" 
+                     alt="Oxford University Logo" 
+                     style="max-width: 30px;">    </div>
+            <h6 class="mb-0" style="font-weight: bold;">
+                Graduate Admission Portal
+            </h6>
+        </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <ul id="nav-links" class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <!-- dynamic from navbar.js -->
+                </ul>
+        
+                <div id="auth-controls" class="d-flex align-items-center gap-3">
+                    <!-- dynamic from navbar.js -->
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="container py-5">
+        <div class="form-container">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="form-header">Revision Requests</h1>
+                <a id="create-request-btn" href="#" class="btn btn-custom-small" style="width: auto;">+ Create Request</a>
+            </div>
+        
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="text-center">
+                        <th>ID</th>
+                        <th>Request Info</th>
+                        <th>Submitted File</th>
+                    </tr>
+                </thead>
+                <tbody id="requests-body">
+                    <!-- fill here -->
+                </tbody>
+            </table>
+        
+            <div id="status" class="mt-3"></div>
+        </div>
+    </div>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/navbar.js">
+        setupNavbar()
+    </script>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const submissionId = params.get("submission_id");
+
+        if (!submissionId) {
+            document.getElementById("status").innerHTML = '<div class="alert alert-warning">Missing submission ID.</div>';
+        } else {
+            document.getElementById("create-request-btn").href = `create-request.html?submission_id=${submissionId}`;
+
+            async function fetchRequests() {
+                try {
+                    const data = await API.request(`/submissions/admin/request/${submissionId}`);
+
+                    const tbody = document.getElementById("requests-body");
+                    tbody.innerHTML = ""; // clear first
+
+                    if (data.length === 0) {
+                        tbody.innerHTML = `<tr><td colspan="3" class="text-center text-muted">No revision requests found.</td></tr>`;
+                        return;
+                    }
+
+                    data.forEach((request, index) => {
+                        const tr = document.createElement("tr");
+
+                        tr.innerHTML = `
+                            <td>${index + 1}</td>
+                            <td>${request.info}</td>
+                            <td class="text-center">
+                                ${request.file ? `<a href="/storage/${request.file}" target="_blank" class="btn btn-sm btn-outline-primary">View File</a>` : `<span class="text-muted">No file</span>`}
+                            </td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                } catch (err) {
+                    console.error(err);
+                    document.getElementById("status").innerHTML = '<div class="alert alert-danger">Failed to load revision requests.</div>';
+                }
+            }
+
+            fetchRequests();
+        }
+    </script>
+</body>
+</html>

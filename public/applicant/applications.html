@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Applications</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <style>
+            body {
+                background: #002147;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+                padding-top: 60px;
+                overflow-y: auto;
+            }
+            .form-container {
+                background: white;
+                padding: 30px;
+                border-radius: 12px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            .form-header {
+                text-align: center;
+                font-size: 1.5rem;
+                font-weight: bold;
+                color: #cba344;
+            }
+            .btn-custom {
+                background: #e7ce92;
+                border: none;
+                padding: 10px 20px;
+                width: 100%;
+                font-size: 1.2rem;
+                border-radius: 8px;
+                transition: background 0.3s;
+                font-weight: bolder;
+                color: #333;
+                text-decoration: none;
+            }
+            .btn-custom:hover {
+                background: #e7a711;
+            }
+            .btn-tertiary{
+                background: #b1b7bd;
+                border: none;
+                padding: 10px 20px;
+                width: 100%;
+                font-size: 1rem;
+                border-radius: 8px;
+                transition: background 0.3s;
+            }
+            .btn-tertiary:hover {
+                background: #808fa2;
+            }
+            .warning {
+                color: #e83e36;
+                font-size: 0.9rem;
+                display: none;
+            }
+
+            .dropdown-container {
+        position: relative;
+        }
+    .dropdown-menu {
+        position: absolute;
+        width: 100%;
+        max-height: 200px;
+        overflow-y: auto;
+        z-index: 1000;
+        display: none;
+        background-color: white;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+    }
+    .dropdown-item {
+        padding: 8px 16px;
+        cursor: pointer;
+    }
+    .dropdown-item:hover {
+        background-color: #f1d89e;
+    }
+    .required {
+        color: red;
+        margin-left: 3px;
+    }
+    .action-container {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    .btn-custom-small {
+            background: #e7ce92;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 8px;
+            transition: background 0.3s;
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+            text-align: center;
+        }
+        .btn-custom-small:hover {
+                background: #e7a711;
+            }
+            .navbar {
+    background-color: #f6e8c1;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+.btn-custom-navbar {
+    background: white;
+    color: #002147;
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.btn-custom-navbar:hover {
+    background: #fdf7e2;
+    color: #002147;
+    border-color: #e7a711;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg px-4 py-2 w-100 fixed-top">
+            <div class="container-fluid">
+            <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="/">
+                <div class="text-center mb-0">
+                    <img src="/circlet.png" 
+                         alt="Oxford University Logo" 
+                         style="max-width: 30px;">    </div>
+                <h6 class="mb-0" style="font-weight: bold;">
+                    Graduate Admission Portal
+                </h6>
+            </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                    aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul id="nav-links" class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <!-- dynamic from navbar.js -->
+                    </ul>
+            
+                    <div id="auth-controls" class="d-flex align-items-center gap-3">
+                        <!-- dynamic from navbar.js -->
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container py-5">
+            <div class="form-container">
+                <h1 class="form-header">My Applications</h1>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="text-center">
+                            <th>ID</th>
+                            <th>Applicant Name</th>
+                            <th>Applicant Email</th>
+                            <th>Reviewer Name</th>
+                            <th>Reviewer Email</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="submissionsBody">
+                        <!-- fill dynamic -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <script src="/js/api.js"></script>
+        <script src="/js/navbar.js">
+            setupNavbar()
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", async () => {
+                const tbody = document.getElementById("submissionsBody");
+
+                try {
+                    const data = await API.request("/submissions/applicant");
+                    data.forEach((item) => {
+                        const tr = document.createElement("tr");
+    
+                        // Submission ID
+                        tr.appendChild(td(item.id));
+    
+                        // Applicant
+                        tr.appendChild(td(item.applicant.name));
+                        tr.appendChild(td(item.applicant.email));
+    
+                        // Reviewer (may be null)
+                        tr.appendChild(
+                            td(item.reviewer ? item.reviewer.name : "—")
+                        );
+                        tr.appendChild(
+                            td(item.reviewer ? item.reviewer.email : "—")
+                        );
+
+                        // Status badge
+                        const badge = document.createElement("span");
+                        badge.textContent = item.status.charAt(0).toUpperCase() + item.status.slice(1);
+                        badge.className = "badge " + badgeClass(item.status) + " w-100";
+                        const tdStatus = document.createElement("td");
+                        tdStatus.appendChild(badge);
+                        tr.appendChild(tdStatus);
+
+                        const tdAction = document.createElement("td");
+                        tdAction.className = "action-container";
+
+                        // Form link
+                        const linkBtn = document.createElement("div");
+                        if (item.active_form_id) {
+                            linkBtn.className = "btn-custom-small";
+                            const a = document.createElement("a");
+                            a.style = "text-decoration: none; color: inherit; text-align: center;";
+                            a.href = `/view-form.html?formId=${item.active_form_id}&submission_id=${item.id}`;
+                            a.textContent = "View Submission";
+                            linkBtn.appendChild(a);
+                        } else {
+                            linkBtn.textContent = "—";
+                        }
+                        tdAction.appendChild(linkBtn);
+
+                        // requests
+                        const revisionBtn = document.createElement("div");
+                        revisionBtn.className = "btn-custom-small";
+                        revisionBtn.innerHTML = `
+                            <a href="requests.html?submission_id=${item.id}" style="text-decoration: none; color: inherit; text-align: center;">View Requests</a>
+                        `;
+                        tdAction.appendChild(revisionBtn);
+
+                        tr.appendChild(tdAction);
+    
+                        tbody.appendChild(tr);
+                    });
+                } catch (err) {
+                    console.error("Failed to load submissions:", err);
+                    const tr = document.createElement("tr");
+                    const td = document.createElement("td");
+                    td.colSpan = 7;
+                    td.className = "text-center text-danger";
+                    td.textContent = "Error loading data";
+                    tr.appendChild(td);
+                    tbody.appendChild(tr);
+                }
+
+                // helper to create a <td> with text
+                function td(text) {
+                    const cell = document.createElement("td");
+                    cell.textContent = text;
+                    return cell;
+                }
+
+                // create badge bootstrap
+                function badgeClass(status) {
+                    switch (status) {
+                        case "wait":
+                            return "bg-warning text-dark p-2 fs-6";
+                        case "approved":
+                            return "bg-success p-2 fs-6";
+                        case "rejected":
+                            return "bg-danger p-2 fs-6";
+                        default:
+                            return "bg-secondary p-2 fs-6";
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

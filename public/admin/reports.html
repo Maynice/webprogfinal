@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Admin Report</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <style>
+            body {
+                background: #002147;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+                padding-top: 60px;
+                overflow-y: auto;
+            }
+            .form-container {
+                background: white;
+                padding: 30px;
+                border-radius: 12px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            .form-header {
+                text-align: center;
+                font-size: 1.5rem;
+                font-weight: bold;
+                color: #cba344;
+            }
+
+            .btn-custom {
+                background: #e7ce92;
+                border: none;
+                padding: 10px 20px;
+                font-size: 1.2rem;
+                border-radius: 8px;
+                transition: background 0.3s;
+                font-weight: bolder;
+                color: #333;
+                text-decoration: none;
+            }
+
+            .btn-custom:hover {
+                background: #e7a711;
+            }
+
+            .btn-tertiary {
+                background: #b1b7bd;
+                border: none;
+                padding: 10px 20px;
+                font-size: 1rem;
+                border-radius: 8px;
+                transition: background 0.3s;
+                color: #333;
+            }
+
+            .btn-tertiary:hover {
+                background: #808fa2;
+            }
+
+            .stat-card {
+                border-radius: 8px;
+                padding: 20px;
+                margin-bottom: 20px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                background: white;
+            }
+
+            .stat-value {
+                font-size: 2rem;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+
+            .stat-label {
+                color: #6c757d;
+                font-size: 0.9rem;
+            }
+
+            .skeleton {
+                background-color: #e0e0e0;
+                border-radius: 4px;
+                min-height: 1em;
+                width: 100%;
+                animation: pulse 1.5s infinite ease-in-out;
+            }
+
+            @keyframes pulse {
+                0% {
+                    opacity: 1;
+                }
+                50% {
+                    opacity: 0.4;
+                }
+                100% {
+                    opacity: 1;
+                }
+            }
+            .navbar {
+    background-color: #f6e8c1;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+.btn-custom-navbar {
+    background: white;
+    color: #002147;
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.btn-custom-navbar:hover {
+    background: #fdf7e2;
+    color: #002147;
+    border-color: #e7a711;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg px-4 py-2 w-100 fixed-top">
+            <div class="container-fluid">
+            <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="/">
+                <div class="text-center mb-0">
+                    <img src="/circlet.png" 
+                         alt="Oxford University Logo" 
+                         style="max-width: 30px;">    </div>
+                <h6 class="mb-0" style="font-weight: bold;">
+                    Graduate Admission Portal
+                </h6>
+            </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                    aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul id="nav-links" class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <!-- dynamic from navbar.js -->
+                    </ul>
+            
+                    <div id="auth-controls" class="d-flex align-items-center gap-3">
+                        <!-- dynamic from navbar.js -->
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="container py-5">
+            <div class="form-container">
+                <h1 class="form-header mb-4">Submission Report</h1>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="stat-card">
+                            <div class="stat-value" id="total-forms">
+                                <div
+                                    class="skeleton"
+                                    style="height: 2.5rem; width: 60%"
+                                ></div>
+                            </div>
+                            <div class="stat-label">Total Forms</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="stat-card">
+                            <div class="stat-value" id="assigned-forms">
+                                <div
+                                    class="skeleton"
+                                    style="height: 2.5rem; width: 60%"
+                                ></div>
+                            </div>
+                            <div class="stat-label">Assigned Forms</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="stat-card">
+                            <div class="stat-value" id="unassigned-forms">
+                                <div
+                                    class="skeleton"
+                                    style="height: 2.5rem; width: 60%"
+                                ></div>
+                            </div>
+                            <div class="stat-label">Unassigned Forms</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="stat-card">
+                            <div class="stat-value" id="open-requests">
+                                <div
+                                    class="skeleton"
+                                    style="height: 2.5rem; width: 60%"
+                                ></div>
+                            </div>
+                            <div class="stat-label">
+                                Forms with Open Requests
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="stat-card">
+                            <div class="stat-value" id="on-hold-forms">
+                                <div
+                                    class="skeleton"
+                                    style="height: 2.5rem; width: 60%"
+                                ></div>
+                            </div>
+                            <div class="stat-label">On Hold Forms</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="stat-card">
+                            <div class="stat-value" id="accepted-forms">
+                                <div
+                                    class="skeleton"
+                                    style="height: 2.5rem; width: 60%"
+                                ></div>
+                            </div>
+                            <div class="stat-label">Accepted Forms</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="stat-card">
+                            <div class="stat-value" id="rejected-forms">
+                                <div
+                                    class="skeleton"
+                                    style="height: 2.5rem; width: 60%"
+                                ></div>
+                            </div>
+                            <div class="stat-label">Rejected Forms</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column align-center">
+                    <button id="refresh-btn" class="btn btn-custom">
+                        Refresh Data
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <script src="/js/api.js"></script>
+        <script src="/js/navbar.js">
+            setupNavbar()
+        </script>
+        <script>
+            async function fetchReportData() {
+                const btn = document.getElementById("refresh-btn");
+                btn.disabled = true;
+                const original = btn.innerHTML;
+                btn.innerHTML = `
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="margin-right: 8px;"></span>
+        Refreshing...
+      `;
+
+                try {
+                    const response = await API.request("/admin/report");
+                    const report = response.report;
+
+                    document.getElementById("total-forms").textContent =
+                        report.total_forms;
+                    document.getElementById("assigned-forms").textContent =
+                        report.assigned_forms;
+                    document.getElementById("unassigned-forms").textContent =
+                        report.unassigned_forms;
+                    document.getElementById("open-requests").textContent =
+                        report.forms_with_open_requests;
+                    document.getElementById("on-hold-forms").textContent =
+                        report.forms_by_status.on_hold;
+                    document.getElementById("accepted-forms").textContent =
+                        report.forms_by_status.accepted;
+                    document.getElementById("rejected-forms").textContent =
+                        report.forms_by_status.rejected;
+                } catch (err) {
+                    console.error(err);
+                    alert("Error loading report data");
+                } finally {
+                    btn.disabled = false;
+                    btn.innerHTML = original;
+                }
+            }
+
+            // Initial load
+            fetchReportData();
+
+            // Refresh button
+            document
+                .getElementById("refresh-btn")
+                .addEventListener("click", fetchReportData);
+        </script>
+    </body>
+</html>
